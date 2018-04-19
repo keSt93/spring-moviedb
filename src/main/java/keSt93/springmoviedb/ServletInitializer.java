@@ -1,4 +1,4 @@
-package keSt93.springmoviedb.springmoviedb;
+package keSt93.springmoviedb;
 
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.support.SpringBootServletInitializer;

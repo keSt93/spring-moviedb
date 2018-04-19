@@ -1,4 +1,4 @@
-package keSt93.springmoviedb.springmoviedb.controller;
+package keSt93.springmoviedb.controller;
 
 
 import org.springframework.stereotype.Controller;
@@ -15,10 +15,10 @@ import org.springframework.web.servlet.ModelAndView;
 public class IndexController {
 
     @GetMapping("/")
-    public ModelAndView index() {
+    public String index() {
         ModelAndView m = new ModelAndView("index");
 
-        return m;
+        return "redirect:/movies";
     }
 
 }

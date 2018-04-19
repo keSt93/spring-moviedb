@@ -1,4 +1,4 @@
-package keSt93.springmoviedb.springmoviedb.handlers;
+package keSt93.springmoviedb.handlers;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

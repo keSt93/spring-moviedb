@@ -1,4 +1,4 @@
-package keSt93.springmoviedb.springmoviedb;
+package keSt93.springmoviedb;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -35,7 +35,12 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.csrf().disable()
                 .authorizeRequests()
+                // Ressources
+                .antMatchers("/css/*").permitAll()
+                // Public Sites
                 .antMatchers("/*").permitAll()
+                .antMatchers("/movies/*").permitAll()
+                // Registered only
                 .antMatchers("/backstage/**").hasAnyRole("ROLE_USER")
                 .anyRequest().authenticated()
                 .and()
@@ -61,7 +66,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         auth.jdbcAuthentication()
                 .dataSource(userSource)
                 // .passwordEncoder(new BCryptPasswordEncoder())
-                .usersByUsernameQuery("SELECT user_name, password, enabled from user where user_name=?")
-                .authoritiesByUsernameQuery("SELECT id_user, role from user_roles where id_user=(SELECT id from user where user_name=?)");
+                .usersByUsernameQuery("SELECT user_name, password, enabled from user where username=?")
+                .authoritiesByUsernameQuery("SELECT id_user, role from user_roles where id_user=(SELECT id from user where username=?)");
     }
 }

@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="de" xmlns:th="http://www.thymeleaf.org">
+<head th:include="/fragments/header :: head" />
+<body>
+
+<nav th:include="/fragments/navigation :: navigation" />
+
+<main role="main" class="container">
+    <div class="row">
+        <div class="col-md-6" th:each="movie : ${movies}">
+            <div class="movie-container">
+                <h2 class="movie-container__title" th:text="${movie.title}"></h2>
+                <div class="movie-container__rating" th:classappend="@{'rating-' + ${movie.rating}}">
+                    <span th:text="${movie.rating}"></span>
+                </div>
+                <div class="movie-container__watchedDate">
+                    <span th:text="${movie.registeredDate}"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+</body>
+</html>

@@ -1,0 +1,53 @@
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+>
+
+    <header th:fragment="navigation">
+        <div class="container navigation-container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="navbar navbar-expand-md navbar-dark">
+                        <a class="navbar-brand" th:href="@{/}">bloqq</a>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+
+                        <div class="collapse navbar-collapse" id="navbar">
+                            <ul class="navbar-nav mr-auto">
+                                <li class="nav-item">
+                                    <a class="nav-link" th:href="@{/}">Start</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" th:href="@{/movies}">Filme</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" th:href="@{/series}">Reihen</a>
+                                </li>
+                                <li sec:authorize="isAuthenticated()" class="nav-item nav-green-af">
+                                    <a class="nav-link" th:href="@{/postbloqq}">Film hinzufügen</a>
+                                </li>
+                            </ul>
+
+                            <!-- logged out -->
+                            <form sec:authorize="!isAuthenticated()" class="form-inline my-2 my-lg-0">
+                                <a class="btn btn-outline-info my-2 my-sm-0" th:href="@{/register}" style="color: white; margin-right: 5px">Registrieren</a>
+                                <a class="btn btn-outline-success my-2 my-sm-0" style="color: white;" th:href="@{/login}" >Login</a>
+                            </form>
+
+                            <!-- logged in -->
+                            <form sec:authorize="isAuthenticated()" class="form-inline my-2 my-lg-0" style="color: white;margin: 0 1rem; ">
+                                <div class="nav__profileDetails__Container">
+                                    <span class="nav__loggedinAs"> Eingeloggt als: </span>
+                                    <span class="nav__userName" sec:authentication="name"></span>
+                                </div>
+                                <a class="btn btn-outline-success my-2 my-sm-0" style="color: white;" th:href="@{/logout}" >Ausloggen</a>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+</html>
