@@ -9,4 +9,9 @@ import org.springframework.stereotype.Repository;
 public interface MovieRepository extends PagingAndSortingRepository<Movie, Integer> {
 
     public Iterable<Movie> findAllByOrderByIdDesc();
+
+    public Iterable<Movie> findFirst4ByOrderByRatingDesc();
+
+    public Iterable<Movie> findFirst4ByOrderByRegisteredDateDesc();
+
 }

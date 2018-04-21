@@ -41,4 +41,32 @@ nav {
           color: white;
           transition: background-color .5s; }
 
+.tile-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  flex-flow: wrap; }
+  .tile-container .tile-instance.tile-box {
+    width: 120px;
+    height: 120px;
+    overflow: hidden;
+    margin: .2rem;
+    position: relative; }
+    .tile-container .tile-instance.tile-box .tile-image img {
+      width: 120px;
+      height: 120px;
+      object-fit: cover; }
+    .tile-container .tile-instance.tile-box .tile-overlay {
+      position: absolute;
+      bottom: -95px;
+      background: rgba(0, 0, 0, 0.4);
+      color: white;
+      transition: all .5s;
+      width: 120px;
+      height: 120px; }
+      .tile-container .tile-instance.tile-box .tile-overlay span {
+        display: block; }
+    .tile-container .tile-instance.tile-box:hover .tile-overlay {
+      bottom: -10px; }
+
 /*# sourceMappingURL=../../../../target/style.css.map */

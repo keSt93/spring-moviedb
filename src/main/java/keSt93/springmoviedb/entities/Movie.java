@@ -44,6 +44,17 @@ public class Movie {
     @Column
     private double rating;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    private Series series;
+
+    public Series getSeries() {
+        return series;
+    }
+
+    public void setSeries(Series series) {
+        this.series = series;
+    }
+
     public double getRating() {
         return rating;
     }

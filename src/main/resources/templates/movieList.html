@@ -3,7 +3,7 @@
 <head th:include="/fragments/special_movieList_header :: header" />
 <body>
 <nav th:include="/fragments/navigation :: navigation" />
-<main role="main" class="container">
+<main id="main" role="main" class="container">
     <div class="row">
         <div class="col-md-6" th:each="movie : ${movies}">
             <a class="movie-container" th:classappend="@{'movie-id-' + ${movie.id}}" th:href="@{'/movies/' + ${movie.id}}">

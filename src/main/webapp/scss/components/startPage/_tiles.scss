@@ -1,0 +1,45 @@
+.tile-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  flex-flow: wrap;
+
+  $tile-width: 120px;
+  $tile-height: 120px;
+
+  .tile-instance.tile-box {
+    width:  $tile-width;
+    height: $tile-height;
+    overflow: hidden;
+    margin: .2rem;
+    position: relative;
+
+    .tile-image {
+      img {
+        width:  $tile-width;
+        height: $tile-height;
+        object-fit: cover;
+      }
+    }
+
+    .tile-overlay {
+      position: absolute;
+      bottom: -95px;
+      background: rgba(0,0,0,.4);
+      color: white;
+      transition: all .5s;
+      width:  $tile-width;
+      height: $tile-height;
+
+      span {
+        display: block;
+      }
+    }
+
+    &:hover {
+      .tile-overlay {
+        bottom: -10px;
+      }
+    }
+  }
+}
