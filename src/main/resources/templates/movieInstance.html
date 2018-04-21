@@ -5,10 +5,10 @@
 <nav th:include="/fragments/navigation :: navigation" />
 <main role="main" class="container">
     <div class="row">
-        <div class="col-md-6" th:each="movie : ${movies}">
-            <a class="movie-container" th:classappend="@{'movie-id-' + ${movie.id}}" th:href="@{'/movies/' + ${movie.id}}">
+        <div class="col-md-12">
+            <a class="movie-container">
                 <div class="movie-container__cover">
-                    <img th:src="${movie.coverImage}"/>
+                    <img th:src="${movie.coverImage}" />
                 </div>
                 <div class="movie-container__details">
                     <h3 class="movie-container__title" th:text="${movie.title}"></h3>
@@ -20,17 +20,20 @@
                     </div>
 
                     <div class="movie-container__rating" th:attr="data-movie-rating=${movie.rating}">
-
                         <div class="movie-container__rating-progressbar">
                             <div class="movie-container__rating-progress" th:text="${movie.rating}"></div>
                         </div>
-
+                    </div>
+                    <div class="movie-container__additionalRatingInformation">
+                        <span th:each="rating : ${ratings}">
+                            <span th:text="${rating.getUser().username}"></span> | <span th:text="${rating.rating}"></span> </br>
+                        </span>
                     </div>
                 </div>
 
                 <script th:inline="javascript">
                     /*[+
-                    var elementclass  = '.movie-id-' + [[${movie.id}]] + ' .movie-container__rating-progress';
+                    var elementclass  = '.movie-container__rating-progress';
                     var percentage = [[${movie.rating}]]
                      +]*/
                     adjustRatingProgressBar(elementclass, percentage*10);

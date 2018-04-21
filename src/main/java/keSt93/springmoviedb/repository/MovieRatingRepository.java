@@ -10,5 +10,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface MovieRatingRepository extends PagingAndSortingRepository<MovieRating, Integer> {
-
+    public Iterable<MovieRating> findAllByMovie(Movie m);
 }

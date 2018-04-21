@@ -7,10 +7,14 @@ nav {
   padding: 1rem;
   transition: all .3s;
   display: flex;
-  flex-direction: row; }
-  .movie-container:hover {
+  flex-direction: row;
+  text-decoration: none;
+  color: black; }
+  .movie-container:hover, .movie-container:focus, .movie-container:active {
     background: #dbd9d7;
-    transform: scale(1.02); }
+    transform: scale(1.02);
+    text-decoration: none;
+    color: black; }
   .movie-container .movie-container__cover img {
     max-width: 150px;
     margin: -1rem 1rem -1rem -1rem;

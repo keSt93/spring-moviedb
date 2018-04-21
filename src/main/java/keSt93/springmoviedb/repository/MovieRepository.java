@@ -8,4 +8,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface MovieRepository extends PagingAndSortingRepository<Movie, Integer> {
 
+    public Iterable<Movie> findAllByOrderByIdDesc();
 }

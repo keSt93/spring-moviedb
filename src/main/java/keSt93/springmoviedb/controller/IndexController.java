@@ -15,10 +15,10 @@ import org.springframework.web.servlet.ModelAndView;
 public class IndexController {
 
     @GetMapping("/")
-    public String index() {
+    public ModelAndView index() {
         ModelAndView m = new ModelAndView("index");
 
-        return "redirect:/movies";
+        return m;
     }
 
 }

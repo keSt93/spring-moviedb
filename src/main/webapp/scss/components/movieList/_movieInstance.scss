@@ -7,9 +7,14 @@
   display: flex;
   flex-direction: row;
 
-  &:hover {
+  text-decoration: none;
+  color: black;
+
+  &:hover, &:focus, &:active {
     background: #dbd9d7;
     transform: scale(1.02);
+    text-decoration: none;
+    color: black;
   }
 
   .movie-container__cover {

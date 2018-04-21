@@ -27,11 +27,9 @@ public class MovieListController {
     public ModelAndView allMovies(){
         ModelAndView modelAndView = new ModelAndView("movieList");
 
-        Iterable<Movie> movies = movieRepository.findAll();
-        Iterable<MovieRating> ratings = movieRatingRepository.findAll();
+        Iterable<Movie> movies = movieRepository.findAllByOrderByIdDesc();
 
         modelAndView.addObject("movies", movies);
-        modelAndView.addObject("ratings", ratings);
         return modelAndView;
     }
 
