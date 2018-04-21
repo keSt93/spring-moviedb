@@ -1,7 +1,11 @@
 package keSt93.springmoviedb.entities;
 
+import keSt93.springmoviedb.repository.MovieRatingRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "movies")
@@ -23,8 +27,19 @@ public class Movie {
     @Column
     private String coverImage;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL)
     private User user;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    private Genre genre;
+
+    public Genre getGenre() {
+        return genre;
+    }
+
+    public void setGenre(Genre genre) {
+        this.genre = genre;
+    }
 
     @Column
     private double rating;
@@ -84,4 +99,5 @@ public class Movie {
     public void setUser(User user) {
         this.user = user;
     }
+
 }

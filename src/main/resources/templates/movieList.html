@@ -1,25 +1,45 @@
 <!doctype html>
 <html lang="de" xmlns:th="http://www.thymeleaf.org">
-<head th:include="/fragments/header :: head" />
+<head th:include="/fragments/special_movieList_header :: header" />
 <body>
-
 <nav th:include="/fragments/navigation :: navigation" />
-
 <main role="main" class="container">
     <div class="row">
         <div class="col-md-6" th:each="movie : ${movies}">
-            <div class="movie-container">
-                <h2 class="movie-container__title" th:text="${movie.title}"></h2>
-                <div class="movie-container__rating" th:classappend="@{'rating-' + ${movie.rating}}">
-                    <span th:text="${movie.rating}"></span>
+            <div class="movie-container" th:classappend="@{'movie-id-' + ${movie.id}}">
+                <div class="movie-container__cover">
+                    <!-- TODO: Not make the cover hard coded -->
+                    <img src="https://vignette.wikia.nocookie.net/marvel_dc/images/7/7d/Friday_the_13th_1B.jpg/revision/latest/scale-to-width-down/309?cb=20080805200446" />
                 </div>
-                <div class="movie-container__watchedDate">
-                    <span th:text="${movie.registeredDate}"></span>
+                <div class="movie-container__details">
+                    <h3 class="movie-container__title" th:text="${movie.title}"></h3>
+                    <div class="movie-container__watchedDate">
+                        <span>Angesehen am </span><span th:text="${#dates.format(movie.registeredDate, 'dd. MMMM yyyy, HH:mm')}"></span>
+                    </div>
+                    <div class="movie-container__genre">
+                        <span>Genre: </span><span th:style="'color:' + ${movie.getGenre().color}" th:text="${movie.getGenre().name}"></span>
+                    </div>
+
+                    <div class="movie-container__rating" th:attr="data-movie-rating=${movie.rating}">
+
+                        <div class="movie-container__rating-progressbar">
+                            <div class="movie-container__rating-progress" th:text="${movie.rating}"></div>
+                        </div>
+
+                    </div>
                 </div>
+
+                <script th:inline="javascript">
+                    /*[+
+                    var elementclass  = '.movie-id-' + [[${movie.id}]] + ' .movie-container__rating-progress';
+                    var percentage = [[${movie.rating}]]
+                     +]*/
+                    adjustRatingProgressBar(elementclass, percentage*10);
+                </script>
             </div>
         </div>
     </div>
 </main>
-
+<footer th:include="/fragments/special_movieList_footer :: footer" />
 </body>
 </html>
