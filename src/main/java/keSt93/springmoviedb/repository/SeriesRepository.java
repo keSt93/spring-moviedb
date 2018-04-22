@@ -9,4 +9,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface SeriesRepository extends PagingAndSortingRepository<Series, Integer> {
 
+    public Series findById(int id);
 }

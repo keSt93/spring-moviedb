@@ -42,7 +42,8 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/*").permitAll()
                 .antMatchers("/movies/**").permitAll()
                 // Registered only
-                .antMatchers("/backstage/**").hasAnyRole("ROLE_USER")
+                .antMatchers("/addmovie/**").hasAnyRole("ROLE_USER")
+                .antMatchers("/addMovieAction/**").hasAnyRole("ROLE_USER")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()

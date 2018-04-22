@@ -6,7 +6,20 @@
 <main id="main" role="main" class="container">
    <div class="container">
        <div class="col-md-12">
+           <h3>Neuen Film hinzufügen:</h3>
+           <form th:action="@{/addMovieAction}" th:object="${movie}" method="POST">
+               <input th:field="*{title}" placeholder="Titel" />
 
+               <select th:field="*{genre}">
+                   <option th:each="genre_ : ${genres_}" th:value="${genre_.id}" th:text="${genre_.name}"></option>
+               </select>
+
+               <select th:field="*{series}">
+                   <option th:each="serie_ : ${series_}" th:value="${serie_.id}" th:text="${serie_.name}"></option>
+               </select>
+
+               <button type="submit">Post!</button>
+           </form>
        </div>
    </div>
 </main>
