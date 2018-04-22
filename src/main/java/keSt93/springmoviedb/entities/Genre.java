@@ -14,9 +14,6 @@ public class Genre {
     @Column
     private String name;
 
-    @Column
-    private boolean isVisible;
-
     @Column String color;
 
     public String getColor() {
@@ -43,11 +40,4 @@ public class Genre {
         this.name = name;
     }
 
-    public boolean isVisible() {
-        return isVisible;
-    }
-
-    public void setVisible(boolean visible) {
-        isVisible = visible;
-    }
 }

@@ -33,6 +33,28 @@ public class Movie {
     @OneToOne(cascade = CascadeType.ALL)
     private Genre genre;
 
+    @Column
+    private int length;
+
+    @Column
+    private String plot;
+
+    public String getPlot() {
+        return plot;
+    }
+
+    public void setPlot(String plot) {
+        this.plot = plot;
+    }
+
+    public int getLength() {
+        return length;
+    }
+
+    public void setLength(int length) {
+        this.length = length;
+    }
+
     public Genre getGenre() {
         return genre;
     }

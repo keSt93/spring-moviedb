@@ -29,8 +29,8 @@ public class IndexController {
     public ModelAndView index() {
         ModelAndView m = new ModelAndView("index");
 
-        Iterable<Movie> recentMovies = movieRepository.findFirst4ByOrderByRegisteredDateDesc();
-        Iterable<Movie> bestRatedMovies = movieRepository.findFirst4ByOrderByRatingDesc();
+        Iterable<Movie> recentMovies = movieRepository.findFirst8ByOrderByRegisteredDateDesc();
+        Iterable<Movie> bestRatedMovies = movieRepository.findFirst8ByOrderByRatingDesc();
 
         m.addObject("recentMovies",recentMovies);
         m.addObject("bestRatedMovies",bestRatedMovies);

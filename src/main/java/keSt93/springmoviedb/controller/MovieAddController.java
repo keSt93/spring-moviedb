@@ -59,6 +59,8 @@ public class MovieAddController {
         movie.setRating(0);
         movie.setSeries(movie.getSeries());
         movie.setGenre(movie.getGenre());
+        movie.setLength(imdbApi.getLength());
+        movie.setPlot(imdbApi.getPlot());
 
         try {
             SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy");

@@ -23,6 +23,7 @@ public class ImdbApi {
     private String imdbID;
     private String released;
     private String plot;
+    private int length;
 
 
     public ImdbApi(String movieName) {
@@ -44,6 +45,7 @@ public class ImdbApi {
             imdbID = jsonObject.getString("imdbID");
             released = jsonObject.getString("Released");
             plot = jsonObject.getString("Plot");
+            length = Integer.parseInt(jsonObject.getString("Runtime").split(" ")[0]);
 
 
 
@@ -74,5 +76,9 @@ public class ImdbApi {
 
     public String getImdbID() {
         return imdbID;
+    }
+
+    public int getLength() {
+        return length;
     }
 }
