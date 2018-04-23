@@ -13,6 +13,8 @@
     overflow: hidden;
     margin: .2rem;
     position: relative;
+    transition: all .3s;
+    display: inherit;
 
     .tile-image {
       img {

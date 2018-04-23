@@ -8,7 +8,7 @@
         <div class="col-md-6">
             <h3> Zuletzt gesehen </h3>
             <div class="tile-container">
-                <div class="tile-instance tile-box" th:each="recentMovie : ${recentMovies}">
+                <a class="tile-instance tile-box" th:each="recentMovie : ${recentMovies}" th:href="@{'/movies/' + ${recentMovie.id}}">
                     <div class="tile-image">
                         <img th:src="${recentMovie.coverImage}"/>
                     </div>
@@ -17,14 +17,33 @@
                         <span th:text="${#dates.format(recentMovie.registeredDate, 'HH:mm')}"></span>
                         <span th:text="${recentMovie.title}"></span>
                     </div>
-                </div>
+                </a>
             </div>
+        </div>
+
+        <div class="col-md-6">
+            <h3> Filmreihen </h3>
+        </div>
+
+    </div>
+
+    <div class="row">
+
+        <div class="col-md-6">
+            <h3> Zahlen, junge! </h3>
+            <span id="totalWastedHours" th:text="${wastedHours}"></span>
+            <span class="totalWastedDescription">Stunden</span>
+            <span id="totalWastedMinutes" th:text="${wastedMinutes}"></span>
+            <span class="totalWastedDescription lineBreakAfterSpan">Minuten</span>
+            <span class="totalWastedDescription">mit</span>
+            <span id="totalWastedWithMovies" th:text="${wastedMinutes}"></span>
+            <span class="totalWastedDescription lineBreakAfterSpan">Filmen verschwendet:</span>
         </div>
 
         <div class="col-md-6">
             <h3> Am besten bewertet </h3>
             <div class="tile-container">
-                <div class="tile-instance tile-box" th:each="movie : ${bestRatedMovies}">
+                <a class="tile-instance tile-box" th:each="movie : ${bestRatedMovies}" th:href="@{'/movies/' + ${movie.id}}">
                     <div class="tile-image">
                         <img th:src="${movie.coverImage}"/>
                     </div>
@@ -32,11 +51,27 @@
                         <span style="display: inline">Rating: </span><span style="display: inline" th:text="${movie.rating}"></span> </br>
                         <span th:text="${movie.title}"></span>
                     </div>
-                </div>
+                </a>
             </div>
         </div>
     </div>
 </main>
 <footer th:include="/fragments/special_movieList_footer :: footer" />
+<script th:inline="javascript">
+    /*[+
+        var percentage = [[${wastedHours}]]
+     +]*/
+    countNumberUp("#totalWastedHours", percentage);
+    /*[+
+        var percentage = [[${wastedMinutes}]]
+     +]*/
+    countNumberUp("#totalWastedMinutes", percentage);
+    /*[+
+        var percentage = [[${totalMovies}]]
+     +]*/
+    countNumberUp("#totalWastedWithMovies", percentage);
+    /*[+
+
+</script>
 </body>
 </html>

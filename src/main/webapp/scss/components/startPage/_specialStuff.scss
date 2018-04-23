@@ -1,0 +1,17 @@
+#totalWastedHours {
+  font-size: 4rem;
+}
+#totalWastedMinutes,
+#totalWastedWithMovies
+{
+  font-size: 2rem;
+}
+
+.lineBreakAfterSpan:after {
+  content : " ";
+  display: block;
+}
+
+.totalWastedDescription {
+  font-size: 1.2rem;
+}

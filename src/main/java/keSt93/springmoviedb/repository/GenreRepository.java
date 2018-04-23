@@ -9,4 +9,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface GenreRepository extends PagingAndSortingRepository<Genre, Integer> {
 
+    public Genre findByName(String name);
 }
