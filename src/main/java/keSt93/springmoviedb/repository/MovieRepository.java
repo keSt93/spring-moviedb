@@ -3,6 +3,8 @@ package keSt93.springmoviedb.repository;
 
 import keSt93.springmoviedb.entities.Movie;
 import keSt93.springmoviedb.entities.Series;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
@@ -11,7 +13,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface MovieRepository extends PagingAndSortingRepository<Movie, Integer> {
 
-    public Iterable<Movie> findAllByOrderByIdDesc();
+    // public Iterable<Movie> findAllByOrderByIdDesc();
+    public Page<Movie> findAllByOrderByIdDesc(Pageable pageable);
 
     public Iterable<Movie> findFirst8ByOrderByRatingDesc();
 

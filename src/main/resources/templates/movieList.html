@@ -38,7 +38,53 @@
             </a>
         </div>
     </div>
+
+    <!-- Pagination -->
+    <div class="row">
+        <div th:if="${movies.totalPages != 1}"
+             class="form-group col-md-11 pagination-centered">
+            <ul class="pagination">
+                <li th:class="${movies.number == 0} ? disabled"><a
+                        class="pageLink"
+                        th:href="@{/movies/(pageSize=${selectedPageSize}, page=1)}">«</a>
+                </li>
+                <li th:class="${movies.number == 0} ? disabled"><a
+                        class="pageLink"
+                        th:href="@{/movies/(pageSize=${selectedPageSize}, page=${movies.number})}">←</a>
+                </li>
+                <li
+                        th:class="${movies.number == (page - 1)} ? 'active pointer-disabled'"
+                        th:each="page : ${#numbers.sequence(pager.startPage, pager.endPage)}">
+                    <a class="pageLink"
+                       th:href="@{/movies/(pageSize=${selectedPageSize}, page=${page})}"
+                       th:text="${page}"></a>
+                </li>
+                <li
+                        th:class="${movies.number + 1 == movies.totalPages} ? disabled">
+                    <a class="pageLink"
+                       th:href="@{/movies/(pageSize=${selectedPageSize}, page=${movies.number + 2})}">→</a>
+                </li>
+                <li
+                        th:class="${movies.number + 1 == movies.totalPages} ? disabled">
+                    <a class="pageLink"
+                       th:href="@{/movies/(pageSize=${selectedPageSize}, page=${movies.totalPages})}">»</a>
+                </li>
+            </ul>
+        </div>
+    </div>
 </main>
 <footer th:include="/fragments/special_movieList_footer :: footer" />
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    $(document).ready(function() {
+        changePageAndSize();
+    });
+    function changePageAndSize() {
+        $('#pageSizeSelect').change(function(evt) {
+            window.location.replace("movies/?pageSize=" + this.value + "&page=1");
+        });
+    }
+    /*]]>*/
+</script>
 </body>
 </html>
