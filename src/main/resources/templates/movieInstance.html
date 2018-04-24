@@ -1,34 +1,52 @@
 <!doctype html>
-<html lang="de" xmlns:th="http://www.thymeleaf.org">
+<html lang="de"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head th:include="/fragments/special_movieList_header :: header" />
 <body>
 <nav th:include="/fragments/navigation :: navigation" />
 <main id="main" role="main" class="container">
     <div class="row">
         <div class="col-md-12">
-            <a class="movie-container">
-                <div class="movie-container__cover">
+            <a class="single-movie-container">
+                <div class="single-movie-container__cover">
                     <img th:src="${movie.coverImage}" />
                 </div>
-                <div class="movie-container__details">
-                    <h3 class="movie-container__title" th:text="${movie.title}"></h3>
-                    <div class="movie-container__watchedDate">
+                <div class="single-movie-container__details">
+                    <h3 class="single-movie-container__title" th:text="${movie.title}"></h3>
+                    <div class="single-movie-container__watchedDate">
                         <span>Angesehen am </span><span th:text="${#dates.format(movie.registeredDate, 'dd. MMMM yyyy, HH:mm')}"></span>
                     </div>
-                    <div class="movie-container__genre">
+                    <div class="single-movie-container__genre">
                         <span>Genre: </span><span th:style="'color:' + ${movie.getGenre().color}" th:text="${movie.getGenre().name}"></span>
                     </div>
-
-                    <div class="movie-container__rating" th:attr="data-movie-rating=${movie.rating}">
-                        <div class="movie-container__rating-progressbar">
-                            <div class="movie-container__rating-progress" th:text="${movie.rating}"></div>
-                        </div>
+                    <div class="single-movie-container__rateNow" sec:authorize="isAuthenticated()">
+                        <form th:action="@{'/addRatingAction/' + ${movie.id}}" th:object="${newRating}" method="POST">
+                            <select class="single-movie-container__rateNow-dropdown" th:field="*{rating}">
+                                <option value="1">1 Stern</option>
+                                <option value="2">2 Sterne</option>
+                                <option value="3">3 Sterne</option>
+                                <option value="4">4 Sterne</option>
+                                <option value="5">5 Sterne</option>
+                                <option value="6">6 Sterne</option>
+                                <option value="7">7 Sterne</option>
+                                <option value="8">8 Sterne</option>
+                                <option value="9">9 Sterne</option>
+                                <option value="10">10 Sterne</option>
+                            </select>
+                            <button type="submit" class="single-movie-container__rateNow-submitButton"> Bewerten </button>
+                        </form>
                     </div>
-                    <div class="movie-container__additionalRatingInformation">
+                </div>
+                <div class="single-movie-container__rating" th:attr="data-movie-rating=${movie.rating}">
+                    <div class="single-movie-container__rating-progressbar">
+                        <div class="movie-container__rating-progress" th:text="${movie.rating}"></div>
+                    </div>
+                </div>
+                <div class="single-movie-container__additionalRatingInformation">
                         <span th:each="rating : ${ratings}">
                             <span th:text="${rating.getUser().username}"></span> | <span th:text="${rating.rating}"></span> </br>
                         </span>
-                    </div>
                 </div>
 
                 <script th:inline="javascript">

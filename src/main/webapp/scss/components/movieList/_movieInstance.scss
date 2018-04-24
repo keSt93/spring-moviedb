@@ -23,16 +23,11 @@
       margin: -1rem 1rem -1rem -1rem;
       object-fit: contain;
     }
-
   }
 
   .movie-container__details {
     width: 100%;
     position: relative;
-
-    .movie-container-title {
-
-    }
 
     .movie-container__rating {
       position: absolute;
@@ -60,6 +55,18 @@
 
     .movie-container__watchedDate {
 
+    }
+
+    .movie-container__rateNow-submitButton {
+      padding: .5rem;
+      color: white;
+      background: #32d93d;
+      border: 0;
+    }
+    .movie-container__rateNow-dropdown {
+      padding: .5rem;
+      margin-right:-4px;
+      border: 0;
     }
   }
 

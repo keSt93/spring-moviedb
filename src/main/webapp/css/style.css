@@ -41,6 +41,34 @@ nav {
           line-height: 30px;
           color: white;
           transition: background-color .5s; }
+    .movie-container .movie-container__details .movie-container__rateNow-submitButton {
+      padding: .5rem;
+      color: white;
+      background: #32d93d;
+      border: 0; }
+    .movie-container .movie-container__details .movie-container__rateNow-dropdown {
+      padding: .5rem;
+      margin-right: -4px;
+      border: 0; }
+
+.single-movie-container {
+  display: flex;
+  flex-direction: row;
+  background: #edebe9; }
+  .single-movie-container .single-movie-container__cover {
+    margin-right: 1rem; }
+    .single-movie-container .single-movie-container__cover img {
+      max-width: 250px;
+      object-fit: contain; }
+  .single-movie-container .single-movie-container__rateNow-submitButton {
+    padding: .5rem;
+    color: white;
+    background: #29a030;
+    border: 0; }
+  .single-movie-container .single-movie-container__rateNow-dropdown {
+    padding: .5rem;
+    margin-right: -4px;
+    border: 0; }
 
 .tile-container {
   display: flex;
@@ -155,4 +183,4 @@ h3 {
       .pagination-centered .pagination li a {
         color: #2c2c2c; }
 
-/*# sourceMappingURL=style.css.map */
+/*# sourceMappingURL=../../../../target/style.css.map */

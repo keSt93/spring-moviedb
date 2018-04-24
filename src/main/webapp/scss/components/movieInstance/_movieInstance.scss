@@ -1,0 +1,25 @@
+.single-movie-container {
+  display: flex;
+  flex-direction: row;
+  background: #edebe9;
+
+  .single-movie-container__cover {
+    margin-right: 1rem;
+    img {
+      max-width: 250px;
+      object-fit: contain;
+    }
+  }
+
+  .single-movie-container__rateNow-submitButton {
+    padding: .5rem;
+    color: white;
+    background: #29a030;
+    border: 0;
+  }
+  .single-movie-container__rateNow-dropdown {
+    padding: .5rem;
+    margin-right:-4px;
+    border: 0;
+  }
+}

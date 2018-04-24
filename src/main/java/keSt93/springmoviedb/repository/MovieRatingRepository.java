@@ -11,4 +11,11 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface MovieRatingRepository extends PagingAndSortingRepository<MovieRating, Integer> {
     public Iterable<MovieRating> findAllByMovie(Movie m);
+
+    @Query("select sum(rating) from MovieRating where movie = ?1")
+    public int getCalculatedMovieRatingForMovie(Movie movie);
+
+    @Query("select count(rating) from MovieRating where movie = ?1")
+    public int getCountOfMovieRatingsForMovie(Movie movie);
+
 }
