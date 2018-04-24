@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css?family=Open+Sans");
 nav {
   background-color: #4e4e4e; }
 
@@ -46,37 +47,67 @@ nav {
   flex-direction: row;
   justify-content: flex-start;
   flex-flow: wrap; }
-  .tile-container .tile-instance.tile-box {
-    width: 120px;
-    height: 120px;
+  .tile-container .tile-instance {
     overflow: hidden;
     margin: .2rem;
     position: relative;
     transition: all .3s;
     display: inherit; }
-    .tile-container .tile-instance.tile-box .tile-image img {
-      width: 120px;
-      height: 120px;
+    .tile-container .tile-instance .tile-image img {
       object-fit: cover; }
-    .tile-container .tile-instance.tile-box .tile-overlay {
+    .tile-container .tile-instance .tile-overlay {
       position: absolute;
-      bottom: -95px;
       background: rgba(0, 0, 0, 0.4);
       color: white;
       transition: all .5s;
+      padding: .2rem;
+      text-shadow: 0px 0px 2px black; }
+      .tile-container .tile-instance .tile-overlay span {
+        display: block; }
+  .tile-container .tile-instance.tile-bigger {
+    width: 245px;
+    height: 245px; }
+    .tile-container .tile-instance.tile-bigger .tile-image img {
+      width: 245px;
+      height: 245px; }
+    .tile-container .tile-instance.tile-bigger .tile-overlay {
+      top: -210px;
+      width: 245px;
+      height: 245px;
+      display: flex;
+      flex-flow: column;
+      align-items: end;
+      justify-content: flex-end;
+      text-align: left; }
+      .tile-container .tile-instance.tile-bigger .tile-overlay .series-name {
+        font-size: 1.5rem; }
+    .tile-container .tile-instance.tile-bigger:hover .tile-overlay {
+      top: -155px; }
+  .tile-container .tile-instance.tile-box {
+    width: 120px;
+    height: 120px; }
+    .tile-container .tile-instance.tile-box .tile-image img {
       width: 120px;
       height: 120px; }
-      .tile-container .tile-instance.tile-box .tile-overlay span {
-        display: block; }
+    .tile-container .tile-instance.tile-box .tile-overlay {
+      bottom: -90px;
+      width: 120px;
+      height: 120px; }
     .tile-container .tile-instance.tile-box:hover .tile-overlay {
       bottom: -10px; }
 
+.hourMinuteContainer {
+  margin-top: -25px; }
+
 #totalWastedHours {
-  font-size: 4rem; }
+  font-size: 7rem; }
 
 #totalWastedMinutes,
 #totalWastedWithMovies {
-  font-size: 2rem; }
+  font-size: 4rem; }
+
+.hourMinuteContainer__additional {
+  margin-top: -3.5rem; }
 
 .lineBreakAfterSpan:after {
   content: " ";
@@ -84,5 +115,14 @@ nav {
 
 .totalWastedDescription {
   font-size: 1.2rem; }
+
+body {
+  font-family: 'Open Sans', sans-serif; }
+
+main .row {
+  margin-top: 15px; }
+
+h3 {
+  padding-bottom: 10px; }
 
 /*# sourceMappingURL=../../../../target/style.css.map */

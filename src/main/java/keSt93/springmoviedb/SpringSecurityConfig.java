@@ -16,6 +16,7 @@ import org.springframework.security.core.userdetails.jdbc.JdbcDaoImpl;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.access.AccessDeniedHandler;
+import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 
 import javax.annotation.Resource;
 import javax.sql.DataSource;
@@ -32,6 +33,9 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+
+        JdbcTokenRepositoryImpl jdbcTokenRepositoryImpl=new JdbcTokenRepositoryImpl();
+        jdbcTokenRepositoryImpl.setDataSource(getDataSource());
 
         http.csrf().disable()
                 .authorizeRequests()
@@ -53,21 +57,25 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .logout()
                 .permitAll()
                 .and()
+                .rememberMe().rememberMeParameter("remember-me").tokenRepository(jdbcTokenRepositoryImpl)
+                .and()
                 .exceptionHandling().accessDeniedHandler(accessDeniedHandler);
     }
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+        auth.jdbcAuthentication()
+                .dataSource(getDataSource())
+                .usersByUsernameQuery("SELECT username, password, enabled from user where username=?")
+                .authoritiesByUsernameQuery("SELECT id_user, role from user_roles where id_user=(SELECT id from user where username=?)");
+    }
 
+    public DataSource getDataSource() {
         DriverManagerDataSource userSource = new DriverManagerDataSource();
         userSource.setDriverClassName("com.mysql.jdbc.Driver");
         userSource.setUrl(environment.getProperty("spring.datasource.url"));
         userSource.setUsername(environment.getProperty("spring.datasource.username"));
         userSource.setPassword(environment.getProperty("spring.datasource.password"));
-
-        auth.jdbcAuthentication()
-                .dataSource(userSource)
-                .usersByUsernameQuery("SELECT username, password, enabled from user where username=?")
-                .authoritiesByUsernameQuery("SELECT id_user, role from user_roles where id_user=(SELECT id from user where username=?)");
+        return userSource;
     }
 }

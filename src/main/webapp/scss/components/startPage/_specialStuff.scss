@@ -1,11 +1,20 @@
+.hourMinuteContainer {
+  margin-top: -25px;
+}
+
 #totalWastedHours {
-  font-size: 4rem;
+  font-size: 7rem;
 }
 #totalWastedMinutes,
 #totalWastedWithMovies
 {
-  font-size: 2rem;
+  font-size: 4rem;
 }
+
+.hourMinuteContainer__additional {
+  margin-top: -3.5rem;
+}
+
 
 .lineBreakAfterSpan:after {
   content : " ";
@@ -15,3 +24,4 @@
 .totalWastedDescription {
   font-size: 1.2rem;
 }
+

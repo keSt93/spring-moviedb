@@ -7,9 +7,10 @@
   $tile-width: 120px;
   $tile-height: 120px;
 
-  .tile-instance.tile-box {
-    width:  $tile-width;
-    height: $tile-height;
+  $tile-bigger-width: 245px;
+  $tile-bigger-height: 245px;
+
+  .tile-instance {
     overflow: hidden;
     margin: .2rem;
     position: relative;
@@ -18,24 +19,70 @@
 
     .tile-image {
       img {
-        width:  $tile-width;
-        height: $tile-height;
         object-fit: cover;
       }
     }
-
     .tile-overlay {
       position: absolute;
-      bottom: -95px;
       background: rgba(0,0,0,.4);
       color: white;
       transition: all .5s;
-      width:  $tile-width;
-      height: $tile-height;
+      padding: .2rem;
+      text-shadow: 0px 0px 2px rgba(0, 0, 0, 1);
 
       span {
         display: block;
       }
+    }
+  }
+
+  // Bigger Tile
+  .tile-instance.tile-bigger {
+    width:  $tile-bigger-width;
+    height: $tile-bigger-height;
+
+    .tile-image {
+      img {
+        width:  $tile-bigger-width;
+        height: $tile-bigger-height;
+      }
+    }
+
+    .tile-overlay {
+      top: -210px;
+      width:  $tile-bigger-width;
+      height: $tile-bigger-height;
+      display: flex;
+      flex-flow: column;
+      align-items: end;
+      justify-content: flex-end;
+      text-align: left;
+
+      .series-name {
+        font-size: 1.5rem;
+      }
+    }
+    &:hover .tile-overlay {
+      top: -155px;
+    }
+  }
+
+  // Smaller Tile
+  .tile-instance.tile-box {
+    width:  $tile-width;
+    height: $tile-height;
+
+    .tile-image {
+      img {
+        width:  $tile-width;
+        height: $tile-height;
+      }
+    }
+
+    .tile-overlay {
+      bottom: -90px;
+      width:  $tile-width;
+      height: $tile-height;
     }
 
     &:hover {

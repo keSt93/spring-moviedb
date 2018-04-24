@@ -13,8 +13,7 @@
                         <img th:src="${recentMovie.coverImage}"/>
                     </div>
                     <div class="tile-overlay">
-                        <span th:text="${#dates.format(recentMovie.registeredDate, 'dd. MMMM yyyy')}"></span>
-                        <span th:text="${#dates.format(recentMovie.registeredDate, 'HH:mm')}"></span>
+                        <span th:text="${#dates.format(recentMovie.registeredDate, 'dd. MMMM')}"></span>
                         <span th:text="${recentMovie.title}"></span>
                     </div>
                 </a>
@@ -23,6 +22,18 @@
 
         <div class="col-md-6">
             <h3> Filmreihen </h3>
+            <div class="tile-container">
+                <a class="tile-instance tile-bigger" th:each="series : ${seriesList}" th:href="@{'/series/' + ${series.id}}">
+                    <div class="tile-image">
+                        <img th:src="${series.coverImage}"/>
+                    </div>
+                    <div class="tile-overlay">
+                        <span style="display: block">Zuletzt aktualisiert:</span>
+                        <span th:text="${#dates.format(series.lastUsed, 'dd. MMMM. yyyy')}"></span>
+                        <span class="series-name" th:text="${series.name}"></span>
+                    </div>
+                </a>
+            </div>
         </div>
 
     </div>
@@ -31,13 +42,19 @@
 
         <div class="col-md-6">
             <h3> Zahlen, junge! </h3>
-            <span id="totalWastedHours" th:text="${wastedHours}"></span>
-            <span class="totalWastedDescription">Stunden</span>
-            <span id="totalWastedMinutes" th:text="${wastedMinutes}"></span>
-            <span class="totalWastedDescription lineBreakAfterSpan">Minuten</span>
-            <span class="totalWastedDescription">mit</span>
-            <span id="totalWastedWithMovies" th:text="${wastedMinutes}"></span>
-            <span class="totalWastedDescription lineBreakAfterSpan">Filmen verschwendet:</span>
+            <div class="hourMinuteContainer">
+                <span id="totalWastedHours" th:text="${wastedHours}"></span>
+                <span class="totalWastedDescription">Stunden</span>
+                <span id="totalWastedMinutes" th:text="${wastedMinutes}"></span>
+                <span class="totalWastedDescription">Minuten</span>
+            </div>
+            <div class="hourMinuteContainer__additional">
+                <span class="totalWastedDescription">mit</span>
+                <span id="totalWastedWithMovies" th:text="${wastedMinutes}"></span>
+                <span class="totalWastedDescription ">Filmen verschwendet.</span>
+            </div>
+
+
         </div>
 
         <div class="col-md-6">
@@ -70,7 +87,6 @@
         var percentage = [[${totalMovies}]]
      +]*/
     countNumberUp("#totalWastedWithMovies", percentage);
-    /*[+
 
 </script>
 </body>

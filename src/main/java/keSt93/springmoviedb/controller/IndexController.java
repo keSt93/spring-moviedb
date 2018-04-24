@@ -15,6 +15,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.management.Query;
 import javax.persistence.EntityManager;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Created by stein on 14.02.2018.
@@ -49,8 +51,12 @@ public class IndexController {
 
         int totalMovies = movieRepository.getTotalMovies();
 
+        // krankes serien-zeug hier
+        Iterable<Series> seriesList = seriesRepository.findFirst2ByOrderByLastUsedDesc();
+
         m.addObject("recentMovies",recentMovies);
         m.addObject("bestRatedMovies",bestRatedMovies);
+        m.addObject("seriesList",seriesList);
         m.addObject("wastedMinutes", wastedMinutes);
         m.addObject("wastedHours", wastedHours);
         m.addObject("totalMovies", totalMovies);

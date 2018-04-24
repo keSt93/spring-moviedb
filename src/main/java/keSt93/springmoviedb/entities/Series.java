@@ -1,6 +1,7 @@
 package keSt93.springmoviedb.entities;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name = "series")
@@ -12,6 +13,12 @@ public class Series {
 
     @Column
     private String name;
+
+    @Column
+    private String coverImage;
+
+    @Column
+    private Date lastUsed;
 
     public int getId() {
         return id;
@@ -29,4 +36,19 @@ public class Series {
         this.name = name;
     }
 
+    public String getCoverImage() {
+        return coverImage;
+    }
+
+    public void setCoverImage(String coverImage) {
+        this.coverImage = coverImage;
+    }
+
+    public Date getLastUsed() {
+        return lastUsed;
+    }
+
+    public void setLastUsed(Date lastUsed) {
+        this.lastUsed = lastUsed;
+    }
 }
