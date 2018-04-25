@@ -1,7 +1,15 @@
 .single-movie-container {
-  display: flex;
-  flex-direction: row;
-  background: #edebe9;
+
+  .single-movie-container__title-container {
+    background: #edebe9;
+    padding: .5rem;
+    h3 {
+      padding-bottom: 0;
+    }
+  }
+  .single-movie-container__details {
+    display: flex;
+  }
 
   .single-movie-container__cover {
     margin-right: 1rem;
@@ -10,16 +18,65 @@
       object-fit: contain;
     }
   }
+  .single-movie-container__rateNow {
+    margin-top: 1rem;
 
-  .single-movie-container__rateNow-submitButton {
-    padding: .5rem;
-    color: white;
-    background: #29a030;
-    border: 0;
+    &:hover {
+      .single-movie-container__rateNow-dropdown {
+        border: 2px solid #29a030;
+      }
+    }
+    .single-movie-container__rateNow-submitButton {
+      padding: .5rem;
+      color: white;
+      background: #29a030;
+      border: 2px solid #29a030;
+      transition: all .5s;
+
+      &:hover {
+        background: #24872b;
+        border: 2px solid #24872b;
+      }
+
+    }
+    .single-movie-container__rateNow-dropdown {
+      padding: .5rem;
+      margin-right:-4px;
+      border: 0;
+      transition: all .5s;
+      border: 2px solid transparent;
+    }
   }
-  .single-movie-container__rateNow-dropdown {
-    padding: .5rem;
-    margin-right:-4px;
-    border: 0;
+
+  .single-movie-container__content {
+    flex: 100%;
+
+    .single-movie-container__allratings-container {
+      margin-top: 1rem;
+
+      .single-movie-container__rating-instance {
+        margin: 1rem 0;
+      }
+    }
   }
+
+  .single-movie-container__rating {
+    .single-movie-container__rating-progressbar {
+      width: 100%;
+      height: 30px;
+      background: lightgray;
+
+      .single-movie-container__rating-progress {
+        width: 1%;
+        height: 30px;
+        background: red;
+        text-align: center;
+        line-height: 30px;
+        color: white;
+        transition: background-color .5s;
+      }
+    }
+  }
+
+
 }
