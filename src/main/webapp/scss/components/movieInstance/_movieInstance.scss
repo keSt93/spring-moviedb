@@ -9,12 +9,25 @@
   }
   .single-movie-container__details {
     display: flex;
+
+    @media (min-width: 0px) and (max-width: 576px) {
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
   }
 
   .single-movie-container__cover {
-    margin-right: 1rem;
+    @media (min-width: 577px) {
+      margin-right: 1rem;
+    }
     img {
-      max-width: 250px;
+      @media (min-width: 0px) and (max-width: 576px) {
+        max-width: 100%;
+      }
+      @media (min-width: 577px) {
+        max-width: 250px;
+      }
       object-fit: contain;
     }
   }
@@ -49,6 +62,10 @@
   }
 
   .single-movie-container__content {
+    @media (min-width: 0px) and (max-width: 576px) {
+      width: 100%;
+    }
+
     flex: 100%;
 
     .single-movie-container__allratings-container {
@@ -77,6 +94,4 @@
       }
     }
   }
-
-
 }

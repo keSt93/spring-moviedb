@@ -59,12 +59,24 @@ nav {
 
 .single-movie-container .single-movie-container__details {
   display: flex; }
+  @media (min-width: 0px) and (max-width: 576px) {
+    .single-movie-container .single-movie-container__details {
+      flex-direction: column;
+      justify-content: center;
+      align-items: center; } }
 
-.single-movie-container .single-movie-container__cover {
-  margin-right: 1rem; }
-  .single-movie-container .single-movie-container__cover img {
-    max-width: 250px;
-    object-fit: contain; }
+@media (min-width: 577px) {
+  .single-movie-container .single-movie-container__cover {
+    margin-right: 1rem; } }
+
+.single-movie-container .single-movie-container__cover img {
+  object-fit: contain; }
+  @media (min-width: 0px) and (max-width: 576px) {
+    .single-movie-container .single-movie-container__cover img {
+      max-width: 100%; } }
+  @media (min-width: 577px) {
+    .single-movie-container .single-movie-container__cover img {
+      max-width: 250px; } }
 
 .single-movie-container .single-movie-container__rateNow {
   margin-top: 1rem; }
@@ -88,6 +100,9 @@ nav {
 
 .single-movie-container .single-movie-container__content {
   flex: 100%; }
+  @media (min-width: 0px) and (max-width: 576px) {
+    .single-movie-container .single-movie-container__content {
+      width: 100%; } }
   .single-movie-container .single-movie-container__content .single-movie-container__allratings-container {
     margin-top: 1rem; }
     .single-movie-container .single-movie-container__content .single-movie-container__allratings-container .single-movie-container__rating-instance {
