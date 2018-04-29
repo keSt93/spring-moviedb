@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
 >
-<head lang="en" th:include="/fragments/header :: head">
+<head th:include="/fragments/special_movieList_header :: header" />
 <body>
 <nav th:include="/fragments/navigation :: navigation (notifications=${notifications})"/>
 <main role="main" class="container">
@@ -47,7 +47,7 @@
     </div>
 </main>
 
-<div th:replace="fragments/footer :: footer"/>
+<footer th:include="/fragments/special_movieList_footer :: footer" />
 </body>
 </html>
 

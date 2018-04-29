@@ -14,12 +14,14 @@ nav {
   width: 30px;
   height: 30px;
   text-align: center;
-  line-height: 30px; }
+  line-height: 30px;
+  transition: all .5s; }
   .notification_container.no-notifications {
     background: #c4c5c3; }
   .notification_container.notifications {
     background: #bd461b;
-    animation: heartbeat 5s ease-in-out infinite both; }
+    animation: heartbeat 5s ease-in-out infinite both;
+    cursor: pointer; }
 
 .notification_list {
   display: none;
@@ -30,7 +32,8 @@ nav {
   top: 3.6rem;
   z-index: 51956161;
   padding: .5rem;
-  border: 1px solid #6c6c6c; }
+  border: 1px solid #6c6c6c;
+  transition: all .5s; }
   .notification_list:before {
     content: " ";
     background: #4e4e4e;
