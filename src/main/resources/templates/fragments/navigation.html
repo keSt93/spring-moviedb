@@ -41,16 +41,15 @@
                                 <div id="notification_list" class="notification_list">
                                     <a class="notification_instance"
                                        th:classappend="'notification-id-'+${notification.id}"
-                                       th:each="notification : ${notifications}"
+                                       th:each="notification, index : ${notifications}"
                                        th:onmouseover="'markNotificationAsRead('+${notification.id}+')'"
                                        th:href="@{'/movies/' + ${notification.getNotification().getMovie().id}}">
+                                        <img class="notification-image" th:src="${notification.getNotification().getMovie().getCoverImage()}"/>
                                         <span class="main-text"
-                                              th:text="${#authentication.getName()} +
-                                                       ', ' +
-                                                       ${notification.getNotification().getUser().getUsername()} +
-                                                       ' hat grade ' +
+                                              th:text="${notification.getNotification().getUser().getUsername()} +
+                                                       ' hat ' +
                                                        ${notification.getNotification().getMovie().title} +
-                                                       ' hinzugefügt, guck doch mal rein!'
+                                                       ' hinzugefügt.'
                                                        ">
                                         </span>
                                         <span class="date" th:text="${#dates.format(notification.getNotification().getNotificationDate(), 'dd. MMMM, HH:mm')}"></span>
