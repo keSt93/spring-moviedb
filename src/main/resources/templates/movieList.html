@@ -2,7 +2,7 @@
 <html lang="de" xmlns:th="http://www.thymeleaf.org">
 <head th:include="/fragments/special_movieList_header :: header" />
 <body>
-<nav th:include="/fragments/navigation :: navigation" />
+<nav th:include="/fragments/navigation :: navigation (notifications=${notifications})" id="navigationbar"/>
 <main id="main" role="main" class="container">
     <div class="row">
         <div class="col-md-6" th:each="movie, index : ${movies}">

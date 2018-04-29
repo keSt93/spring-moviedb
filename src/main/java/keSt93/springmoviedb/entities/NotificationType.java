@@ -18,6 +18,8 @@ public class NotificationType {
     @Column
     private String text;
 
+
+
     public int getId() {
         return id;
     }
@@ -41,4 +43,5 @@ public class NotificationType {
     public void setText(String text) {
         this.text = text;
     }
+
 }

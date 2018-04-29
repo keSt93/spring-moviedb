@@ -2,9 +2,10 @@ package keSt93.springmoviedb.controller;
 
 import keSt93.springmoviedb.entities.Movie;
 import keSt93.springmoviedb.entities.MovieRating;
+import keSt93.springmoviedb.entities.NotificationUserRelation;
 import keSt93.springmoviedb.models.PageModel;
-import keSt93.springmoviedb.repository.MovieRatingRepository;
-import keSt93.springmoviedb.repository.MovieRepository;
+import keSt93.springmoviedb.repository.*;
+import keSt93.springmoviedb.utils.NotificationHelper;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -25,6 +26,12 @@ public class MovieListController {
     private MovieRepository movieRepository;
     @Autowired
     private MovieRatingRepository movieRatingRepository;
+    @Autowired
+    UserRepository userRepository;
+    @Autowired
+    NotificationUserRelationRepository notificationUserRelationRepository;
+    @Autowired
+    NotificationTypeRepository notificationTypeRepository;
 
 
 
@@ -34,7 +41,8 @@ public class MovieListController {
     private static final int INITIAL_PAGE_SIZE = 6;
 
     @RequestMapping("/movies")
-    public ModelAndView allMovies(@RequestParam("pageSize") Optional<Integer> pageSize,
+    public ModelAndView allMovies(Principal principal,
+                                  @RequestParam("pageSize") Optional<Integer> pageSize,
                                   @RequestParam("page") Optional<Integer> page){
         ModelAndView modelAndView = new ModelAndView("movieList");
 
@@ -44,11 +52,16 @@ public class MovieListController {
         Page<Movie> movieList = movieRepository.findAllByOrderByIdDesc(new PageRequest(evalPage, evalPageSize));
         PageModel pageModel = new PageModel(movieList.getTotalPages(),movieList.getNumber(),BUTTONS_TO_SHOW );
 
+        // get Notifications from User, if logged in
+        Iterable<NotificationUserRelation> notifications;
+        NotificationHelper notificationHelper = new NotificationHelper(userRepository, notificationUserRelationRepository, notificationTypeRepository);
+        notifications = notificationHelper.getNotificationsFromUser(principal);
+
 
         modelAndView.addObject("movies", movieList);
-
         modelAndView.addObject("selectedPageSize", evalPageSize);
         modelAndView.addObject("pager", pageModel);
+        modelAndView.addObject("notifications", notifications);
 
         return modelAndView;
     }

@@ -2,8 +2,7 @@
       xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
 >
-
-    <header th:fragment="navigation">
+    <header th:fragment="navigation (notifications)">
         <div class="container navigation-container">
             <div class="row">
                 <div class="col-md-12">
@@ -36,6 +35,23 @@
 
                             <!-- logged in -->
                             <form sec:authorize="isAuthenticated()" class="form-inline my-2 my-lg-0" style="color: white;margin: 0 1rem; ">
+                                <div class="notification_container" th:classappend="${#lists.size(notifications)} > 0 ? 'notifications' : 'no-notifications'" onclick="toggleNotificationWindow()">
+                                    <span th:text="${#lists.size(notifications)}"></span>
+                                </div>
+                                <div class="notification_list">
+                                    <a class="notification_instance" th:each="notification : ${notifications}" th:href="@{'/movies/' + ${notification.getNotification().getMovie().id}}">
+                                        <span class="main-text"
+                                              th:text="${#authentication.getName()} +
+                                                       ', ' +
+                                                       ${notification.getNotification().getUser().getUsername()} +
+                                                       ' hat grade ' +
+                                                       ${notification.getNotification().getMovie().title} +
+                                                       ' hinzugefügt, guck doch mal rein!'
+                                                       ">
+                                        </span>
+                                        <span class="date" th:text="${#dates.format(notification.getNotification().getNotificationDate(), 'dd. MMMM, HH:mm')}"></span>
+                                    </a>
+                                </div>
                                 <div class="nav__profileDetails__Container">
                                     <span class="nav__loggedinAs"> Eingeloggt als: </span>
                                     <span class="nav__userName" sec:authentication="name"></span>

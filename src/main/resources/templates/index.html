@@ -1,8 +1,8 @@
 <!doctype html>
-<html lang="de" xmlns:th="http://www.thymeleaf.org">
+<html lang="de" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.thymeleaf.org">
 <head th:include="/fragments/special_movieList_header :: header" />
 <body>
-<nav th:include="/fragments/navigation :: navigation" id="navigationbar" />
+<nav th:include="/fragments/navigation :: navigation (notifications=${notifications})" id="navigationbar"/>
 <main id="main" role="main" class="container">
     <div class="row">
         <div class="col-md-6">

@@ -18,8 +18,9 @@ public class Notification {
     @OneToOne(cascade = CascadeType.ALL)
     private User user;
 
-    @Column
-    private Boolean isSeen;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    private Movie movie;
 
     @Column
     private Date notificationDate;
@@ -48,13 +49,6 @@ public class Notification {
         this.user = user;
     }
 
-    public Boolean getSeen() {
-        return isSeen;
-    }
-
-    public void setSeen(Boolean seen) {
-        isSeen = seen;
-    }
 
     public Date getNotificationDate() {
         return notificationDate;
@@ -62,5 +56,13 @@ public class Notification {
 
     public void setNotificationDate(Date notificationDate) {
         this.notificationDate = notificationDate;
+    }
+
+    public Movie getMovie() {
+        return movie;
+    }
+
+    public void setMovie(Movie movie) {
+        this.movie = movie;
     }
 }

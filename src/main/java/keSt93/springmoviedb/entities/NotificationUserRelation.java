@@ -18,6 +18,10 @@ public class NotificationUserRelation {
     @OneToOne(cascade = CascadeType.ALL)
     private Notification notification;
 
+    @Column
+    private Boolean isSeen;
+
+
     public int getId() {
         return id;
     }
@@ -40,5 +44,13 @@ public class NotificationUserRelation {
 
     public void setNotification(Notification notification) {
         this.notification = notification;
+    }
+
+    public Boolean getSeen() {
+        return isSeen;
+    }
+
+    public void setSeen(Boolean seen) {
+        isSeen = seen;
     }
 }

@@ -3,12 +3,12 @@ package keSt93.springmoviedb.controller;
 
 import keSt93.springmoviedb.entities.Movie;
 import keSt93.springmoviedb.entities.MovieRating;
+import keSt93.springmoviedb.entities.NotificationUserRelation;
 import keSt93.springmoviedb.entities.User;
-import keSt93.springmoviedb.repository.MovieRatingRepository;
-import keSt93.springmoviedb.repository.MovieRepository;
-import keSt93.springmoviedb.repository.UserRepository;
+import keSt93.springmoviedb.repository.*;
 import keSt93.springmoviedb.utils.DataUriHelper;
 import keSt93.springmoviedb.utils.ImdbApi;
+import keSt93.springmoviedb.utils.NotificationHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,19 +37,28 @@ public class MovieInstanceController {
     MovieRatingRepository movieRatingRepository;
     @Autowired
     UserRepository userRepository;
-
+    @Autowired
+    NotificationUserRelationRepository notificationUserRelationRepository;
+    @Autowired
+    NotificationTypeRepository notificationTypeRepository;
 
     @GetMapping("/movies/{id}")
-    public ModelAndView singleMovie(@PathVariable int id) {
+    public ModelAndView singleMovie(Principal principal, @PathVariable int id) {
         ModelAndView m = new ModelAndView("movieInstance");
 
         Movie requestedMovie = movieRepository.findOne(id);
         Iterable<MovieRating> requestedMovieRating = movieRatingRepository.findAllByMovie(requestedMovie);
         MovieRating newRating = new MovieRating();
 
+        // get Notifications from User, if logged in
+        Iterable<NotificationUserRelation> notifications;
+        NotificationHelper notificationHelper = new NotificationHelper(userRepository, notificationUserRelationRepository, notificationTypeRepository);
+        notifications = notificationHelper.getNotificationsFromUser(principal);
+
         m.addObject("movie", requestedMovie);
         m.addObject("ratings", requestedMovieRating);
         m.addObject("newRating", newRating);
+        m.addObject("notifications", notifications);
 
         return m;
     }

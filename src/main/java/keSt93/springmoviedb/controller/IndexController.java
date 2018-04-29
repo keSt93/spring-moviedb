@@ -1,12 +1,9 @@
 package keSt93.springmoviedb.controller;
 
 
-import keSt93.springmoviedb.entities.Genre;
-import keSt93.springmoviedb.entities.Movie;
-import keSt93.springmoviedb.entities.Series;
-import keSt93.springmoviedb.repository.GenreRepository;
-import keSt93.springmoviedb.repository.MovieRepository;
-import keSt93.springmoviedb.repository.SeriesRepository;
+import keSt93.springmoviedb.entities.*;
+import keSt93.springmoviedb.repository.*;
+import keSt93.springmoviedb.utils.NotificationHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,7 +12,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.management.Query;
 import javax.persistence.EntityManager;
+import java.security.Principal;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -36,23 +35,41 @@ public class IndexController {
     GenreRepository genreRepository;
 
     @Autowired
+    UserRepository userRepository;
+
+    @Autowired
+    NotificationUserRelationRepository notificationUserRelationRepository;
+
+    @Autowired
+    NotificationTypeRepository notificationTypeRepository;
+
+    @Autowired
     EntityManager em;
 
     @GetMapping("/")
-    public ModelAndView index() {
+    public ModelAndView index(Principal principal) {
         ModelAndView m = new ModelAndView("index");
 
+        // Movie Lists
         Iterable<Movie> recentMovies = movieRepository.findFirst8ByOrderByRegisteredDateDesc();
         Iterable<Movie> bestRatedMovies = movieRepository.findFirst8ByOrderByRatingDesc();
 
+        // Calculate wasted Time
         int wastedMinutes = movieRepository.getTotalWastedMinutes();
         int wastedHours = wastedMinutes / 60;
         wastedMinutes = wastedMinutes % 60;
 
+        // Get all Movies count
         int totalMovies = movieRepository.getTotalMovies();
 
-        // krankes serien-zeug hier
+        // Find Last Two Series
         Iterable<Series> seriesList = seriesRepository.findFirst2ByOrderByLastUsedDesc();
+
+        // get Notifications from User, if logged in
+        Iterable<NotificationUserRelation> notifications;
+        NotificationHelper notificationHelper = new NotificationHelper(userRepository, notificationUserRelationRepository, notificationTypeRepository);
+        notifications = notificationHelper.getNotificationsFromUser(principal);
+
 
         m.addObject("recentMovies",recentMovies);
         m.addObject("bestRatedMovies",bestRatedMovies);
@@ -60,6 +77,7 @@ public class IndexController {
         m.addObject("wastedMinutes", wastedMinutes);
         m.addObject("wastedHours", wastedHours);
         m.addObject("totalMovies", totalMovies);
+        m.addObject("notifications", notifications);
         return m;
     }
 
