@@ -10,3 +10,11 @@ nav {
   display: block;
   font-size: 0.7rem;
 }
+
+.nav__userName {
+  color: white;
+
+  &:hover, &:active, &:focus {
+    color: white;
+  }
+}

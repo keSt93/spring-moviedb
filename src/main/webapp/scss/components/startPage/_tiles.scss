@@ -4,11 +4,11 @@
   justify-content: flex-start;
   flex-flow: wrap;
 
-  $tile-width: 120px;
-  $tile-height: 120px;
+  $tile-width: 128px;
+  $tile-height: 128px;
 
-  $tile-bigger-width: 245px;
-  $tile-bigger-height: 245px;
+  $tile-bigger-width: 263px;
+  $tile-bigger-height: 263px;
 
   .tile-instance {
     overflow: hidden;
@@ -49,7 +49,7 @@
     }
 
     .tile-overlay {
-      top: -210px;
+      top: -225px;
       width:  $tile-bigger-width;
       height: $tile-bigger-height;
       display: flex;
@@ -63,7 +63,7 @@
       }
     }
     &:hover .tile-overlay {
-      top: -155px;
+      top: -170px;
     }
   }
 
@@ -80,14 +80,14 @@
     }
 
     .tile-overlay {
-      bottom: -90px;
+      bottom: -100px;
       width:  $tile-width;
       height: $tile-height;
     }
 
     &:hover {
       .tile-overlay {
-        bottom: -10px;
+        bottom: -15px;
       }
     }
   }

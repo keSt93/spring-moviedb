@@ -61,3 +61,10 @@ h3 {
 .btn {
   border-radius: 0;
 }
+
+footer {
+  a {
+    color: $navigation-background-color;
+    text-decoration: none;
+  }
+}

@@ -1,9 +1,8 @@
 package keSt93.springmoviedb.controller;
 
-import keSt93.springmoviedb.entities.NotificationUserRelation;
-import keSt93.springmoviedb.repository.NotificationTypeRepository;
-import keSt93.springmoviedb.repository.NotificationUserRelationRepository;
-import keSt93.springmoviedb.repository.UserRepository;
+
+import keSt93.springmoviedb.entities.*;
+import keSt93.springmoviedb.repository.*;
 import keSt93.springmoviedb.utils.NotificationHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,10 +10,24 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.persistence.EntityManager;
 import java.security.Principal;
 
+/**
+ * Created by stein on 14.02.2018.
+ */
+
 @Controller
-public class UserLoginController {
+public class UserController {
+
+    @Autowired
+    MovieRepository movieRepository;
+
+    @Autowired
+    SeriesRepository seriesRepository;
+
+    @Autowired
+    GenreRepository genreRepository;
 
     @Autowired
     UserRepository userRepository;
@@ -25,17 +38,26 @@ public class UserLoginController {
     @Autowired
     NotificationTypeRepository notificationTypeRepository;
 
-    @RequestMapping(value = "/login")
-    public String login(Principal principal) {
-        ModelAndView m = new ModelAndView("userLogin");
+    @Autowired
+    MovieRatingRepository movieRatingRepository;
+
+    @GetMapping("/user/current")
+    public ModelAndView index(Principal principal) {
+        ModelAndView m = new ModelAndView("userPage");
+        User currentUser = userRepository.findByUsernameEquals(principal.getName());
+
+        int avgUserRating = movieRatingRepository.getAverageRatingForUser(currentUser);
+
 
         // get Notifications from User, if logged in
         Iterable<NotificationUserRelation> notifications;
         NotificationHelper notificationHelper = new NotificationHelper(userRepository, notificationUserRelationRepository, notificationTypeRepository);
         notifications = notificationHelper.getNotificationsFromUser(principal);
 
+        m.addObject("currentUser", currentUser);
+        m.addObject("avgUserRating", avgUserRating);
         m.addObject("notifications", notifications);
-
-        return "userLogin";
+        return m;
     }
+
 }

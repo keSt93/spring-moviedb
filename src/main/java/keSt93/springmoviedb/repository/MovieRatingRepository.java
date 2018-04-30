@@ -21,4 +21,8 @@ public interface MovieRatingRepository extends PagingAndSortingRepository<MovieR
 
     public MovieRating findByUserAndAndMovie(User user, Movie movie);
 
+    @Query("select sum(rating) / count(rating) from MovieRating where user = ?1")
+    public int getAverageRatingForUser(User user);
+
+
 }

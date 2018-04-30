@@ -42,6 +42,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 // Ressources
                 .antMatchers("/css/*").permitAll()
                 .antMatchers("/js/*").permitAll()
+                .antMatchers("/target/*").permitAll()
                 // Public Sites
                 .antMatchers("/*").permitAll()
                 .antMatchers("/movies/**").permitAll()
@@ -50,8 +51,8 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/addMovieAction/**").hasAnyRole("ROLE_USER")
                 .anyRequest().authenticated()
                 .and()
-                .formLogin()
-                .loginPage("/login").successForwardUrl("/")
+                .formLogin().defaultSuccessUrl("/user/current")
+                .loginPage("/login")
                 .permitAll()
                 .and()
                 .logout()
