@@ -1,11 +1,19 @@
 @import "navigation/navigation";
 @import "navigation/notifications";
+
 @import "movieList/movieInstance";
+
 @import "seriesList/seriesInstance";
+
 @import "movieInstance/movieInstance";
+
 @import "startPage/tiles";
 @import "startPage/specialStuff";
+
 @import "pageLayout/general";
+
+@import "userPages/userPage";
+
 @import "animations/heartbeat";
 @import "animations/swingin";
 @import "animations/slidein-blurred";

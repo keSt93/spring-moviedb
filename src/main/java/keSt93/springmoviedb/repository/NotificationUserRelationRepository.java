@@ -12,4 +12,6 @@ public interface NotificationUserRelationRepository extends PagingAndSortingRepo
 
     public Iterable<NotificationUserRelation> findAllByUserAndIsSeenFalse(User user);
 
+    public Iterable<NotificationUserRelation> findTop5ByUserOrderByIdDesc(User user);
+
 }

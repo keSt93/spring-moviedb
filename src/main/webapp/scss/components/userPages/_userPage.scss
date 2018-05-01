@@ -1,0 +1,18 @@
+.notification-user-box {
+  background: $navigation-background-color;
+  padding: 1rem;
+  color: white;
+  margin-bottom: 1rem;
+
+  &.notification-seen {
+    span {
+      opacity: .5;
+    }
+  }
+
+  .date {
+    display: block;
+    font-size: .8rem;
+    color: lightgray;
+  }
+}

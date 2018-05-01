@@ -48,6 +48,7 @@ public class UserController {
 
         int avgUserRating = movieRatingRepository.getAverageRatingForUser(currentUser);
 
+        Iterable<NotificationUserRelation> top5notifications = notificationUserRelationRepository.findTop5ByUserOrderByIdDesc(currentUser);
 
         // get Notifications from User, if logged in
         Iterable<NotificationUserRelation> notifications;
@@ -57,6 +58,7 @@ public class UserController {
         m.addObject("currentUser", currentUser);
         m.addObject("avgUserRating", avgUserRating);
         m.addObject("notifications", notifications);
+        m.addObject("top5notifications", top5notifications);
         return m;
     }
 

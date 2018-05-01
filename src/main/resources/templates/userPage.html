@@ -11,10 +11,29 @@
             <div class="single-movie-container__title-container">
                 <h3 class="single-movie-container__title" th:text="${currentUser.getUsername()}"></h3>
             </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <h3>Letzte Notifications</h3>
+            <div class="notification-user-box"
+                 th:each="notification : ${top5notifications}"
+                 th:classappend="${notification.getSeen()} == true ? 'notification-seen' : 'notification-unseen'">
+                <span class="main-text"
+                      th:text="${notification.getNotification().getUser().getUsername()} +
+                      ' hat ' +
+                      ${notification.getNotification().getMovie().title} +
+                      ' hinzugefügt.'
+                "></span>
+                <span class="date" th:text="${#dates.format(notification.getNotification().getNotificationDate(), 'dd. MMMM, HH:mm')}"></span>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <h3>Nutzerdetails</h3>
             <div class="single-movie-container__details">
                 <div class="single-movie-container__content">
-                    <div class="single-movie-container__allratings-container">
-                        <div class="single-movie-container__rating-instance single-movie-container__rating-overall">
+                    <div>
+                        <div class="single-movie-container__rating-overall">
                             <div class="single-movie-container__rating">
                                 <div class="single-movie-container__rating-progressbar">
                                     <div class="single-movie-container__rating-progress" th:text="${avgUserRating}"></div>
@@ -23,8 +42,6 @@
                         </div>
                     </div>
                 </div>
-
-
             </div>
         </div>
     </div>
