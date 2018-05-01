@@ -17,7 +17,7 @@ function markNotificationAsRead(notification) {
     var notificationElement = $(".notification-id-"+notification);
     notificationElement.attr("onmouseover", "");
 
-    $.get("./notifications/markasread/"+notification, function(data) {
+    $.get(window.location.protocol + "//" + window.location.host + "/notifications/markasread/"+notification, function(data) {
         if(notifyCount.html() > 0) {
             notifyCount.text(notifyCount.html() - 1);
             notificationElement.css("opacity", .5);
