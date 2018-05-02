@@ -22,6 +22,9 @@
                     <img th:src="${movie.coverImage}" />
                 </div>
                 <div class="single-movie-container__content">
+                    <div class="single-movie-container__plot" th:text="${movie.plot}">
+                        Für diesen Film liegt keine Handlung vor.
+                    </div>
                     <div class="single-movie-container__rateNow" sec:authorize="isAuthenticated()">
 
                         <div th:if="${param.alreadyrated}">

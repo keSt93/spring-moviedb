@@ -32,3 +32,19 @@
   }
 
 }
+
+.series-container__cover-fullheight {
+  @media (min-width: 577px) {
+    margin-right: 1rem;
+  }
+  img {
+    @media (min-width: 0px) and (max-width: 576px) {
+      max-width: 100%;
+    }
+    @media (min-width: 577px) {
+      max-width: 250px;
+      height: 266px;
+    }
+    object-fit: cover;
+  }
+}

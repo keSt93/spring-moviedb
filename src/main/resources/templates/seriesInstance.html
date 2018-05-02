@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="de"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head th:include="/fragments/special_movieList_header :: header" />
+<body>
+<nav th:include="/fragments/navigation :: navigation (notifications=${notifications})" id="navigationbar"/>
+<main id="main" role="main" class="container">
+    <div class="row">
+        <div class="col-md-12 single-movie-container">
+            <div class="single-movie-container__title-container">
+                <h3 class="single-movie-container__title" th:text="${series.name}"></h3>
+                <div class="single-movie-container__watchedDate">
+                    <span>Zuletzt aktualisiert am </span><span th:text="${#dates.format(series.lastUsed, 'dd. MMMM yyyy')}"></span>
+                </div>
+            </div>
+            <div class="single-movie-container__details">
+                <div class="series-container__cover-fullheight">
+                    <img th:src="${series.coverImage}" />
+                </div>
+                <div class="single-movie-container__content">
+
+                    <div class="tile-container">
+                        <a class="tile-instance tile-box" th:each="movie : ${moviesFromSeries}" th:href="@{'/movies/' + ${movie.id}}">
+                            <div class="tile-image">
+                                <img th:src="${movie.coverImage}"/>
+                            </div>
+                            <div class="tile-overlay">
+                                <span class="series-name" th:text="${movie.title}"></span>
+                            </div>
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<footer th:include="/fragments/special_movieList_footer :: footer" />
+</body>
+</html>
