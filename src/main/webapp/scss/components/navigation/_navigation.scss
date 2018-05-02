@@ -18,3 +18,11 @@ nav {
     color: white;
   }
 }
+
+.navigation-container form {
+  @media (max-width: 767px) {
+    position: absolute;
+    right: 0;
+    top: -7px;
+  }
+}

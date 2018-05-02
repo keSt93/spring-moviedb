@@ -15,6 +15,12 @@ nav {
   .nav__userName:hover, .nav__userName:active, .nav__userName:focus {
     color: white; }
 
+@media (max-width: 767px) {
+  .navigation-container form {
+    position: absolute;
+    right: 0;
+    top: -7px; } }
+
 .notification_container {
   border-radius: 100%;
   width: 30px;
@@ -355,6 +361,22 @@ h3 {
 footer a {
   color: #4e4e4e;
   text-decoration: none; }
+
+@media (max-width: 767px) {
+  .for-normal {
+    display: none; } }
+
+@media (min-width: 768px) {
+  .for-normal {
+    display: block; } }
+
+@media (max-width: 767px) {
+  .for-small {
+    display: block; } }
+
+@media (min-width: 768px) {
+  .for-small {
+    display: none; } }
 
 .notification-user-box {
   background: #4e4e4e;

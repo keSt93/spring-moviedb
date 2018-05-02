@@ -68,3 +68,20 @@ footer {
     text-decoration: none;
   }
 }
+
+.for-normal {
+  @media (max-width: 767px) {
+    display: none;
+  }
+  @media (min-width: 768px) {
+    display: block;
+  }
+}
+.for-small {
+  @media (max-width: 767px) {
+    display: block;
+  }
+  @media (min-width: 768px) {
+    display: none;
+  }
+}
