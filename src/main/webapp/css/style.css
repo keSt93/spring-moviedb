@@ -29,7 +29,7 @@ nav {
   line-height: 30px;
   transition: all .5s; }
   .notification_container.no-notifications {
-    background: #c4c5c3; }
+    background: #edebe9; }
   .notification_container.notifications {
     background: #bd461b;
     animation: heartbeat 5s ease-in-out infinite both;
@@ -44,7 +44,7 @@ nav {
   top: 3.6rem;
   z-index: 51956161;
   padding: .5rem;
-  border: 1px solid #6c6c6c;
+  border: 1px solid #edebe9;
   transition: all .5s;
   width: 320px; }
   .notification_list:before {

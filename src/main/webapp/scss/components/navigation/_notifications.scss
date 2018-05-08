@@ -7,7 +7,7 @@
   transition: all .5s;
 
   &.no-notifications {
-    background: #c4c5c3;
+    background: $db-light-grey;
   }
   &.notifications {
     background: $db-orange;
@@ -15,6 +15,7 @@
     cursor: pointer;
   }
 }
+
 
 .notification_list {
   display: none;
@@ -25,7 +26,7 @@
   top: 3.6rem;
   z-index: 51956161;
   padding: .5rem;
-  border: 1px solid #6c6c6c;
+  border: 1px solid $db-light-grey;
   transition: all .5s;
   width: 320px;
 
@@ -39,12 +40,12 @@
     left: 8px;
     transform: rotate(45deg);
     z-index: -58;
-    border-left: 1px solid #6c6c6c;
-    border-top: 1px solid #6c6c6c;
+    border-left: 1px solid $db-dark-grey-variation-1;
+    border-top: 1px solid $db-dark-grey-variation-1;
   }
 
   .notification_instance {
-    border-bottom: 1px solid #6c6c6c;
+    border-bottom: 1px solid $db-dark-grey-variation-1;
     margin: .4rem 0;
     padding: .2rem;
     display: block;
