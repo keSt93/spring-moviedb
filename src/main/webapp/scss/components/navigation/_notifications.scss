@@ -10,7 +10,7 @@
     background: #c4c5c3;
   }
   &.notifications {
-    background: #bd461b;
+    background: $db-orange;
     animation: heartbeat 5s ease-in-out infinite both;
     cursor: pointer;
   }

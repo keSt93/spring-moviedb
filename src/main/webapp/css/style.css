@@ -410,6 +410,13 @@ footer a {
   .hide-for-767down {
     display: none; } }
 
+.navbar-toggler {
+  border-radius: 0;
+  border: none;
+  border-color: transparent; }
+  .navbar-toggler .navbar-toggler-icon {
+    color: white; }
+
 .notification-user-box {
   background: #4e4e4e;
   padding: 1rem;

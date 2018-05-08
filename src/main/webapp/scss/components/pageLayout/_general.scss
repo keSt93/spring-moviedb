@@ -36,14 +36,14 @@ h3 {
       align-items: center;
 
       &:not(.disabled):not(.active) {
-        background: #edebe9;
+        background: $db-light-grey;
         &:hover {
           transform: translateY(-5px);
         }
       }
 
       &.disabled {
-        background: #b4b2b0;
+        background: $db-grey;
         pointer-events: none;
         a {
           color: lightgray;
@@ -51,7 +51,7 @@ h3 {
       }
       &.active {
         pointer-events: none;
-        background: #18599c;
+        background: $db-dark-blue;
         a {
           color: white;
         }
@@ -108,5 +108,15 @@ footer {
 .hide-for-767down {
   @media (max-width: 767px) {
     display: none;
+  }
+}
+
+.navbar-toggler {
+  border-radius: 0;
+  border: none;
+  border-color: transparent;
+
+  .navbar-toggler-icon {
+    color: white;
   }
 }
