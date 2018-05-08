@@ -14,6 +14,12 @@ h3 {
   padding-bottom: 10px;
 }
 
+.col-md-6 {
+  @media (max-width: 767px) {
+    margin-bottom: 1rem;
+  }
+}
+
 .pagination-centered {
   padding-left: 2px;
   .pagination {
@@ -64,8 +70,21 @@ h3 {
 
 footer {
   a {
-    color: $navigation-background-color;
     text-decoration: none;
+  }
+
+  @media (max-width: 1199px) {
+    margin-top: 1rem;
+    background: $db-dark-grey;
+    a {
+      color: white;
+    }
+  }
+
+  @media (min-width: 1200px) {
+    a {
+      color: $db-dark-grey;
+    }
   }
 }
 
@@ -82,6 +101,12 @@ footer {
     display: block;
   }
   @media (min-width: 768px) {
+    display: none;
+  }
+}
+
+.hide-for-767down {
+  @media (max-width: 767px) {
     display: none;
   }
 }

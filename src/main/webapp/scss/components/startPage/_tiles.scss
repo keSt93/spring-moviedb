@@ -1,14 +1,12 @@
 .tile-container {
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
   flex-flow: wrap;
+  justify-content: flex-start;
 
-  $tile-width: 128px;
-  $tile-height: 128px;
-
-  $tile-bigger-width: 263px;
-  $tile-bigger-height: 263px;
+  @media (max-width: 767px) {
+    justify-content: center;
+  }
 
   .tile-instance {
     overflow: hidden;
@@ -36,22 +34,40 @@
     }
   }
 
-  // Bigger Tile
+  // _______________________________________________________ Bigger Tile
   .tile-instance.tile-bigger {
-    width:  $tile-bigger-width;
-    height: $tile-bigger-height;
+    @media (max-width: 991px) {
+      width: $tile-bigger-proportions-large;
+      height: $tile-bigger-proportions-large;
 
-    .tile-image {
-      img {
-        width:  $tile-bigger-width;
-        height: $tile-bigger-height;
+      .tile-image img {
+        width: $tile-bigger-proportions-large;
+        height: $tile-bigger-proportions-large;
+      }
+    }
+    @media (min-width:992px) and (max-width: 1199px) {
+      width: $tile-bigger-proportions-medium;
+      height: $tile-bigger-proportions-medium;
+
+      .tile-image img {
+        width: $tile-bigger-proportions-medium;
+        height: $tile-bigger-proportions-medium;
+      }
+    }
+    @media (min-width: 1200px) {
+      width: $tile-bigger-proportions-large;
+      height: $tile-bigger-proportions-large;
+
+      .tile-image img {
+        width: $tile-bigger-proportions-large;
+        height: $tile-bigger-proportions-large;
       }
     }
 
     .tile-overlay {
       top: -225px;
-      width:  $tile-bigger-width;
-      height: $tile-bigger-height;
+      width:  $tile-bigger-proportions-large;
+      height: $tile-bigger-proportions-large;
       display: flex;
       flex-flow: column;
       align-items: end;
@@ -67,22 +83,22 @@
     }
   }
 
-  // Smaller Tile
+  // _______________________________________________________ Smaller Tile
   .tile-instance.tile-box {
-    width:  $tile-width;
-    height: $tile-height;
+    width:  $tile-small-width;
+    height: $tile-small-height;
 
     .tile-image {
       img {
-        width:  $tile-width;
-        height: $tile-height;
+        width:  $tile-small-width;
+        height: $tile-small-height;
       }
     }
 
     .tile-overlay {
       bottom: -100px;
-      width:  $tile-width;
-      height: $tile-height;
+      width:  $tile-small-width;
+      height: $tile-small-height;
     }
 
     &:hover {

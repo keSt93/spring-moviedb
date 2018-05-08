@@ -4,20 +4,17 @@
 
 .hourMinuteContainer {
   font-family: 'Orbitron', sans-serif;
-  background: $navigation-background-color;
-  color: white;
-  padding: 1.4rem;
-  text-align: center;
-  text-transform: uppercase;
+  color: rgb(33, 37, 41);
   font-size: 1.8rem;
-  text-shadow: 0px 0px 2px black;
   margin-top: .7rem;
 }
 
 .hourMinuteContainer__additional {
-  background: grey;
-  text-align: center;
-  padding: .5rem;
-  color: white;
+  color: rgb(33, 37, 41);
 }
 
+.hoursAndMinutes {
+  @media (max-width: 767px) {
+    text-align: center;
+  }
+}

@@ -248,8 +248,11 @@ nav {
 .tile-container {
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
-  flex-flow: wrap; }
+  flex-flow: wrap;
+  justify-content: flex-start; }
+  @media (max-width: 767px) {
+    .tile-container {
+      justify-content: center; } }
   .tile-container .tile-instance {
     overflow: hidden;
     margin: .2rem;
@@ -267,25 +270,40 @@ nav {
       text-shadow: 0px 0px 2px black; }
       .tile-container .tile-instance .tile-overlay span {
         display: block; }
-  .tile-container .tile-instance.tile-bigger {
-    width: 263px;
-    height: 263px; }
-    .tile-container .tile-instance.tile-bigger .tile-image img {
+  @media (max-width: 991px) {
+    .tile-container .tile-instance.tile-bigger {
       width: 263px;
       height: 263px; }
-    .tile-container .tile-instance.tile-bigger .tile-overlay {
-      top: -225px;
+      .tile-container .tile-instance.tile-bigger .tile-image img {
+        width: 263px;
+        height: 263px; } }
+  @media (min-width: 992px) and (max-width: 1199px) {
+    .tile-container .tile-instance.tile-bigger {
+      width: 215px;
+      height: 215px; }
+      .tile-container .tile-instance.tile-bigger .tile-image img {
+        width: 215px;
+        height: 215px; } }
+  @media (min-width: 1200px) {
+    .tile-container .tile-instance.tile-bigger {
       width: 263px;
-      height: 263px;
-      display: flex;
-      flex-flow: column;
-      align-items: end;
-      justify-content: flex-end;
-      text-align: left; }
-      .tile-container .tile-instance.tile-bigger .tile-overlay .series-name {
-        font-size: 1.5rem; }
-    .tile-container .tile-instance.tile-bigger:hover .tile-overlay {
-      top: -170px; }
+      height: 263px; }
+      .tile-container .tile-instance.tile-bigger .tile-image img {
+        width: 263px;
+        height: 263px; } }
+  .tile-container .tile-instance.tile-bigger .tile-overlay {
+    top: -225px;
+    width: 263px;
+    height: 263px;
+    display: flex;
+    flex-flow: column;
+    align-items: end;
+    justify-content: flex-end;
+    text-align: left; }
+    .tile-container .tile-instance.tile-bigger .tile-overlay .series-name {
+      font-size: 1.5rem; }
+  .tile-container .tile-instance.tile-bigger:hover .tile-overlay {
+    top: -170px; }
   .tile-container .tile-instance.tile-box {
     width: 128px;
     height: 128px; }
@@ -301,20 +319,16 @@ nav {
 
 .hourMinuteContainer {
   font-family: 'Orbitron', sans-serif;
-  background: #4e4e4e;
-  color: white;
-  padding: 1.4rem;
-  text-align: center;
-  text-transform: uppercase;
+  color: #212529;
   font-size: 1.8rem;
-  text-shadow: 0px 0px 2px black;
   margin-top: .7rem; }
 
 .hourMinuteContainer__additional {
-  background: grey;
-  text-align: center;
-  padding: .5rem;
-  color: white; }
+  color: #212529; }
+
+@media (max-width: 767px) {
+  .hoursAndMinutes {
+    text-align: center; } }
 
 body {
   font-family: 'Open Sans', sans-serif; }
@@ -324,6 +338,10 @@ main .row {
 
 h3 {
   padding-bottom: 10px; }
+
+@media (max-width: 767px) {
+  .col-md-6 {
+    margin-bottom: 1rem; } }
 
 .pagination-centered {
   padding-left: 2px; }
@@ -359,8 +377,18 @@ h3 {
   border-radius: 0; }
 
 footer a {
-  color: #4e4e4e;
   text-decoration: none; }
+
+@media (max-width: 1199px) {
+  footer {
+    margin-top: 1rem;
+    background: #4e4e4e; }
+    footer a {
+      color: white; } }
+
+@media (min-width: 1200px) {
+  footer a {
+    color: #4e4e4e; } }
 
 @media (max-width: 767px) {
   .for-normal {
@@ -376,6 +404,10 @@ footer a {
 
 @media (min-width: 768px) {
   .for-small {
+    display: none; } }
+
+@media (max-width: 767px) {
+  .hide-for-767down {
     display: none; } }
 
 .notification-user-box {

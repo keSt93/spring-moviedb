@@ -20,7 +20,7 @@
   display: none;
   animation: swing-in-top-fwd 1s cubic-bezier(0.175, 0.885, 0.320, 1.275) both;
   position: absolute;
-  background: $navigation-background-color;
+  background: $db-dark-grey;
   color: white;
   top: 3.6rem;
   z-index: 51956161;
@@ -31,7 +31,7 @@
 
   &:before {
     content: " ";
-    background: $navigation-background-color;
+    background: $db-dark-grey;
     width: 15px;
     height: 15px;
     position: absolute;
