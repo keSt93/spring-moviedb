@@ -36,9 +36,15 @@
 
                             <!-- logged in -->
                             <form id="loggedin_form" sec:authorize="isAuthenticated()" class="form-inline my-2 my-lg-0" style="color: white;margin: 0 1rem; ">
-                                <div class="notification_container" id="notification_container" th:classappend="${#lists.size(notifications)} > 0 ? 'notifications' : 'no-notifications'" onclick="toggleNotificationWindow()">
+                                <div class="notification_container for-normal" id="notification_container" th:classappend="${#lists.size(notifications)} > 0 ? 'notifications' : 'no-notifications'" onclick="toggleNotificationWindow()">
                                     <span id ="notification_container-number" th:text="${#lists.size(notifications)}"></span>
                                 </div>
+                                <a class="notification_container notification_container_small for-small"
+                                   id="notification_container-small"
+                                   th:classappend="${#lists.size(notifications)} > 0 ? 'notifications' : 'no-notifications'"
+                                   th:href="@{/notifications/new}">
+                                    <span id ="notification_container-number-small" th:text="${#lists.size(notifications)}"></span>
+                                </a>
                                 <div id="notification_list" class="notification_list">
                                     <a class="notification_instance"
                                        th:classappend="'notification-id-'+${notification.id}"

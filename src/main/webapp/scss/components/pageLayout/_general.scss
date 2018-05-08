@@ -101,7 +101,10 @@ footer {
     display: block;
   }
   @media (min-width: 768px) {
-    display: none;
+    &:before {
+      display: none !important;
+    }
+    display: none !important;
   }
 }
 

@@ -15,7 +15,13 @@ nav {
   .nav__userName:hover, .nav__userName:active, .nav__userName:focus {
     color: white; }
 
-@media (max-width: 767px) {
+@media (min-width: 576px) and (max-width: 767px) {
+  .navigation-container form {
+    position: absolute;
+    right: 0;
+    top: 0; } }
+
+@media (max-width: 575px) {
   .navigation-container form {
     position: absolute;
     right: 0;
@@ -34,6 +40,16 @@ nav {
     background: #bd461b;
     animation: heartbeat 5s ease-in-out infinite both;
     cursor: pointer; }
+
+.notification_container_small {
+  display: block; }
+  .notification_container_small a,
+  .notification_container_small a:hover,
+  .notification_container_small a:focus,
+  .notification_container_small a:visited,
+  .notification_container_small span {
+    text-decoration: none;
+    color: white; }
 
 .notification_list {
   display: none;
@@ -404,7 +420,9 @@ footer a {
 
 @media (min-width: 768px) {
   .for-small {
-    display: none; } }
+    display: none !important; }
+    .for-small:before {
+      display: none !important; } }
 
 @media (max-width: 767px) {
   .hide-for-767down {

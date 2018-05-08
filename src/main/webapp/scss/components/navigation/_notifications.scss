@@ -16,6 +16,19 @@
   }
 }
 
+.notification_container_small {
+  display: block;
+
+  a,
+  a:hover,
+  a:focus,
+  a:visited,
+  span {
+    text-decoration: none;
+    color: white;
+  }
+
+}
 
 .notification_list {
   display: none;

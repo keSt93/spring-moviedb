@@ -25,6 +25,10 @@ public class NotificationController {
 
     @Autowired
     NotificationUserRelationRepository notificationUserRelationRepository;
+    @Autowired
+    UserRepository userRepository;
+    @Autowired
+    NotificationTypeRepository notificationTypeRepository;
 
     @GetMapping("/notifications/markasread/{id}")
     public String index(@PathVariable int id) {
@@ -35,6 +39,19 @@ public class NotificationController {
             notificationUserRelationRepository.save(notification);
         }
         return "notification_markAsRead";
+    }
+
+    @GetMapping("/notifications/new")
+    public ModelAndView notificationList(Principal principal) {
+        ModelAndView notificationList = new ModelAndView("notificationList");
+        NotificationHelper notificationHelper = new NotificationHelper(userRepository, notificationUserRelationRepository, notificationTypeRepository);
+
+        // get Notifications from User, if logged in
+        Iterable<NotificationUserRelation> notifications;
+        notifications = notificationHelper.getNotificationsFromUser(principal);
+
+        notificationList.addObject("notifications", notifications);
+        return notificationList;
     }
 
 }

@@ -20,7 +20,12 @@ nav {
 }
 
 .navigation-container form {
-  @media (max-width: 767px) {
+  @media (min-width: 576px) and (max-width: 767px) {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+  @media (max-width: 575px) {
     position: absolute;
     right: 0;
     top: -7px;

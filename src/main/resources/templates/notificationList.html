@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="de" xmlns:th="http://www.thymeleaf.org">
+<head th:include="/fragments/special_movieList_header :: header" />
+<body>
+<nav th:include="/fragments/navigation :: navigation (notifications=${notifications})" id="navigationbar"/>
+<main id="main" role="main" class="container">
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="notification-user-box" th:each="notification : ${notifications}">
+                <img class="notification-image" th:src="${notification.getNotification().getMovie().getCoverImage()}"/>
+                <span class="main-text"
+                      th:text="${notification.getNotification().getUser().getUsername()} +
+                      ' hat ' +
+                      ${notification.getNotification().getMovie().title} +
+                      ' hinzugefügt.'
+                "></span>
+                <span class="date" th:text="${#dates.format(notification.getNotification().getNotificationDate(), 'dd. MMMM, HH:mm')}"></span>
+            </div>
+        </div>
+    </div>
+
+</main>
+<footer th:include="/fragments/special_movieList_footer :: footer" />
+</body>
+</html>
