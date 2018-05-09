@@ -42,7 +42,7 @@
                                 <a class="notification_container notification_container_small for-small"
                                    id="notification_container-small"
                                    th:classappend="${#lists.size(notifications)} > 0 ? 'notifications' : 'no-notifications'"
-                                   th:href="@{/notifications/new}">
+                                   th:href="${#lists.size(notifications)} > 0 ? @{/notifications/new} : '#'">
                                     <span id ="notification_container-number-small" th:text="${#lists.size(notifications)}"></span>
                                 </a>
                                 <div id="notification_list" class="notification_list">
