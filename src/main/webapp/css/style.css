@@ -205,7 +205,7 @@ nav {
 
 .single-movie-container__details {
   display: flex; }
-  @media (min-width: 0px) and (max-width: 576px) {
+  @media (max-width: 576px) {
     .single-movie-container__details {
       flex-direction: column;
       justify-content: center;
@@ -214,14 +214,19 @@ nav {
 .single-movie-container__plot {
   margin: 1rem 0; }
 
+@media (max-width: 576px) {
+  .single-movie-container__cover {
+    width: 100%; } }
+
 @media (min-width: 577px) {
   .single-movie-container__cover {
     margin-right: 1rem; } }
 
 .single-movie-container__cover img {
   object-fit: contain; }
-  @media (min-width: 0px) and (max-width: 576px) {
+  @media (max-width: 576px) {
     .single-movie-container__cover img {
+      width: 100%;
       max-width: 100%; } }
   @media (min-width: 577px) {
     .single-movie-container__cover img {

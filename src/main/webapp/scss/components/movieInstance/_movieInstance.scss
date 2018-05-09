@@ -9,7 +9,7 @@
 .single-movie-container__details {
   display: flex;
 
-  @media (min-width: 0px) and (max-width: 576px) {
+  @media (max-width: 576px) {
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -22,11 +22,15 @@
 }
 
 .single-movie-container__cover {
+  @media (max-width: 576px) {
+    width: 100%;
+  }
   @media (min-width: 577px) {
     margin-right: 1rem;
   }
   img {
-    @media (min-width: 0px) and (max-width: 576px) {
+    @media (max-width: 576px) {
+      width: 100%;
       max-width: 100%;
     }
     @media (min-width: 577px) {
