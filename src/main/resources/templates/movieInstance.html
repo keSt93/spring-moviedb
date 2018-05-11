@@ -11,7 +11,7 @@
             <div class="single-movie-container__title-container">
                 <h3 class="single-movie-container__title" th:text="${movie.title}"></h3>
                 <div class="single-movie-container__watchedDate">
-                    <span>Angesehen am </span><span th:text="${#dates.format(movie.registeredDate, 'dd. MMMM yyyy, HH:mm')}"></span>
+                    <span>Eingetragen am </span><span th:text="${#dates.format(movie.registeredDate, 'dd. MMMM yyyy')}"></span>
                 </div>
                 <div class="single-movie-container__genre">
                     <span>Genre: </span><span th:style="'color:' + ${movie.getGenre().color}" th:text="${movie.getGenre().name}"></span>

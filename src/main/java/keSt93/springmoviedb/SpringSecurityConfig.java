@@ -39,13 +39,15 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.csrf().disable()
                 .authorizeRequests()
-                // Ressources
-                .antMatchers("/css/*").permitAll()
-                .antMatchers("/js/*").permitAll()
-                .antMatchers("/target/*").permitAll()
+                // Resources
+                .antMatchers("/css/**").permitAll()
+                .antMatchers("/js/**").permitAll()
+                .antMatchers("/img/**").permitAll()
+                .antMatchers("/target/**").permitAll()
                 // Public Sites
                 .antMatchers("/*").permitAll()
                 .antMatchers("/movies/**").permitAll()
+                .antMatchers("/series/**").permitAll()
                 // Registered only
                 .antMatchers("/addmovie/**").hasAnyRole("ROLE_USER")
                 .antMatchers("/addMovieAction/**").hasAnyRole("ROLE_USER")

@@ -1,19 +1,30 @@
+// ___________________________________________ General Styles
+@import "pageLayout/general";
+@import "pageLayout/fonts";
+
+// ___________________________________________ Navigation / Notification Styles
 @import "navigation/navigation";
 @import "navigation/notifications";
 
+// ___________________________________________ Series Styles
+// Movie List Styles
 @import "movieList/movieInstance";
-
-@import "seriesList/seriesInstance";
-
+// Movie Instance Styles
 @import "movieInstance/movieInstance";
 
+// ___________________________________________ Series Styles
+// Series Styles
+@import "seriesList/seriesInstance";
+
+// ___________________________________________ Start Page Styles (although the tiles are used throughout the whole site..)
 @import "startPage/tiles";
 @import "startPage/specialStuff";
 
-@import "pageLayout/general";
-
+// ___________________________________________ Userpage Styles
 @import "userPages/userPage";
 
+
+// ___________________________________________ css Animations by animista
 @import "animations/heartbeat";
 @import "animations/swingin";
 @import "animations/slidein-blurred";

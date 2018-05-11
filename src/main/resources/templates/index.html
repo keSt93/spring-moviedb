@@ -17,6 +17,13 @@
                         <span th:text="${recentMovie.title}"></span>
                     </div>
                 </a>
+                <a class="tile-instance tile-box" th:href="@{'/movies/'}">
+                    <div class="tile-image">
+                    </div>
+                    <div class="tile-overlay always-visible tile-blue">
+                        <span th:text="'und ' + ${totalMovies - 11} + ' weitere Filme...'"></span>
+                    </div>
+                </a>
             </div>
         </div>
 

@@ -51,7 +51,7 @@ public class IndexController {
         ModelAndView m = new ModelAndView("index");
 
         // Movie Lists
-        Iterable<Movie> recentMovies = movieRepository.findFirst8ByOrderByRegisteredDateDesc();
+        Iterable<Movie> recentMovies = movieRepository.findFirst11ByOrderByRegisteredDateDesc();
         Iterable<Movie> bestRatedMovies = movieRepository.findFirst8ByOrderByRatingDesc();
 
         // Calculate wasted Time
