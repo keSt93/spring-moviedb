@@ -40,6 +40,7 @@ public class MovieListController {
     private static final int INITIAL_PAGE = 0;
     private static final int INITIAL_PAGE_SIZE = 6;
 
+    // Movie List
     @RequestMapping("/movies")
     public ModelAndView allMovies(Principal principal,
                                   @RequestParam("pageSize") Optional<Integer> pageSize,
@@ -57,7 +58,13 @@ public class MovieListController {
         NotificationHelper notificationHelper = new NotificationHelper(userRepository, notificationUserRelationRepository, notificationTypeRepository);
         notifications = notificationHelper.getNotificationsFromUser(principal);
 
+        // Calculate wasted Time for Footer
+        int wastedMinutes = movieRepository.getTotalWastedMinutes();
+        int wastedHours = wastedMinutes / 60;
+        wastedMinutes = wastedMinutes % 60;
 
+        modelAndView.addObject("wastedMinutes", wastedMinutes);
+        modelAndView.addObject("wastedHours", wastedHours);
         modelAndView.addObject("movies", movieList);
         modelAndView.addObject("selectedPageSize", evalPageSize);
         modelAndView.addObject("pager", pageModel);

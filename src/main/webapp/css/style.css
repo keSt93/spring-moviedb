@@ -45,19 +45,15 @@ h3 {
 .btn {
   border-radius: 0; }
 
-footer a {
-  text-decoration: none; }
-
-@media (max-width: 1199px) {
-  footer {
-    margin-top: 1rem;
-    background: #4e4e4e; }
-    footer a {
-      color: white; } }
-
-@media (min-width: 1200px) {
+footer {
+  background: linear-gradient(135deg, #b4b2b0 0%, #4e4e4e 75%);
+  padding: 1rem;
+  color: white;
+  min-height: 6rem;
+  margin-top: 2rem; }
   footer a {
-    color: #4e4e4e; } }
+    color: white;
+    text-decoration: none; }
 
 @media (max-width: 767px) {
   .for-normal {
@@ -87,12 +83,6 @@ footer a {
   border-color: transparent; }
   .navbar-toggler .navbar-toggler-icon {
     color: white; }
-
-@font-face {
-  font-family: "Orbitron";
-  font-style: normal;
-  font-weight: 400;
-  src: url("/css/fonts/Orbitron-Regular.ttf") format("ttf"); }
 
 nav {
   background-color: #4e4e4e; }
@@ -451,19 +441,6 @@ nav {
         bottom: -100px; }
     .tile-container .tile-instance.tile-box:hover .tile-overlay:not(.always-visible) {
       bottom: -15px; }
-
-.hourMinuteContainer {
-  font-family: 'Orbitron', sans-serif;
-  color: #212529;
-  font-size: 1.8rem;
-  margin-top: .7rem; }
-
-.hourMinuteContainer__additional {
-  color: #212529; }
-
-@media (max-width: 767px) {
-  .hoursAndMinutes {
-    text-align: center; } }
 
 .notification-user-box {
   background: #4e4e4e;

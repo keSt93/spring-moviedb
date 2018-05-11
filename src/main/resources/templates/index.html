@@ -47,22 +47,7 @@
 
     <div class="row">
 
-        <div class="col-md-6 hoursAndMinutes">
-            <h3 class="hide-for-767down"> &nbsp; </h3>
-            <div class="hourMinuteContainer">
-                <span id="totalWastedHours" th:text="${wastedHours}"></span>
-                <span class="totalWastedDescription">Stunden</span>
-                <span id="totalWastedMinutes" th:text="${wastedMinutes}"></span>
-                <span class="totalWastedDescription">Minuten</span>
-            </div>
-            <div class="hourMinuteContainer__additional">
-                <span class="totalWastedDescription">mit</span>
-                <span id="totalWastedWithMovies" th:text="${wastedMinutes}"></span>
-                <span class="totalWastedDescription ">Filmen verschwendet.</span>
-            </div>
-        </div>
-
-        <div class="col-md-6">
+        <div class="col-md-10">
             <h3> Am besten bewertet </h3>
             <div class="tile-container">
                 <a class="tile-instance tile-box" th:each="movie : ${bestRatedMovies}" th:href="@{'/movies/' + ${movie.id}}">
@@ -74,25 +59,18 @@
                         <span th:text="${movie.title}"></span>
                     </div>
                 </a>
+                <a class="tile-instance tile-box" th:href="@{'/movies/'}">
+                    <div class="tile-image">
+                    </div>
+                    <div class="tile-overlay always-visible tile-orange">
+                        <span th:text="'und ' + ${totalMovies - 11} + ' weitere Filme...'"></span>
+                    </div>
+                </a>
+
             </div>
         </div>
     </div>
 </main>
-<footer th:include="/fragments/special_movieList_footer :: footer" />
-<script th:inline="javascript">
-    /*[+
-        var percentage = [[${wastedHours}]]
-     +]*/
-    countNumberUp("#totalWastedHours", percentage);
-    /*[+
-        var percentage = [[${wastedMinutes}]]
-     +]*/
-    countNumberUp("#totalWastedMinutes", percentage);
-    /*[+
-        var percentage = [[${totalMovies}]]
-     +]*/
-    countNumberUp("#totalWastedWithMovies", percentage);
-
-</script>
+<footer th:include="/fragments/footer :: footer(wastedHours=${wastedHours},wastedMinutes=${wastedMinutes})" />
 </body>
 </html>

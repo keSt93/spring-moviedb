@@ -55,6 +55,13 @@ public class UserController {
         NotificationHelper notificationHelper = new NotificationHelper(userRepository, notificationUserRelationRepository, notificationTypeRepository);
         notifications = notificationHelper.getNotificationsFromUser(principal);
 
+        // Calculate wasted Time for Footer
+        int wastedMinutes = movieRepository.getTotalWastedMinutes();
+        int wastedHours = wastedMinutes / 60;
+        wastedMinutes = wastedMinutes % 60;
+
+        m.addObject("wastedMinutes", wastedMinutes);
+        m.addObject("wastedHours", wastedHours);
         m.addObject("currentUser", currentUser);
         m.addObject("avgUserRating", avgUserRating);
         m.addObject("notifications", notifications);

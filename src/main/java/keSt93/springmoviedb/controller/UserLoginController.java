@@ -1,6 +1,7 @@
 package keSt93.springmoviedb.controller;
 
 import keSt93.springmoviedb.entities.NotificationUserRelation;
+import keSt93.springmoviedb.repository.MovieRepository;
 import keSt93.springmoviedb.repository.NotificationTypeRepository;
 import keSt93.springmoviedb.repository.NotificationUserRelationRepository;
 import keSt93.springmoviedb.repository.UserRepository;
@@ -18,12 +19,12 @@ public class UserLoginController {
 
     @Autowired
     UserRepository userRepository;
-
     @Autowired
     NotificationUserRelationRepository notificationUserRelationRepository;
-
     @Autowired
     NotificationTypeRepository notificationTypeRepository;
+    @Autowired
+    MovieRepository movieRepository;
 
     @RequestMapping(value = "/login")
     public String login(Principal principal) {
@@ -34,6 +35,13 @@ public class UserLoginController {
         NotificationHelper notificationHelper = new NotificationHelper(userRepository, notificationUserRelationRepository, notificationTypeRepository);
         notifications = notificationHelper.getNotificationsFromUser(principal);
 
+        // Calculate wasted Time for Footer
+        int wastedMinutes = movieRepository.getTotalWastedMinutes();
+        int wastedHours = wastedMinutes / 60;
+        wastedMinutes = wastedMinutes % 60;
+
+        m.addObject("wastedMinutes", wastedMinutes);
+        m.addObject("wastedHours", wastedHours);
         m.addObject("notifications", notifications);
 
         return "userLogin";

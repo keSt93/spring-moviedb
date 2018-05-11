@@ -42,6 +42,7 @@ public class MovieInstanceController {
     @Autowired
     NotificationTypeRepository notificationTypeRepository;
 
+    // Movie Detail Page
     @GetMapping("/movies/{id}")
     public ModelAndView singleMovie(Principal principal, @PathVariable int id) {
         ModelAndView m = new ModelAndView("movieInstance");
@@ -55,6 +56,13 @@ public class MovieInstanceController {
         NotificationHelper notificationHelper = new NotificationHelper(userRepository, notificationUserRelationRepository, notificationTypeRepository);
         notifications = notificationHelper.getNotificationsFromUser(principal);
 
+        // Calculate wasted Time for Footer
+        int wastedMinutes = movieRepository.getTotalWastedMinutes();
+        int wastedHours = wastedMinutes / 60;
+        wastedMinutes = wastedMinutes % 60;
+
+        m.addObject("wastedMinutes", wastedMinutes);
+        m.addObject("wastedHours", wastedHours);
         m.addObject("movie", requestedMovie);
         m.addObject("ratings", requestedMovieRating);
         m.addObject("newRating", newRating);
@@ -64,6 +72,7 @@ public class MovieInstanceController {
     }
 
 
+    // Add Rating
     @PostMapping(value = "/addRatingAction/{id}")
     private String saveView(MovieRating movieRating, Principal principal,@PathVariable int id)  {
 
@@ -93,10 +102,5 @@ public class MovieInstanceController {
         } else {
             return "redirect:/movies/"+id+"?alreadyrated=true";
         }
-
-
-
-
     }
-
 }

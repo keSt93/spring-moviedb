@@ -17,7 +17,7 @@ public interface SeriesRepository extends PagingAndSortingRepository<Series, Int
 
     public Iterable<Series> findByIdOrderByIdDesc(int id);
 
-    public Iterable<Series> findFirst2ByOrderByLastUsedDesc();
+    public Iterable<Series> findFirst4ByOrderByLastUsedDesc();
 
     public Page<Series> findAllByIdNotOrderByIdDesc(int id, Pageable pageable);
 

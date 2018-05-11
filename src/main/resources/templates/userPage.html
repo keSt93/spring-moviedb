@@ -46,7 +46,7 @@
         </div>
     </div>
 </main>
-<footer th:include="/fragments/special_movieList_footer :: footer" />
+<footer th:include="/fragments/footer :: footer(wastedHours=${wastedHours},wastedMinutes=${wastedMinutes})" />
 <script th:inline="javascript">
     /*[+
         var elementclass  = '.single-movie-container__rating-overall .single-movie-container__rating-progress';

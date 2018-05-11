@@ -35,6 +35,7 @@ public class SeriesInstanceController {
     @Autowired
     SeriesRepository seriesRepository;
 
+    // Series Detail Page
     @GetMapping("/series/{id}")
     public ModelAndView singleMovie(Principal principal, @PathVariable int id) {
         ModelAndView m = new ModelAndView("seriesInstance");
@@ -47,6 +48,13 @@ public class SeriesInstanceController {
         NotificationHelper notificationHelper = new NotificationHelper(userRepository, notificationUserRelationRepository, notificationTypeRepository);
         notifications = notificationHelper.getNotificationsFromUser(principal);
 
+        // Calculate wasted Time for Footer
+        int wastedMinutes = movieRepository.getTotalWastedMinutes();
+        int wastedHours = wastedMinutes / 60;
+        wastedMinutes = wastedMinutes % 60;
+
+        m.addObject("wastedMinutes", wastedMinutes);
+        m.addObject("wastedHours", wastedHours);
         m.addObject("series", currentSeries);
         m.addObject("moviesFromSeries", moviesFromSeries);
         m.addObject("notifications", notifications);

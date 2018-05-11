@@ -43,6 +43,7 @@ public class MovieAddController {
     @Autowired
     private UserRepository userRepository;
 
+    // Add movie page
     @GetMapping(value = "/addmovie")
     public ModelAndView showView(Principal principal) {
         ModelAndView modelAndView = new ModelAndView("movieAdd");
@@ -55,14 +56,23 @@ public class MovieAddController {
         NotificationHelper notificationHelper = new NotificationHelper(userRepository, notificationUserRelationRepository, notificationTypeRepository);
         notifications = notificationHelper.getNotificationsFromUser(principal);
 
+        // Calculate wasted Time for Footer
+        int wastedMinutes = movieRepository.getTotalWastedMinutes();
+        int wastedHours = wastedMinutes / 60;
+        wastedMinutes = wastedMinutes % 60;
+
+        modelAndView.addObject("wastedMinutes", wastedMinutes);
+        modelAndView.addObject("wastedHours", wastedHours);
         modelAndView.addObject("movie", new Movie());
         modelAndView.addObject("genres_", genres);
         modelAndView.addObject("series_", series);
         modelAndView.addObject("notifications", notifications);
 
+
         return modelAndView;
     }
 
+    // Add Movie Action
     @PostMapping(value = "/addMovieAction")
     private String saveView(Movie movie, Principal currentUser)  {
         ImdbApi imdbApi = new ImdbApi(movie.getTitle());

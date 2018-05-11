@@ -29,6 +29,8 @@ public class NotificationController {
     UserRepository userRepository;
     @Autowired
     NotificationTypeRepository notificationTypeRepository;
+    @Autowired
+    MovieRepository movieRepository;
 
     @GetMapping("/notifications/markasread/{id}")
     public String index(@PathVariable int id) {
@@ -50,6 +52,13 @@ public class NotificationController {
         Iterable<NotificationUserRelation> notifications;
         notifications = notificationHelper.getNotificationsFromUser(principal);
 
+        // Calculate wasted Time for Footer
+        int wastedMinutes = movieRepository.getTotalWastedMinutes();
+        int wastedHours = wastedMinutes / 60;
+        wastedMinutes = wastedMinutes % 60;
+
+        notificationList.addObject("wastedMinutes", wastedMinutes);
+        notificationList.addObject("wastedHours", wastedHours);
         notificationList.addObject("notifications", notifications);
         return notificationList;
     }

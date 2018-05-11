@@ -28,6 +28,7 @@ public class SeriesListController {
     NotificationUserRelationRepository notificationUserRelationRepository;
     @Autowired
     NotificationTypeRepository notificationTypeRepository;
+    @Autowired MovieRepository movieRepository;
 
 
 
@@ -53,7 +54,13 @@ public class SeriesListController {
         NotificationHelper notificationHelper = new NotificationHelper(userRepository, notificationUserRelationRepository, notificationTypeRepository);
         notifications = notificationHelper.getNotificationsFromUser(principal);
 
+        // Calculate wasted Time for Footer
+        int wastedMinutes = movieRepository.getTotalWastedMinutes();
+        int wastedHours = wastedMinutes / 60;
+        wastedMinutes = wastedMinutes % 60;
 
+        modelAndView.addObject("wastedMinutes", wastedMinutes);
+        modelAndView.addObject("wastedHours", wastedHours);
         modelAndView.addObject("series", seriesList);
         modelAndView.addObject("selectedPageSize", evalPageSize);
         modelAndView.addObject("pager", pageModel);

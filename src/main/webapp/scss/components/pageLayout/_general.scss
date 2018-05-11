@@ -69,22 +69,15 @@ h3 {
 }
 
 footer {
+  background: linear-gradient(135deg, $db-grey 0%,$db-dark-grey 75%);
+  padding: 1rem;
+  color: white;
+  min-height: 6rem;
+  margin-top: 2rem;
+
   a {
+    color: white;
     text-decoration: none;
-  }
-
-  @media (max-width: 1199px) {
-    margin-top: 1rem;
-    background: $db-dark-grey;
-    a {
-      color: white;
-    }
-  }
-
-  @media (min-width: 1200px) {
-    a {
-      color: $db-dark-grey;
-    }
   }
 }
 

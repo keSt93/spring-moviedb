@@ -51,8 +51,8 @@ public class IndexController {
         ModelAndView m = new ModelAndView("index");
 
         // Movie Lists
-        Iterable<Movie> recentMovies = movieRepository.findFirst11ByOrderByRegisteredDateDesc();
-        Iterable<Movie> bestRatedMovies = movieRepository.findFirst8ByOrderByRatingDesc();
+        Iterable<Movie> recentMovies = movieRepository.findFirst15ByOrderByRegisteredDateDesc();
+        Iterable<Movie> bestRatedMovies = movieRepository.findFirst11ByOrderByRatingDesc();
 
         // Calculate wasted Time
         int wastedMinutes = movieRepository.getTotalWastedMinutes();
@@ -63,7 +63,7 @@ public class IndexController {
         int totalMovies = movieRepository.getTotalMovies();
 
         // Find Last Two Series
-        Iterable<Series> seriesList = seriesRepository.findFirst2ByOrderByLastUsedDesc();
+        Iterable<Series> seriesList = seriesRepository.findFirst4ByOrderByLastUsedDesc();
 
         // get Notifications from User, if logged in
         Iterable<NotificationUserRelation> notifications;

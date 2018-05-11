@@ -1,6 +1,5 @@
 // ___________________________________________ General Styles
 @import "pageLayout/general";
-@import "pageLayout/fonts";
 
 // ___________________________________________ Navigation / Notification Styles
 @import "navigation/navigation";
@@ -18,7 +17,7 @@
 
 // ___________________________________________ Start Page Styles (although the tiles are used throughout the whole site..)
 @import "startPage/tiles";
-@import "startPage/specialStuff";
+
 
 // ___________________________________________ Userpage Styles
 @import "userPages/userPage";
