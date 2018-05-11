@@ -18,20 +18,35 @@ public interface MovieRepository extends PagingAndSortingRepository<Movie, Integ
 
     public Movie findById(int id);
 
-    // public Iterable<Movie> findAllByOrderByIdDesc();
     public Page<Movie> findAllByOrderByIdDesc(Pageable pageable);
 
     public Iterable<Movie> findFirst11ByOrderByRatingDesc();
-
     public Iterable<Movie> findFirst15ByOrderByRegisteredDateDesc();
+    public Iterable<Movie> findAllBySeries(Series series);
 
-    public Iterable<Movie> findFirst10BySeriesIsNot(Series isNot);
 
     @Query("select sum(length) from Movie")
     public int getTotalWastedMinutes();
 
-    @Query("select count(id) from Movie")
-    public int getTotalMovies();
+    @Query(value = "select sum(length) from movies where series_id = ?1", nativeQuery = true)
+    public int getTotalSeriesWastedTime(Series series);
+
+    @Query(value = "select sum(rating)/count(id) from movies where series_id = ?1", nativeQuery = true)
+    public double getAverageSeriesRating(Series series);
+
+    public int countAllBy();
+    public int countAllBySeriesEquals(Series Series);
+
+
+    @Modifying
+    @Transactional
+    @Query("update Movie set rating = ?1 where id = ?2")
+    int updateMovieRating(Double rating, int id);
+
+
+
+
+
 
     @Query("select count(id) from Movie where genre = 1")
     public int getTotalHorrorMoviesSum();
@@ -42,12 +57,9 @@ public interface MovieRepository extends PagingAndSortingRepository<Movie, Integ
     @Query("select count(id) from Movie where genre = 3")
     public int getTotalComedyMoviesSum();
 
-    public Iterable<Movie> findAllBySeries(Series series);
 
-    @Modifying
-    @Transactional
-    @Query("update Movie set rating = ?1 where id = ?2")
-    int updateMovieRating(Double rating, int id);
+
+
 
 
 }

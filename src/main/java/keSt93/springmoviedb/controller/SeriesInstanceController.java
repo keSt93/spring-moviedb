@@ -48,6 +48,11 @@ public class SeriesInstanceController {
         NotificationHelper notificationHelper = new NotificationHelper(userRepository, notificationUserRelationRepository, notificationTypeRepository);
         notifications = notificationHelper.getNotificationsFromUser(principal);
 
+        // Get a few series stats
+        int wastedSeriesTime = movieRepository.getTotalSeriesWastedTime(currentSeries);
+        int totalMoviesForSeries = movieRepository.countAllBySeriesEquals(currentSeries);
+        double averageSeriesRating = movieRepository.getAverageSeriesRating(currentSeries);
+
         // Calculate wasted Time for Footer
         int wastedMinutes = movieRepository.getTotalWastedMinutes();
         int wastedHours = wastedMinutes / 60;
@@ -55,6 +60,9 @@ public class SeriesInstanceController {
 
         m.addObject("wastedMinutes", wastedMinutes);
         m.addObject("wastedHours", wastedHours);
+        m.addObject("wastedSeriesTime", wastedSeriesTime);
+        m.addObject("totalMoviesForSeries", totalMoviesForSeries);
+        m.addObject("averageSeriesRating", averageSeriesRating);
         m.addObject("series", currentSeries);
         m.addObject("moviesFromSeries", moviesFromSeries);
         m.addObject("notifications", notifications);

@@ -60,7 +60,7 @@ public class IndexController {
         wastedMinutes = wastedMinutes % 60;
 
         // Get all Movies count
-        int totalMovies = movieRepository.getTotalMovies();
+        int totalMovies = movieRepository.countAllBy();
 
         // Find Last Two Series
         Iterable<Series> seriesList = seriesRepository.findFirst4ByOrderByLastUsedDesc();
