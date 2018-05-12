@@ -4,69 +4,75 @@
 <body>
 <nav th:include="/fragments/navigation :: navigation (notifications=${notifications})" id="navigationbar"/>
 <main id="main" role="main" class="container">
-    <div class="row">
-        <div class="col-md-6">
-            <h3> Zuletzt gesehen </h3>
-            <div class="tile-container">
-                <a class="tile-instance tile-box" th:each="recentMovie : ${recentMovies}" th:href="@{'/movies/' + ${recentMovie.id}}">
-                    <div class="tile-image">
-                        <img th:src="${recentMovie.coverImage}"/>
-                    </div>
-                    <div class="tile-overlay">
-                        <span th:text="${#dates.format(recentMovie.registeredDate, 'dd. MMMM')}"></span>
-                        <span th:text="${recentMovie.title}"></span>
-                    </div>
-                </a>
-                <a class="tile-instance tile-box" th:href="@{'/movies/'}">
-                    <div class="tile-image">
-                    </div>
-                    <div class="tile-overlay always-visible tile-blue">
-                        <span th:text="'und ' + ${totalMovies - 11} + ' weitere Filme...'"></span>
-                    </div>
-                </a>
-            </div>
-        </div>
-
-        <div class="col-md-6">
-            <h3> Filmreihen </h3>
-            <div class="tile-container">
-                <a class="tile-instance tile-bigger" th:each="series : ${seriesList}" th:href="@{'/series/' + ${series.id}}">
-                    <div class="tile-image">
-                        <img th:src="${series.coverImage}"/>
-                    </div>
-                    <div class="tile-overlay">
-                        <span style="display: block">Zuletzt aktualisiert:</span>
-                        <span th:text="${#dates.format(series.lastUsed, 'dd. MMMM. yyyy')}"></span>
-                        <span class="series-name" th:text="${series.name}"></span>
-                    </div>
-                </a>
-            </div>
-        </div>
-
-    </div>
 
     <div class="row">
-
-        <div class="col-md-10">
-            <h3> Am besten bewertet </h3>
-            <div class="tile-container">
-                <a class="tile-instance tile-box" th:each="movie : ${bestRatedMovies}" th:href="@{'/movies/' + ${movie.id}}">
-                    <div class="tile-image">
-                        <img th:src="${movie.coverImage}"/>
+        <div class="col-md-8">
+            <div class="row">
+                <div class="col-md-12">
+                    <h3> Zuletzt gesehen </h3>
+                    <div class="tile-container">
+                        <a class="tile-instance tile-box" th:each="recentMovie : ${recentMovies}" th:href="@{'/movies/' + ${recentMovie.id}}">
+                            <div class="tile-image">
+                                <img th:src="${recentMovie.coverImage}"/>
+                            </div>
+                            <div class="tile-overlay">
+                                <span th:text="${#dates.format(recentMovie.registeredDate, 'dd. MMMM')}"></span>
+                                <span th:text="${recentMovie.title}"></span>
+                            </div>
+                        </a>
+                        <a class="tile-instance tile-box" th:href="@{'/movies/'}">
+                            <div class="tile-image">
+                            </div>
+                            <div class="tile-overlay always-visible tile-blue">
+                                <span th:text="'und ' + ${totalMovies - 11} + ' weitere Filme...'"></span>
+                            </div>
+                        </a>
                     </div>
-                    <div class="tile-overlay">
-                        <span style="display: inline">Rating: </span><span style="display: inline" th:text="${movie.rating}"></span> </br>
-                        <span th:text="${movie.title}"></span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <h3> Filmreihen </h3>
+                    <div class="tile-container">
+                        <a class="tile-instance tile-bigger" th:each="series : ${seriesList}" th:href="@{'/series/' + ${series.id}}">
+                            <div class="tile-image">
+                                <img th:src="${series.coverImage}"/>
+                            </div>
+                            <div class="tile-overlay">
+                                <span style="display: block">Zuletzt aktualisiert:</span>
+                                <span th:text="${#dates.format(series.lastUsed, 'dd. MMMM. yyyy')}"></span>
+                                <span class="series-name" th:text="${series.name}"></span>
+                            </div>
+                        </a>
                     </div>
-                </a>
-                <a class="tile-instance tile-box" th:href="@{'/movies/'}">
-                    <div class="tile-image">
-                    </div>
-                    <div class="tile-overlay always-visible tile-orange">
-                        <span th:text="'und ' + ${totalMovies - 11} + ' weitere Filme...'"></span>
-                    </div>
-                </a>
-
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="row">
+                <div class="col-md-12">
+                    <h3> Am besten bewertet </h3>
+                    <a class="movie-container" th:each="movie, index : ${bestRatedMovies}" th:classappend="@{'movie-id-' + ${movie.id}}" th:href="@{'/movies/' + ${movie.id}}">
+                        <div class="movie-container__cover compact">
+                            <img th:src="${movie.coverImage}"/>
+                        </div>
+                        <div class="movie-container__details">
+                            <h3 class="movie-container__title compact" th:text="${movie.title}"></h3>
+                            <div class="movie-container__rating" th:attr="data-movie-rating=${movie.rating}">
+                                <div class="movie-container__rating-progressbar">
+                                    <div class="movie-container__rating-progress" th:text="${movie.rating}"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <script th:inline="javascript">
+                            /*[+
+                            var elementclass  = '.movie-id-' + [[${movie.id}]] + ' .movie-container__rating-progress';
+                            var percentage = [[${movie.rating}]]
+                             +]*/
+                            adjustRatingProgressBar(elementclass, percentage*10);
+                        </script>
+                    </a>
+                </div>
             </div>
         </div>
     </div>

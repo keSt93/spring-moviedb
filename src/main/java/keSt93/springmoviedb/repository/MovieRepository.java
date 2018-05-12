@@ -20,8 +20,8 @@ public interface MovieRepository extends PagingAndSortingRepository<Movie, Integ
 
     public Page<Movie> findAllByOrderByIdDesc(Pageable pageable);
 
-    public Iterable<Movie> findFirst11ByOrderByRatingDesc();
-    public Iterable<Movie> findFirst15ByOrderByRegisteredDateDesc();
+    public Iterable<Movie> findFirst6ByOrderByRatingDesc();
+    public Iterable<Movie> findFirst14ByOrderByRegisteredDateDesc();
     public Iterable<Movie> findAllBySeries(Series series);
 
 

@@ -19,15 +19,30 @@
 
   .movie-container__cover {
     img {
-      max-width: 150px;
       margin: -1rem 1rem -1rem -1rem;
       object-fit: contain;
+    }
+
+    &.compact {
+      img {
+        max-width: 71px;
+      }
+    }
+
+    &:not(.compact) {
+      img {
+        max-width: 150px;
+      }
     }
   }
 
   .movie-container__details {
     width: 100%;
     position: relative;
+
+    .movie-container__title.compact {
+      font-size: 1rem;
+    }
 
     .movie-container__rating {
       position: absolute;
