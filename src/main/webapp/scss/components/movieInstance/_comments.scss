@@ -1,0 +1,18 @@
+.comment-instance {
+
+}
+
+.comment-instance__userside {
+  background: $db-dark-grey;
+  color: white;
+  padding: 1rem;
+
+  span {
+    display: block;
+  }
+}
+
+.comment-instance__contentside {
+  background: $db-light-grey;
+  padding: 1rem;
+}

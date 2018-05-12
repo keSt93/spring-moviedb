@@ -1,14 +1,12 @@
 package keSt93.springmoviedb.controller;
 
 
-import keSt93.springmoviedb.entities.Movie;
-import keSt93.springmoviedb.entities.MovieRating;
-import keSt93.springmoviedb.entities.NotificationUserRelation;
-import keSt93.springmoviedb.entities.User;
+import keSt93.springmoviedb.entities.*;
 import keSt93.springmoviedb.repository.*;
 import keSt93.springmoviedb.utils.DataUriHelper;
 import keSt93.springmoviedb.utils.ImdbApi;
 import keSt93.springmoviedb.utils.NotificationHelper;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -41,6 +39,8 @@ public class MovieInstanceController {
     NotificationUserRelationRepository notificationUserRelationRepository;
     @Autowired
     NotificationTypeRepository notificationTypeRepository;
+    @Autowired
+    MovieCommentsRepository movieCommentsRepository;
 
     // Movie Detail Page
     @GetMapping("/movies/{id}")
@@ -61,12 +61,17 @@ public class MovieInstanceController {
         int wastedHours = wastedMinutes / 60;
         wastedMinutes = wastedMinutes % 60;
 
+        //getAllCommentsForMovie
+        Iterable<MovieComments> comments = movieCommentsRepository.findAllByMovieOrderByCreationDateDesc(requestedMovie);
+
         m.addObject("wastedMinutes", wastedMinutes);
         m.addObject("wastedHours", wastedHours);
         m.addObject("movie", requestedMovie);
         m.addObject("ratings", requestedMovieRating);
         m.addObject("newRating", newRating);
         m.addObject("notifications", notifications);
+        m.addObject("comments", comments);
+        m.addObject("newComment", new MovieComments());
 
         return m;
     }
@@ -101,6 +106,25 @@ public class MovieInstanceController {
             return "redirect:/movies/"+id+"?successfullyrated=true";
         } else {
             return "redirect:/movies/"+id+"?alreadyrated=true";
+        }
+    }
+
+    // Add Comment
+    @PostMapping(value = "/addCommentAction/{id}")
+    private String saveView(MovieComments newComment, Principal principal, @PathVariable int id)  {
+        Movie currentMovie = movieRepository.findById(id);
+        User currentUser = userRepository.findByUsernameEquals(principal.getName());
+
+
+        if(StringUtils.isNotEmpty(newComment.getComment()) && currentMovie != null) {
+            newComment.setUser(currentUser);
+            newComment.setComment(newComment.getComment());
+            newComment.setCreationDate(new Date());
+            newComment.setMovie(currentMovie);
+            movieCommentsRepository.save(newComment);
+            return "redirect:/movies/"+id;
+        } else {
+            return "redirect:/movies/"+id+"?commentfail=true";
         }
     }
 }

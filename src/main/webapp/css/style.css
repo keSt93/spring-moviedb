@@ -42,8 +42,11 @@ h3 {
       .pagination-centered .pagination li a {
         color: #2c2c2c; }
 
-.btn {
-  border-radius: 0; }
+.btn,
+input,
+textarea,
+select {
+  border-radius: 0 !important; }
 
 footer {
   background: linear-gradient(135deg, #b4b2b0 0%, #4e4e4e 75%);
@@ -324,6 +327,17 @@ nav {
     line-height: 30px;
     color: white;
     transition: background-color .5s; }
+
+.comment-instance__userside {
+  background: #4e4e4e;
+  color: white;
+  padding: 1rem; }
+  .comment-instance__userside span {
+    display: block; }
+
+.comment-instance__contentside {
+  background: #edebe9;
+  padding: 1rem; }
 
 .series-instance-container__cover {
   margin-top: -1.3rem;

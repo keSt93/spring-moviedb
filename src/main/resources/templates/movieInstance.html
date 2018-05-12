@@ -39,6 +39,12 @@
                             </div>
                         </div>
 
+                        <div th:if="${param.commentfail}">
+                            <div class="alert alert-danger">
+                                Beim Erstellen deines Kommentars ist etwas schief gelaufen. :(
+                            </div>
+                        </div>
+
                         <span class="single-movie-container__rateNowText"> Jetzt bewerten: </span>
                         <form th:action="@{'/addRatingAction/' + ${movie.id}}" th:object="${newRating}" method="POST">
                             <select class="single-movie-container__rateNow-dropdown" th:field="*{rating}">
@@ -82,9 +88,30 @@
                         </div>
                     </div>
                 </div>
-
-
             </div>
+        </div>
+    </div>
+
+    <div class="row" sec:authorize="isAuthenticated()">
+        <div class="col-md-12">
+            <form th:action="@{'/addCommentAction/' + ${movie.id}}" th:object="${newComment}" method="POST">
+                <div class="form-group">
+                    <label for="newcomment">Kommentar hinterlassen:</label>
+                    <textarea class="form-control" th:field="*{comment}" id="newcomment"></textarea>
+                    <button type="submit" class="btn btn-block btn-primary">Post!</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="row comment-instance"  th:each="comment : ${comments}">
+        <div class="col-md-2 comment-instance__userside">
+            <span class="userName" th:text="${comment.getUser().getUsername()}"></span> </br>
+            <span class="date" th:text="${#dates.format(comment.getCreationDate(), 'dd. MMMM yyyy')}"></span>
+            <span class="time" th:text="${#dates.format(comment.getCreationDate(), 'HH:mm')}"></span>
+        </div>
+        <div class="col-md-10 comment-instance__contentside">
+            <span class="" th:utext="${comment.getComment()}"></span>
         </div>
     </div>
 </main>

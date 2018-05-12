@@ -64,8 +64,12 @@ h3 {
   }
 }
 
-.btn {
-  border-radius: 0;
+.btn,
+input,
+textarea,
+select
+{
+  border-radius: 0 !important;
 }
 
 footer {
