@@ -15,15 +15,15 @@ public interface MovieRatingRepository extends PagingAndSortingRepository<MovieR
     public Iterable<MovieRating> findFirst5ByUserOrderByIdDesc(User user);
 
     @Query("select sum(rating) from MovieRating where movie = ?1")
-    public int getCalculatedMovieRatingForMovie(Movie movie);
+    public double getCalculatedMovieRatingForMovie(Movie movie);
 
     @Query("select count(rating) from MovieRating where movie = ?1")
-    public int getCountOfMovieRatingsForMovie(Movie movie);
+    public double getCountOfMovieRatingsForMovie(Movie movie);
 
     public MovieRating findByUserAndAndMovie(User user, Movie movie);
 
     @Query("select sum(rating) / count(rating) from MovieRating where user = ?1")
-    public int getAverageRatingForUser(User user);
+    public String getAverageRatingForUser(User user);
 
 
 }

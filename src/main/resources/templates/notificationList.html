@@ -6,6 +6,11 @@
 <main id="main" role="main" class="container">
 
     <div class="row">
+        <div class="col-md-12" th:if="${#lists.isEmpty(notifications)}">
+            <div class="alert alert-info" role="alert">
+                Derzeit keine neuen Meldungen für dich vorhanden!
+            </div>
+        </div>
         <div class="col-md-6 notification-mobile-box" th:each="notification : ${notifications}">
             <a class="notification_instance"
                th:href="@{'/movies/' + ${notification.getNotification().getMovie().id}}"

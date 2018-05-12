@@ -112,6 +112,10 @@
         </div>
         <div class="col-md-10 comment-instance__contentside">
             <span class="" th:utext="${comment.getComment()}"></span>
+            <a th:if="${comment.getUser().getUsername() == #authentication.getPrincipal().getUsername()}"
+               th:href="@{'/deleteCommentAction/' + ${movie.id} + '/' + ${comment.getId()}}">
+                löschen
+            </a>
         </div>
     </div>
 </main>

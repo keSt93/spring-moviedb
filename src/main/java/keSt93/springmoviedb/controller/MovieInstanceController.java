@@ -127,4 +127,20 @@ public class MovieInstanceController {
             return "redirect:/movies/"+id+"?commentfail=true";
         }
     }
+
+    @PostMapping(value = "/deleteCommentAction/{movieId}/{commentId}")
+    private String saveView(Principal principal, @PathVariable int movieId, @PathVariable int commentId)  {
+        Movie currentMovie = movieRepository.findById(movieId);
+        MovieComments currentComment = movieCommentsRepository.findOne(commentId);
+        User currentUser = userRepository.findByUsernameEquals(principal.getName());
+
+        if (principal.getName() == currentUser.getUsername()) {
+            movieCommentsRepository.delete(currentComment);
+            return "redirect:/movies/"+movieId;
+        } else {
+            return "redirect:/movies/"+movieId+"?commentfail=true";
+        }
+
+
+    }
 }

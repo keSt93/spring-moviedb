@@ -49,7 +49,11 @@ public class UserController {
         ModelAndView m = new ModelAndView("userPage");
         User currentUser = userRepository.findByUsernameEquals(principal.getName());
 
-        int avgUserRating = movieRatingRepository.getAverageRatingForUser(currentUser);
+        String avgUserRatingString = movieRatingRepository.getAverageRatingForUser(currentUser);
+        double avgUserRating = 0;
+        if (avgUserRatingString != null) {
+            avgUserRating = Double.parseDouble(avgUserRatingString);
+        }
 
         // get Notifications from User, if logged in
         Iterable<NotificationUserRelation> notifications;
