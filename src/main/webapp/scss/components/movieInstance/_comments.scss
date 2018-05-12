@@ -16,3 +16,19 @@
   background: $db-light-grey;
   padding: 1rem;
 }
+
+.comment-instance__movieside {
+  background: $db-dark-grey;
+  color: white;
+  padding: 0 1rem;
+
+  a {
+    color: white;
+
+    &:hover,
+    &:focus,
+    &:active {
+    text-decoration: none;
+  }
+  }
+}

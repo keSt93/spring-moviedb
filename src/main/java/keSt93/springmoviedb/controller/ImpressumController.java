@@ -1,7 +1,9 @@
 package keSt93.springmoviedb.controller;
 
 
-import keSt93.springmoviedb.entities.*;
+import keSt93.springmoviedb.entities.Movie;
+import keSt93.springmoviedb.entities.NotificationUserRelation;
+import keSt93.springmoviedb.entities.Series;
 import keSt93.springmoviedb.repository.*;
 import keSt93.springmoviedb.utils.NotificationHelper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,16 +20,11 @@ import java.security.Principal;
  */
 
 @Controller
-public class UserController {
+@RequestMapping("/")
+public class ImpressumController {
 
     @Autowired
     MovieRepository movieRepository;
-
-    @Autowired
-    SeriesRepository seriesRepository;
-
-    @Autowired
-    GenreRepository genreRepository;
 
     @Autowired
     UserRepository userRepository;
@@ -38,39 +35,24 @@ public class UserController {
     @Autowired
     NotificationTypeRepository notificationTypeRepository;
 
-    @Autowired
-    MovieRatingRepository movieRatingRepository;
 
-    @Autowired
-    MovieCommentsRepository movieCommentsRepository;
-
-    @GetMapping("/user/current")
+    @GetMapping("/impressum")
     public ModelAndView index(Principal principal) {
-        ModelAndView m = new ModelAndView("userPage");
-        User currentUser = userRepository.findByUsernameEquals(principal.getName());
+        ModelAndView m = new ModelAndView("impressum");
 
-        int avgUserRating = movieRatingRepository.getAverageRatingForUser(currentUser);
+        // Calculate wasted Time
+        int wastedMinutes = movieRepository.getTotalWastedMinutes();
+        int wastedHours = wastedMinutes / 60;
+        wastedMinutes = wastedMinutes % 60;
 
         // get Notifications from User, if logged in
         Iterable<NotificationUserRelation> notifications;
         NotificationHelper notificationHelper = new NotificationHelper(userRepository, notificationUserRelationRepository, notificationTypeRepository);
         notifications = notificationHelper.getNotificationsFromUser(principal);
 
-        // Calculate wasted Time for Footer
-        int wastedMinutes = movieRepository.getTotalWastedMinutes();
-        int wastedHours = wastedMinutes / 60;
-        wastedMinutes = wastedMinutes % 60;
-
-        Iterable<MovieComments> userComments = movieCommentsRepository.findFirst5ByUserOrderByCreationDateDesc(currentUser);
-        Iterable<MovieRating> movieRatings = movieRatingRepository.findFirst5ByUserOrderByIdDesc(currentUser);
-
         m.addObject("wastedMinutes", wastedMinutes);
         m.addObject("wastedHours", wastedHours);
-        m.addObject("currentUser", currentUser);
-        m.addObject("avgUserRating", avgUserRating);
         m.addObject("notifications", notifications);
-        m.addObject("userComments", userComments);
-        m.addObject("movieRatings", movieRatings);
         return m;
     }
 

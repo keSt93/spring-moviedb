@@ -11,36 +11,46 @@
             <div class="single-movie-container__title-container">
                 <h3 class="single-movie-container__title" th:text="${currentUser.getUsername()}"></h3>
             </div>
+            <div class="single-movie-container__rating-overall">
+                <div class="single-movie-container__rating">
+                    <div class="single-movie-container__rating-progressbar">
+                        <div class="single-movie-container__rating-progress" th:text="${avgUserRating}"></div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <div class="row">
-        <div class="col-md-6">
-            <h3>Letzte Notifications</h3>
-            <div class="notification-user-box"
-                 th:each="notification : ${top5notifications}"
-                 th:classappend="${notification.getSeen()} == true ? 'notification-seen' : 'notification-unseen'">
-                <span class="main-text"
-                      th:text="${notification.getNotification().getUser().getUsername()} +
-                      ' hat ' +
-                      ${notification.getNotification().getMovie().title} +
-                      ' hinzugefügt.'
-                "></span>
-                <span class="date" th:text="${#dates.format(notification.getNotification().getNotificationDate(), 'dd. MMMM, HH:mm')}"></span>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <h3>Nutzerdetails</h3>
-            <div class="single-movie-container__details">
-                <div class="single-movie-container__content">
-                    <div>
-                        <div class="single-movie-container__rating-overall">
-                            <div class="single-movie-container__rating">
-                                <div class="single-movie-container__rating-progressbar">
-                                    <div class="single-movie-container__rating-progress" th:text="${avgUserRating}"></div>
-                                </div>
-                            </div>
+        <div class="col-md-8">
+            <h3>Letzte Bewertungen</h3>
+            <a class="movie-container" th:each="rating, index : ${movieRatings}" th:classappend="@{'movie-id-' + ${rating.getMovie().id}}" th:href="@{'/movies/' + ${rating.getMovie().id}}">
+                <div class="movie-container__cover compact">
+                    <img th:src="${rating.getMovie().coverImage}"/>
+                </div>
+                <div class="movie-container__details">
+                    <h3 class="movie-container__title compact" th:text="${rating.getMovie().title}"></h3>
+                    <div class="movie-container__rating" th:attr="data-movie-rating=${rating.rating}">
+                        <div class="movie-container__rating-progressbar">
+                            <div class="movie-container__rating-progress" th:text="${rating.rating}"></div>
                         </div>
                     </div>
+                </div>
+                <script th:inline="javascript">
+                    /*[+
+                    var elementclass  = '.movie-id-' + [[${rating.getMovie().id}]] + ' .movie-container__rating-progress';
+                    var percentage = [[${rating.rating}]]
+                     +]*/
+                    adjustRatingProgressBar(elementclass, percentage*10);
+                </script>
+            </a>
+        </div>
+        <div class="col-md-4">
+            <h3>Letzte Kommentare</h3>
+            <div class="comment-instance" th:each="comment : ${userComments}">
+                <div class="comment-instance__contentside" th:text="${comment.comment}"></div>
+                <div class="comment-instance__movieside">
+                    <span>kommentiert bei </span>
+                    <a th:href="@{'/movies/' + ${comment.getMovie().getId()}}" th:text="${comment.getMovie().getTitle()}"></a>
                 </div>
             </div>
         </div>

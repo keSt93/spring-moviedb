@@ -254,7 +254,8 @@ nav {
   color: white;
   padding: .5rem 2rem; }
   .single-movie-container__title-container h3 {
-    padding-bottom: 0; }
+    padding: 0 !important;
+    margin: 0 !important; }
 
 .single-movie-container__details {
   display: flex; }
@@ -338,6 +339,15 @@ nav {
 .comment-instance__contentside {
   background: #edebe9;
   padding: 1rem; }
+
+.comment-instance__movieside {
+  background: #4e4e4e;
+  color: white;
+  padding: 0 1rem; }
+  .comment-instance__movieside a {
+    color: white; }
+    .comment-instance__movieside a:hover, .comment-instance__movieside a:focus, .comment-instance__movieside a:active {
+      text-decoration: none; }
 
 .series-instance-container__cover {
   margin-top: -1.3rem;

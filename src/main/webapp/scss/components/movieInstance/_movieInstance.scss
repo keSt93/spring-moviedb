@@ -3,7 +3,8 @@
   color: white;
   padding: .5rem 2rem;
   h3 {
-    padding-bottom: 0;
+    padding: 0 !important;
+    margin: 0 !important;
   }
 }
 .single-movie-container__details {
