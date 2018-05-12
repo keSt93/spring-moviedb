@@ -21,18 +21,19 @@
             <div class="series-instance-container">
                 <div class="series-instance-container__cover">
                     <img th:src="${series.coverImage}" />
+                    <div class="series-instance-container__details">
+                        <span th:text="'Geschaute Teile: ' + ${totalMoviesForSeries}"></span>
+                        <span th:text="'Zeit mit dieser Filmreihe verbracht: ' + ${wastedSeriesTime} + ' Minuten'"></span>
+                        <span th:text="'Durchschnittliches Rating: ' + ${#numbers.formatDecimal(averageSeriesRating, 0, 1)}"></span>
+                    </div>
                 </div>
-                <div class="series-instance-container__details">
-                    <span th:text="'Geschaute Teile: ' + ${totalMoviesForSeries}"></span>
-                    <span th:text="'Zeit mit dieser Filmreihe verbracht: ' + ${wastedSeriesTime}"></span>
-                    <span th:text="'Durchschnittliches Rating: ' + ${averageSeriesRating}"></span>
-                </div>
+
             </div>
         </div>
     </div>
     <div class="row">
-        <div class="col-md-12">
-            <table class="table table-striped table-responsive">
+        <div class="col-md-8 offset-md-2 table-responsive">
+            <table class="table table-striped">
                 <thead>
                 <tr>
                     <th scope="col">Titel</th>
@@ -47,7 +48,7 @@
                     </td>
                     <td th:if="${movie.releaseDate != null}" th:text="${#dates.format(movie.releaseDate, 'dd. MM. yyyy')}"></td>
                     <td th:if="${movie.releaseDate == null}">unbekannt</td>
-                    <td th:text="${movie.rating}"></td>
+                    <td th:text="${#numbers.formatDecimal(movie.rating,0,1)}"></td>
                 </tr>
                 </tbody>
             </table>
