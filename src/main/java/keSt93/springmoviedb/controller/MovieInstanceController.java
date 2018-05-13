@@ -51,6 +51,15 @@ public class MovieInstanceController {
         Iterable<MovieRating> requestedMovieRating = movieRatingRepository.findAllByMovie(requestedMovie);
         MovieRating newRating = new MovieRating();
 
+
+        // get Related Movies
+        Iterable<Movie> relatedMovies;
+        if(requestedMovie.getSeries().getId() == -1) {
+            relatedMovies = null;
+        } else {
+            relatedMovies = movieRepository.findAllBySeriesAndIdIsNot(requestedMovie.getSeries(), id);
+        }
+
         // get Notifications from User, if logged in
         Iterable<NotificationUserRelation> notifications;
         NotificationHelper notificationHelper = new NotificationHelper(userRepository, notificationUserRelationRepository, notificationTypeRepository);
@@ -72,6 +81,7 @@ public class MovieInstanceController {
         m.addObject("notifications", notifications);
         m.addObject("comments", comments);
         m.addObject("newComment", new MovieComments());
+        m.addObject("relatedMovies", relatedMovies);
 
         return m;
     }
@@ -79,7 +89,7 @@ public class MovieInstanceController {
 
     // Add Rating
     @PostMapping(value = "/addRatingAction/{id}")
-    private String saveView(MovieRating movieRating, Principal principal,@PathVariable int id)  {
+    private String addRating(MovieRating movieRating, Principal principal,@PathVariable int id)  {
 
         Movie currentMovie = movieRepository.findById(id);
         User currentUser = userRepository.findByUsernameEquals(principal.getName());
@@ -111,7 +121,7 @@ public class MovieInstanceController {
 
     // Add Comment
     @PostMapping(value = "/addCommentAction/{id}")
-    private String saveView(MovieComments newComment, Principal principal, @PathVariable int id)  {
+    private String saveComment(MovieComments newComment, Principal principal, @PathVariable int id)  {
         Movie currentMovie = movieRepository.findById(id);
         User currentUser = userRepository.findByUsernameEquals(principal.getName());
 
@@ -128,19 +138,22 @@ public class MovieInstanceController {
         }
     }
 
-    @PostMapping(value = "/deleteCommentAction/{movieId}/{commentId}")
-    private String saveView(Principal principal, @PathVariable int movieId, @PathVariable int commentId)  {
+    @RequestMapping(value = "/deleteCommentAction/{movieId}/{commentId}")
+    private String deleteComment(Principal principal, @PathVariable int movieId, @PathVariable int commentId)  {
         Movie currentMovie = movieRepository.findById(movieId);
         MovieComments currentComment = movieCommentsRepository.findOne(commentId);
         User currentUser = userRepository.findByUsernameEquals(principal.getName());
 
-        if (principal.getName() == currentUser.getUsername()) {
+        String currentUsername = currentUser.getUsername();
+        String commentUsername = currentComment.getUser().getUsername();
+
+        if (commentUsername.equals(currentUsername)) {
+            currentComment.setMovie(null);
+            currentComment.setUser(null);
             movieCommentsRepository.delete(currentComment);
             return "redirect:/movies/"+movieId;
         } else {
             return "redirect:/movies/"+movieId+"?commentfail=true";
         }
-
-
     }
 }

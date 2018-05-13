@@ -1,11 +1,12 @@
 .comment-instance {
-
+  display: flex;
 }
 
 .comment-instance__userside {
   background: $db-dark-grey;
   color: white;
   padding: 1rem;
+  flex: 20%;
 
   span {
     display: block;
@@ -15,12 +16,22 @@
 .comment-instance__contentside {
   background: $db-light-grey;
   padding: 1rem;
+  position: relative;
+  flex: 80%;
+
+  .comment-instance__contentside-deletebutton {
+    position: absolute;
+    right: .5rem;
+    bottom: .5rem;
+    color: $db-dark-grey-variation-1;
+    text-decoration: underline;
+  }
 }
 
 .comment-instance__movieside {
   background: $db-dark-grey;
   color: white;
-  padding: 0 1rem;
+  padding: 1rem;
 
   a {
     color: white;

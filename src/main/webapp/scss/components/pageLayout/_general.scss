@@ -67,7 +67,8 @@ h3 {
 .btn,
 input,
 textarea,
-select
+select,
+.alert
 {
   border-radius: 0 !important;
 }
@@ -119,4 +120,9 @@ footer {
   .navbar-toggler-icon {
     color: white;
   }
+}
+
+// bootstrap overrides
+.btn-primary {
+  background-color: $db-dark-blue;
 }

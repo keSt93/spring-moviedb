@@ -23,6 +23,7 @@ public interface MovieRepository extends PagingAndSortingRepository<Movie, Integ
     public Iterable<Movie> findFirst6ByOrderByRatingDesc();
     public Iterable<Movie> findFirst14ByOrderByRegisteredDateDesc();
     public Iterable<Movie> findAllBySeries(Series series);
+    public Iterable<Movie> findAllBySeriesAndIdIsNot (Series series, int id);
 
 
     @Query("select sum(length) from Movie")

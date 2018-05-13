@@ -45,7 +45,8 @@ h3 {
 .btn,
 input,
 textarea,
-select {
+select,
+.alert {
   border-radius: 0 !important; }
 
 footer {
@@ -86,6 +87,9 @@ footer {
   border-color: transparent; }
   .navbar-toggler .navbar-toggler-icon {
     color: white; }
+
+.btn-primary {
+  background-color: #18599c; }
 
 nav {
   background-color: #4e4e4e; }
@@ -238,7 +242,8 @@ nav {
           text-align: center;
           line-height: 30px;
           color: white;
-          transition: background-color .5s; }
+          transition: background-color .5s;
+          font-size: 10px; }
     .movie-container .movie-container__details .movie-container__rateNow-submitButton {
       padding: .5rem;
       color: white;
@@ -313,8 +318,9 @@ nav {
       width: 100%; } }
   .single-movie-container__content .single-movie-container__allratings-container {
     margin-top: 1rem; }
-    .single-movie-container__content .single-movie-container__allratings-container .single-movie-container__rating-instance {
-      margin: 1rem 0; }
+
+.single-movie-container__rating__userrating {
+  margin-top: .2rem; }
 
 .single-movie-container__rating .single-movie-container__rating-progressbar {
   width: 100%;
@@ -327,23 +333,36 @@ nav {
     text-align: center;
     line-height: 30px;
     color: white;
-    transition: background-color .5s; }
+    transition: background-color .5s;
+    font-size: 10px; }
+
+.comment-instance {
+  display: flex; }
 
 .comment-instance__userside {
   background: #4e4e4e;
   color: white;
-  padding: 1rem; }
+  padding: 1rem;
+  flex: 20%; }
   .comment-instance__userside span {
     display: block; }
 
 .comment-instance__contentside {
   background: #edebe9;
-  padding: 1rem; }
+  padding: 1rem;
+  position: relative;
+  flex: 80%; }
+  .comment-instance__contentside .comment-instance__contentside-deletebutton {
+    position: absolute;
+    right: .5rem;
+    bottom: .5rem;
+    color: #6c6c6c;
+    text-decoration: underline; }
 
 .comment-instance__movieside {
   background: #4e4e4e;
   color: white;
-  padding: 0 1rem; }
+  padding: 1rem; }
   .comment-instance__movieside a {
     color: white; }
     .comment-instance__movieside a:hover, .comment-instance__movieside a:focus, .comment-instance__movieside a:active {
