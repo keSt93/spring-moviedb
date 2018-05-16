@@ -30,7 +30,6 @@
 
                             <!-- logged out -->
                             <form sec:authorize="!isAuthenticated()" class="form-inline my-2 my-lg-0">
-                                <a class="btn btn-outline-info my-2 my-sm-0" th:href="@{/register}" style="color: white; margin-right: 5px">Registrieren</a>
                                 <a class="btn btn-outline-success my-2 my-sm-0" style="color: white;" th:href="@{/login}" >Login</a>
                             </form>
 
