@@ -35,7 +35,7 @@ public class SeriesListController {
     // Settings for pagination
     private static final int BUTTONS_TO_SHOW = 51;
     private static final int INITIAL_PAGE = 0;
-    private static final int INITIAL_PAGE_SIZE = 6;
+    private static final int INITIAL_PAGE_SIZE = 12;
 
     @RequestMapping("/series")
     public ModelAndView allMovies(Principal principal,

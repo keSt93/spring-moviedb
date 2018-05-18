@@ -54,6 +54,66 @@
     }
   }
 
+  // _______________________________________________________ Thicc Tile
+  .tile-instance.tile-thicc {
+    @media (max-width: 991px) {
+      width: $tile-thicc-proportions-large;
+      height: $tile-thicc-proportions-large;
+
+      .tile-image img {
+        width: $tile-thicc-proportions-large;
+        height: $tile-thicc-proportions-large;
+      }
+    }
+    @media (min-width:992px) and (max-width: 1199px) {
+      width: $tile-thicc-proportions-medium;
+      height: $tile-thicc-proportions-medium;
+
+      .tile-image img {
+        width: $tile-thicc-proportions-medium;
+        height: $tile-thicc-proportions-medium;
+      }
+    }
+    @media (min-width: 1200px) {
+      width: $tile-thicc-proportions-large;
+      height: $tile-thicc-proportions-large;
+
+      .tile-image img {
+        width: $tile-thicc-proportions-large;
+        height: $tile-thicc-proportions-large;
+      }
+    }
+
+    .tile-overlay {
+      width:  $tile-thicc-overlay-size;
+      height: $tile-thicc-overlay-size;
+      display: flex;
+      flex-flow: column;
+      align-items: end;
+      justify-content: flex-start;
+      text-align: left;
+      transform: rotate(20deg);
+      bottom: -245px;
+      left: -60px;
+
+      span {
+        margin-left: 30px;
+      }
+      .hidden-until-hover {
+        opacity: 0;
+        transition: opacity .3s;
+      }
+      .series-name {
+        font-size: 1.5rem;
+      }
+    }
+    &:hover .tile-overlay {
+      .hidden-until-hover {
+        opacity: 1;
+      }
+    }
+  }
+
   // _______________________________________________________ Bigger Tile
   .tile-instance.tile-bigger {
     @media (max-width: 991px) {

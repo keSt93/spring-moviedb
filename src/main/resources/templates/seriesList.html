@@ -5,18 +5,19 @@
 <nav th:include="/fragments/navigation :: navigation (notifications=${notifications})" id="navigationbar"/>
 <main id="main" role="main" class="container">
     <div class="row">
-        <div class="col-md-6" th:each="serie, index : ${series}">
-            <a class="series-container" th:href="@{'/series/' + ${serie.id}}">
-                <div class="series-container__cover">
-                    <img th:src="${serie.coverImage}"/>
-                </div>
-                <div class="series-container__details">
-                    <h3 class="series-container__title" th:text="${serie.name}"></h3>
-                    <div class="series-container__watchedDate">
-                        <span>Zuletzt aktualisiert am </span><span th:text="${#dates.format(serie.lastUsed, 'dd. MMMM yyyy')}"></span>
+        <div class="col-md-12">
+            <div class="tile-container">
+                <a class="tile-instance tile-thicc" th:each="serie : ${series}" th:href="@{'/series/' + ${serie.id}}">
+                    <div class="tile-image">
+                        <img th:src="${serie.coverImage}"/>
                     </div>
-                </div>
-            </a>
+                    <div class="tile-overlay">
+                        <span class="series-name" th:text="${serie.name}"></span>
+                        <span style="display: block" class="hidden-until-hover">Zuletzt aktualisiert:</span>
+                        <span class="hidden-until-hover" th:text="${#dates.format(serie.lastUsed, 'dd. MMMM. yyyy')}"></span>
+                    </div>
+                </a>
+            </div>
         </div>
     </div>
 

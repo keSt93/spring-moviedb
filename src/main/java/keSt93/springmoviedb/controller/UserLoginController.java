@@ -28,7 +28,6 @@ public class UserLoginController {
 
     @RequestMapping(value = "/login")
     public String login(Principal principal) {
-
         return "userLogin";
     }
 }

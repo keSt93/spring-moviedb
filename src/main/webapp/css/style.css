@@ -472,6 +472,47 @@ nav {
       .tile-container .tile-instance .tile-overlay span {
         display: block; }
   @media (max-width: 991px) {
+    .tile-container .tile-instance.tile-thicc {
+      width: 271px;
+      height: 271px; }
+      .tile-container .tile-instance.tile-thicc .tile-image img {
+        width: 271px;
+        height: 271px; } }
+  @media (min-width: 992px) and (max-width: 1199px) {
+    .tile-container .tile-instance.tile-thicc {
+      width: 303px;
+      height: 303px; }
+      .tile-container .tile-instance.tile-thicc .tile-image img {
+        width: 303px;
+        height: 303px; } }
+  @media (min-width: 1200px) {
+    .tile-container .tile-instance.tile-thicc {
+      width: 271px;
+      height: 271px; }
+      .tile-container .tile-instance.tile-thicc .tile-image img {
+        width: 271px;
+        height: 271px; } }
+  .tile-container .tile-instance.tile-thicc .tile-overlay {
+    width: 340px;
+    height: 340px;
+    display: flex;
+    flex-flow: column;
+    align-items: end;
+    justify-content: flex-start;
+    text-align: left;
+    transform: rotate(20deg);
+    bottom: -245px;
+    left: -60px; }
+    .tile-container .tile-instance.tile-thicc .tile-overlay span {
+      margin-left: 30px; }
+    .tile-container .tile-instance.tile-thicc .tile-overlay .hidden-until-hover {
+      opacity: 0;
+      transition: opacity .3s; }
+    .tile-container .tile-instance.tile-thicc .tile-overlay .series-name {
+      font-size: 1.5rem; }
+  .tile-container .tile-instance.tile-thicc:hover .tile-overlay .hidden-until-hover {
+    opacity: 1; }
+  @media (max-width: 991px) {
     .tile-container .tile-instance.tile-bigger {
       width: 236px;
       height: 236px; }
