@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
 >
-<head th:include="/fragments/special_movieList_header :: header" />
+<head th:include="fragments/special_movieList_header :: header" />
 <body>
-<nav th:include="/fragments/navigation :: navigation (notifications=${notifications})"/>
+<nav th:include="fragments/navigation :: navigation (notifications=${notifications})"/>
 <main role="main" class="container">
     <div class="row">
         <div class="col-md-12">
@@ -48,7 +48,7 @@
     </div>
 </main>
 
-<footer th:include="/fragments/footer :: footer(wastedHours=${wastedHours},wastedMinutes=${wastedMinutes})" />
+<footer th:include="fragments/footer :: footer(wastedHours=${wastedHours},wastedMinutes=${wastedMinutes})" />
 </body>
 </html>
 
