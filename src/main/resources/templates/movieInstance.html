@@ -40,6 +40,12 @@
                         </div>
                     </div>
 
+                    <div th:if="${param.oldworld}">
+                        <div class="alert alert-danger">
+                            Dieser Film stammt aus der "alten Welt" und kann deshalb nicht mehr bewertet werden.
+                        </div>
+                    </div>
+
                     <div th:if="${param.commentfail}">
                         <div class="alert alert-danger">
                             Beim Erstellen oder Löschen deines Kommentars ist etwas schief gelaufen. :(

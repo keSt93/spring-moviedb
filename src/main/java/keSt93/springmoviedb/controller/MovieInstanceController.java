@@ -95,6 +95,12 @@ public class MovieInstanceController {
         User currentUser = userRepository.findByUsernameEquals(principal.getName());
 
         MovieRating ratingByUserAndMovie = movieRatingRepository.findByUserAndAndMovie(currentUser, currentMovie);
+
+        //if movie is from the old world, we wont rate it.
+        if(currentMovie.getId() <= 70) {
+            return "redirect:/movies/"+id+"?oldworld=true";
+        }
+
         if(ratingByUserAndMovie == null) {
             // Generate MovieRatingEntry
             movieRating.setMovie(currentMovie);
