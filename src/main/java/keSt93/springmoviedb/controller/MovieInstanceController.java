@@ -94,29 +94,34 @@ public class MovieInstanceController {
         Movie currentMovie = movieRepository.findById(id);
         User currentUser = userRepository.findByUsernameEquals(principal.getName());
 
-        if(movieRatingRepository.findByUserAndAndMovie(currentUser, currentMovie) == null) {
+        MovieRating ratingByUserAndMovie = movieRatingRepository.findByUserAndAndMovie(currentUser, currentMovie);
+        if(ratingByUserAndMovie == null) {
             // Generate MovieRatingEntry
             movieRating.setMovie(currentMovie);
             movieRating.setUser(currentUser);
             movieRating.setRating(movieRating.getRating());
             movieRatingRepository.save(movieRating);
-
-            // Calculate new Rating
-            double ratingSum = movieRatingRepository.getCalculatedMovieRatingForMovie(currentMovie);
-            double ratingCount = movieRatingRepository.getCountOfMovieRatingsForMovie(currentMovie);
-            double finalRating = 0;
-            if(ratingCount > 1) {
-                finalRating = ratingSum / ratingCount;
-            }
-            if(ratingCount == 1) {
-                finalRating = ratingSum;
-            }
-            movieRepository.updateMovieRating(finalRating, id);
-
-            return "redirect:/movies/"+id+"?successfullyrated=true";
         } else {
-            return "redirect:/movies/"+id+"?alreadyrated=true";
+            ratingByUserAndMovie.setRating(movieRating.getRating());
+            movieRatingRepository.save(ratingByUserAndMovie);
         }
+        recalculateMovieRating(currentMovie, id);
+        return "redirect:/movies/"+id+"?successfullyrated=true";
+    }
+
+    // Calculate new Rating
+    private void recalculateMovieRating(Movie currentMovie, int id) {
+
+        double ratingSum = movieRatingRepository.getCalculatedMovieRatingForMovie(currentMovie);
+        double ratingCount = movieRatingRepository.getCountOfMovieRatingsForMovie(currentMovie);
+        double finalRating = 0;
+        if(ratingCount > 1) {
+            finalRating = ratingSum / ratingCount;
+        }
+        if(ratingCount == 1) {
+            finalRating = ratingSum;
+        }
+        movieRepository.updateMovieRating(finalRating, id);
     }
 
     // Add Comment

@@ -34,12 +34,6 @@
                     <img th:src="${movie.coverImage}" />
                 </div>
                 <div class="single-movie-container__content">
-                    <div th:if="${param.alreadyrated}">
-                        <div class="alert alert-danger">
-                            Du kannst nur einmal für einen Film abstimmen!
-                        </div>
-                    </div>
-
                     <div th:if="${param.successfullyrated}">
                         <div class="alert alert-success">
                             Deine Abstimmung wurde registriert!
@@ -73,7 +67,7 @@
                                             <option value="10">10 Sterne</option>
                                         </select>
                                         <button type="submit" class="single-movie-container__rateNow-submitButton"> Bewerten </button>
-                                        <small id="ratenowdropdown" class="form-text text-muted">Du kannst nur einmal abstimmen!</small>
+                                        <small id="ratenowdropdown" class="form-text text-muted">Nur deine letzte Abstimmung wird gezählt!</small>
                                     </div>
                                 </form>
                             </div>

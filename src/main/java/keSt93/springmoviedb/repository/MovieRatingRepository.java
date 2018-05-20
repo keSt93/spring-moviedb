@@ -25,5 +25,4 @@ public interface MovieRatingRepository extends PagingAndSortingRepository<MovieR
     @Query("select sum(rating) / count(rating) from MovieRating where user = ?1")
     public String getAverageRatingForUser(User user);
 
-
 }
