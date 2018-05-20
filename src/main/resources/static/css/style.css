@@ -342,16 +342,28 @@ nav {
 .comment-instance__userside {
   background: #4e4e4e;
   color: white;
-  padding: 1rem;
-  flex: 20%; }
+  padding: 1rem; }
+  @media (max-width: 576px) {
+    .comment-instance__userside {
+      flex: 40%; } }
+  @media (min-width: 577px) {
+    .comment-instance__userside {
+      flex: 20%; } }
+  .comment-instance__userside .date, .comment-instance__userside .time {
+    font-size: .7rem; }
   .comment-instance__userside span {
     display: block; }
 
 .comment-instance__contentside {
   background: #edebe9;
   padding: 1rem;
-  position: relative;
-  flex: 80%; }
+  position: relative; }
+  @media (max-width: 576px) {
+    .comment-instance__contentside {
+      flex: 60%; } }
+  @media (min-width: 577px) {
+    .comment-instance__contentside {
+      flex: 80%; } }
   .comment-instance__contentside .comment-instance__contentside-deletebutton {
     position: absolute;
     right: .5rem;
@@ -724,4 +736,4 @@ nav {
     filter: blur(0);
     opacity: 1; } }
 
-/*# sourceMappingURL=../../../../target/style.css.map */
+/*# sourceMappingURL=../../../../../target/style.css.map */

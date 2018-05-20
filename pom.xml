@@ -140,7 +140,7 @@
                 </executions>
                 <configuration>
                     <inputPath>${basedir}/src/main/webapp/scss/</inputPath>
-                    <outputPath>${basedir}/src/main/webapp/css/</outputPath>
+                    <outputPath>${basedir}/src/main/resources/static/css/</outputPath>
                 </configuration>
             </plugin>
         </plugins>

@@ -6,8 +6,17 @@
   background: $db-dark-grey;
   color: white;
   padding: 1rem;
-  flex: 20%;
+  @media (max-width: 576px) {
+    flex: 40%;
+  }
+  @media (min-width: 577px) {
+    flex: 20%;
+  }
 
+
+  .date, .time {
+    font-size: .7rem;
+  }
   span {
     display: block;
   }
@@ -17,7 +26,12 @@
   background: $db-light-grey;
   padding: 1rem;
   position: relative;
-  flex: 80%;
+  @media (max-width: 576px) {
+    flex: 60%;
+  }
+  @media (min-width: 577px) {
+    flex: 80%;
+  }
 
   .comment-instance__contentside-deletebutton {
     position: absolute;
