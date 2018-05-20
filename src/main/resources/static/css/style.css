@@ -509,7 +509,7 @@ nav {
     height: 340px;
     display: flex;
     flex-flow: column;
-    align-items: end;
+    align-items: flex-start;
     justify-content: flex-start;
     text-align: left;
     transform: rotate(20deg);
