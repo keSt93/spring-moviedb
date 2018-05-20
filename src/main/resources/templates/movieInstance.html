@@ -124,6 +124,7 @@
                 <div class="comment-instance__contentside">
                     <span class="" th:utext="${comment.getComment()}"></span>
                     <a class="comment-instance__contentside-deletebutton"
+                       sec:authorize="isAuthenticated()"
                        th:if="${comment.getUser().getUsername() == #authentication.getPrincipal().getUsername()}"
                        th:href="@{'/deleteCommentAction/' + ${movie.id} + '/' + ${comment.getId()}}">
                         löschen
