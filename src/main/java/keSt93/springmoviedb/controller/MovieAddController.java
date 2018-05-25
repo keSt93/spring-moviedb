@@ -107,8 +107,22 @@ public class MovieAddController {
 
         movieRepository.save(movie);
 
+        String notificationUrl = "/movies/" + movie.getId();
+        String notificationImage = movie.getCoverImage();
+        StringBuilder notificationText = new StringBuilder();
+        notificationText
+                .append(user.getUsername())
+                .append(" hat gerade ")
+                .append(movie.getTitle())
+                .append(" hinzugefügt.")
+                .append(" Schau doch mal rein!");
+
         // notifications for everyone not involved in this process
-        notificationHelper.createNotification(user, notificationHelper.NOTIFICATION_NEWMOVIE, movie);
+        notificationHelper.createNotification(
+                user,
+                notificationText.toString(),
+                notificationUrl,
+                notificationImage);
         return "redirect:/";
     }
 }

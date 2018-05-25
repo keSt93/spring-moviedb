@@ -46,12 +46,20 @@ public class NotificationHelper {
         return returnValue;
     }
 
-    public void createNotification(User fromUser, int notificationType, Movie movie) {
+    public void createNotification(
+            User fromUser,
+            String notificationText,
+            String notificationUrl,
+            String notificationImage)
+    {
         Notification notification = new Notification();
-        notification.setUser(fromUser);
-        notification.setNotificationType(notificationTypeRepository.findById(notificationType));
+
+        notification.setNotificationText(notificationText);
+        notification.setNotificationUrl(notificationUrl);
+        notification.setNotificationImage(notificationImage);
+
         notification.setNotificationDate(new Date());
-        notification.setMovie(movie);
+
         List<User> noteworthyUsers = userRepository.findAllByIdNot(fromUser.getId());
         for (User noteworthyUser : noteworthyUsers) {
             NotificationUserRelation relation = new NotificationUserRelation();

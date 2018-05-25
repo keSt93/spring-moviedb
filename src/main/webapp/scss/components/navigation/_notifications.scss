@@ -61,35 +61,38 @@
 .notification_instance {
   background: $db-dark-grey;
   border-bottom: 1px solid $db-dark-grey-variation-1;
+}
+
+.notification_link {
+  display: block;
+  height: 100px;
   margin: .4rem 0;
   padding: .2rem;
-  display: block;
   color: white;
-  height: 100px;
   position: relative;
 
   &:hover, &:active, &:focus {
     text-decoration: none;
     color: white;
   }
+}
 
-  .notification-image {
-    width: 60px;
-    float: left;
-    margin-right: .5rem;
-  }
+.notification-image {
+  width: 60px;
+  float: left;
+  margin-right: .5rem;
+}
 
-  .main-text {
-    font-size: .9rem;
-  }
-  .date {
-    font-size: .8rem;
-    color: lightgray;
-    display: block;
-    position: absolute;
-    bottom: 5px;
-    left: 70px;
-  }
+.main-text {
+  font-size: .9rem;
+}
+.date {
+  font-size: .8rem;
+  color: lightgray;
+  display: block;
+  position: absolute;
+  bottom: 5px;
+  left: 70px;
 }
 
 .notification-mobile-box {

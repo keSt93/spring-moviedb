@@ -5,26 +5,33 @@
 <nav th:include="fragments/navigation :: navigation (notifications=${notifications})" id="navigationbar"/>
 <main id="main" role="main" class="container">
 
+    <!-- Notification List for Mobile Users -->
+
     <div class="row">
-        <div class="col-md-12" th:if="${#lists.isEmpty(notifications)}">
-            <div class="alert alert-info" role="alert">
+        <div class="col-md-12">
+            <h3>Was du verpasst hast</h3>
+            <div class="alert alert-info" role="alert" th:if="${#lists.isEmpty(notifications)}">
                 Derzeit keine neuen Meldungen für dich vorhanden!
             </div>
         </div>
-        <div class="col-md-6 notification-mobile-box" th:each="notification : ${notifications}">
-            <a class="notification_instance"
-               th:href="@{'/movies/' + ${notification.getNotification().getMovie().id}}"
-               th:classappend="'notification-id-'+${notification.id}"
-               th:onclick="'markNotificationAsRead('+${notification.id}+')'">
-                <img class="notification-image" th:src="${notification.getNotification().getMovie().getCoverImage()}"/>
-                <span class="main-text"
-                      th:text="${notification.getNotification().getUser().getUsername()} +
-                      ' hat ' +
-                      ${notification.getNotification().getMovie().title} +
-                      ' hinzugefügt.'
-                "></span>
-                <span class="date" th:text="${#dates.format(notification.getNotification().getNotificationDate(), 'dd. MMMM, HH:mm')}"></span>
-            </a>
+
+        <div class="offset-md-3 col-md-6 notification-mobile-box">
+            <div class="notification_instance"
+                 th:classappend="'notification-id-'+${notification.id}"
+                 th:each="notification, index : ${notifications}"
+                 th:onclick="'markNotificationAsRead('+${notification.id}+')'">
+
+                <a class="notification_link"
+                   th:href="@{${notification.getNotification().getNotificationUrl()}}">
+
+                    <img class="notification-image" th:src="${notification.getNotification().getNotificationImage()}"/>
+                    <span class="main-text"
+                          th:text="${notification.getNotification().getNotificationText()}">
+                     </span>
+                    <span class="date" th:text="${#dates.format(notification.getNotification().getNotificationDate(), 'dd. MMMM, HH:mm')}"></span>
+
+                </a>
+            </div>
         </div>
     </div>
 

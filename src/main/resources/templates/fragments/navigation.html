@@ -45,21 +45,19 @@
                                     <span id ="notification_container-number-small" th:text="${#lists.size(notifications)}"></span>
                                 </a>
                                 <div id="notification_list" class="notification_list">
-                                    <a class="notification_instance"
-                                       th:classappend="'notification-id-'+${notification.id}"
-                                       th:each="notification, index : ${notifications}"
-                                       th:onmouseover="'markNotificationAsRead('+${notification.id}+')'"
-                                       th:href="@{'/movies/' + ${notification.getNotification().getMovie().id}}">
-                                        <img class="notification-image" th:src="${notification.getNotification().getMovie().getCoverImage()}"/>
-                                        <span class="main-text"
-                                              th:text="${notification.getNotification().getUser().getUsername()} +
-                                                       ' hat ' +
-                                                       ${notification.getNotification().getMovie().title} +
-                                                       ' hinzugefügt.'
-                                                       ">
-                                        </span>
-                                        <span class="date" th:text="${#dates.format(notification.getNotification().getNotificationDate(), 'dd. MMMM, HH:mm')}"></span>
-                                    </a>
+                                    <div id="notification_instance"
+                                         th:classappend="'notification-id-'+${notification.id}"
+                                         th:each="notification, index : ${notifications}"
+                                         th:onmouseover="'markNotificationAsRead('+${notification.id}+')'">
+                                        <a class="notification_link"
+                                           th:href="@{${notification.getNotification().getNotificationUrl()}}">
+                                            <img class="notification-image" th:src="${notification.getNotification().getNotificationImage()}"/>
+                                            <span class="main-text"
+                                                  th:text="${notification.getNotification().getNotificationText()}">
+                                            </span>
+                                            <span class="date" th:text="${#dates.format(notification.getNotification().getNotificationDate(), 'dd. MMMM, HH:mm')}"></span>
+                                        </a>
+                                    </div>
                                 </div>
                                 <div class="nav__profileDetails__Container">
                                     <span class="nav__loggedinAs"> Eingeloggt als: </span>

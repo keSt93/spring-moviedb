@@ -175,29 +175,34 @@ nav {
 
 .notification_instance {
   background: #4e4e4e;
-  border-bottom: 1px solid #6c6c6c;
+  border-bottom: 1px solid #6c6c6c; }
+
+.notification_link {
+  display: block;
+  height: 100px;
   margin: .4rem 0;
   padding: .2rem;
-  display: block;
   color: white;
-  height: 100px;
   position: relative; }
-  .notification_instance:hover, .notification_instance:active, .notification_instance:focus {
+  .notification_link:hover, .notification_link:active, .notification_link:focus {
     text-decoration: none;
     color: white; }
-  .notification_instance .notification-image {
-    width: 60px;
-    float: left;
-    margin-right: .5rem; }
-  .notification_instance .main-text {
-    font-size: .9rem; }
-  .notification_instance .date {
-    font-size: .8rem;
-    color: lightgray;
-    display: block;
-    position: absolute;
-    bottom: 5px;
-    left: 70px; }
+
+.notification-image {
+  width: 60px;
+  float: left;
+  margin-right: .5rem; }
+
+.main-text {
+  font-size: .9rem; }
+
+.date {
+  font-size: .8rem;
+  color: lightgray;
+  display: block;
+  position: absolute;
+  bottom: 5px;
+  left: 70px; }
 
 .notification-mobile-box .date {
   position: static; }

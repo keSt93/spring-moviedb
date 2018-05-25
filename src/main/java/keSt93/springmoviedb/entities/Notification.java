@@ -12,18 +12,16 @@ public class Notification {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    private NotificationType notificationType;
-
-    @OneToOne(cascade = CascadeType.ALL)
-    private User user;
-
-
-    @OneToOne(cascade = CascadeType.ALL)
-    private Movie movie;
-
     @Column
     private Date notificationDate;
+
+    @Column
+    private String notificationText;
+
+    @Column
+    private String notificationUrl;
+
+    @Column String notificationImage;
 
     public int getId() {
         return id;
@@ -33,22 +31,29 @@ public class Notification {
         this.id = id;
     }
 
-    public NotificationType getNotificationType() {
-        return notificationType;
+    public String getNotificationText() {
+        return notificationText;
     }
 
-    public void setNotificationType(NotificationType notificationType) {
-        this.notificationType = notificationType;
+    public void setNotificationText(String notificationText) {
+        this.notificationText = notificationText;
     }
 
-    public User getUser() {
-        return user;
+    public String getNotificationImage() {
+        return notificationImage;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setNotificationImage(String notificationImage) {
+        this.notificationImage = notificationImage;
     }
 
+    public String getNotificationUrl() {
+        return notificationUrl;
+    }
+
+    public void setNotificationUrl(String notificationUrl) {
+        this.notificationUrl = notificationUrl;
+    }
 
     public Date getNotificationDate() {
         return notificationDate;
@@ -58,11 +63,4 @@ public class Notification {
         this.notificationDate = notificationDate;
     }
 
-    public Movie getMovie() {
-        return movie;
-    }
-
-    public void setMovie(Movie movie) {
-        this.movie = movie;
-    }
 }
