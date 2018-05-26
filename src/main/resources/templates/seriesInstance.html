@@ -44,7 +44,7 @@
                 <tbody>
                 <tr th:each="movie : ${moviesFromSeries}">
                     <td>
-                        <a th:href="@{'/movies/' + ${movie.id}}" th:text="${movie.title}"></a>
+                        <a th:href="@{'/m/movies/' + ${movie.id}}" th:text="${movie.title}"></a>
                     </td>
                     <td th:if="${movie.releaseDate != null}" th:text="${#dates.format(movie.releaseDate, 'dd. MM. yyyy')}"></td>
                     <td th:if="${movie.releaseDate == null}">unbekannt</td>

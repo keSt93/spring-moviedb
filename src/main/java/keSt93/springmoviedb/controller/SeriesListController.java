@@ -37,7 +37,7 @@ public class SeriesListController {
     private static final int INITIAL_PAGE = 0;
     private static final int INITIAL_PAGE_SIZE = 12;
 
-    @RequestMapping("/series")
+    @RequestMapping("/m/series")
     public ModelAndView allMovies(Principal principal,
                                   @RequestParam("pageSize") Optional<Integer> pageSize,
                                   @RequestParam("page") Optional<Integer> page){

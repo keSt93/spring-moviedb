@@ -26,7 +26,6 @@ import java.util.Date;
  */
 
 @Controller
-@RequestMapping("/")
 public class MovieInstanceController {
 
     @Autowired
@@ -43,7 +42,7 @@ public class MovieInstanceController {
     MovieCommentsRepository movieCommentsRepository;
 
     // Movie Detail Page
-    @GetMapping("/movies/{id}")
+    @GetMapping("/m/movies/{id}")
     public ModelAndView singleMovie(Principal principal, @PathVariable int id) {
         ModelAndView m = new ModelAndView("movieInstance");
 
@@ -88,7 +87,7 @@ public class MovieInstanceController {
 
 
     // Add Rating
-    @PostMapping(value = "/addRatingAction/{id}")
+    @PostMapping(value = "/actions/addRatingAction/{id}")
     private String addRating(MovieRating movieRating, Principal principal,@PathVariable int id)  {
 
         Movie currentMovie = movieRepository.findById(id);
@@ -98,7 +97,7 @@ public class MovieInstanceController {
 
         //if movie is from the old world, we wont rate it.
         if(currentMovie.getId() <= 70) {
-            return "redirect:/movies/"+id+"?oldworld=true";
+            return "redirect:/m/movies/"+id+"?oldworld=true";
         }
 
         if(ratingByUserAndMovie == null) {
@@ -112,7 +111,7 @@ public class MovieInstanceController {
             movieRatingRepository.save(ratingByUserAndMovie);
         }
         recalculateMovieRating(currentMovie, id);
-        return "redirect:/movies/"+id+"?successfullyrated=true";
+        return "redirect:/m/movies/"+id+"?successfullyrated=true";
     }
 
     // Calculate new Rating
@@ -131,7 +130,7 @@ public class MovieInstanceController {
     }
 
     // Add Comment
-    @PostMapping(value = "/addCommentAction/{id}")
+    @PostMapping(value = "/actions/addCommentAction/{id}")
     private String saveComment(MovieComments newComment, Principal principal, @PathVariable int id)  {
         Movie currentMovie = movieRepository.findById(id);
         User currentUser = userRepository.findByUsernameEquals(principal.getName());
@@ -143,13 +142,13 @@ public class MovieInstanceController {
             newComment.setCreationDate(new Date());
             newComment.setMovie(currentMovie);
             movieCommentsRepository.save(newComment);
-            return "redirect:/movies/"+id;
+            return "redirect:/m/movies/"+id;
         } else {
-            return "redirect:/movies/"+id+"?commentfail=true";
+            return "redirect:/m/movies/"+id+"?commentfail=true";
         }
     }
 
-    @RequestMapping(value = "/deleteCommentAction/{movieId}/{commentId}")
+    @RequestMapping(value = "/actions/deleteCommentAction/{movieId}/{commentId}")
     private String deleteComment(Principal principal, @PathVariable int movieId, @PathVariable int commentId)  {
         Movie currentMovie = movieRepository.findById(movieId);
         MovieComments currentComment = movieCommentsRepository.findOne(commentId);
@@ -162,9 +161,9 @@ public class MovieInstanceController {
             currentComment.setMovie(null);
             currentComment.setUser(null);
             movieCommentsRepository.delete(currentComment);
-            return "redirect:/movies/"+movieId;
+            return "redirect:/m/movies/"+movieId;
         } else {
-            return "redirect:/movies/"+movieId+"?commentfail=true";
+            return "redirect:/m/movies/"+movieId+"?commentfail=true";
         }
     }
 }

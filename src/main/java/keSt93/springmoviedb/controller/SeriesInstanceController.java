@@ -36,7 +36,7 @@ public class SeriesInstanceController {
     SeriesRepository seriesRepository;
 
     // Series Detail Page
-    @GetMapping("/series/{id}")
+    @GetMapping("/m/series/{id}")
     public ModelAndView singleMovie(Principal principal, @PathVariable int id) {
         ModelAndView m = new ModelAndView("seriesInstance");
 

@@ -14,23 +14,23 @@
                         <div class="collapse navbar-collapse" id="navbar">
                             <ul class="navbar-nav mr-auto">
                                 <li class="nav-item">
-                                    <a class="nav-link" th:href="@{/}">MovieDB</a>
+                                    <a class="nav-link" th:href="@{/m/}">MovieDB</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" th:href="@{/movies}">Filme</a>
+                                    <a class="nav-link" th:href="@{/m/movies}">Filme</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" th:href="@{/series}">Reihen</a>
+                                    <a class="nav-link" th:href="@{/m/series}">Reihen</a>
                                 </li>
                                 <li sec:authorize="isAuthenticated()" class="nav-item nav-green-af">
-                                    <a class="nav-link" th:href="@{/addmovie}">Film hinzufügen</a>
+                                    <a class="nav-link" th:href="@{/m/addmovie}">Film hinzufügen</a>
                                 </li>
                             </ul>
                         </div>
 
                             <!-- logged out -->
                             <form sec:authorize="!isAuthenticated()" class="form-inline my-2 my-lg-0">
-                                <a class="btn btn-outline-success my-2 my-sm-0" style="color: white;" th:href="@{/login}" >Login</a>
+                                <a class="btn btn-outline-success my-2 my-sm-0" style="color: white;" th:href="@{/}" >Login</a>
                             </form>
 
                             <!-- logged in -->
@@ -41,7 +41,7 @@
                                 <a class="notification_container notification_container_small for-small"
                                    id="notification_container-small"
                                    th:classappend="${#lists.size(notifications)} > 0 ? 'notifications' : 'no-notifications'"
-                                   th:href="${#lists.size(notifications)} > 0 ? @{/notifications/new} : '#'">
+                                   th:href="${#lists.size(notifications)} > 0 ? @{/m/notifications/new} : '#'">
                                     <span id ="notification_container-number-small" th:text="${#lists.size(notifications)}"></span>
                                 </a>
                                 <div id="notification_list" class="notification_list">
@@ -61,7 +61,7 @@
                                 </div>
                                 <div class="nav__profileDetails__Container">
                                     <span class="nav__loggedinAs"> Eingeloggt als: </span>
-                                    <a class="nav__userName" th:href="@{/user/current}" sec:authentication="name"></a>
+                                    <a class="nav__userName" th:href="@{/m/user/current}" sec:authentication="name"></a>
                                 </div>
                                 <a class="btn btn-outline-success my-2 my-sm-0" style="color: white;" th:href="@{/logout}" >
                                     <span class="for-normal">Ausloggen</span>

@@ -41,7 +41,7 @@ public class MovieListController {
     private static final int INITIAL_PAGE_SIZE = 6;
 
     // Movie List
-    @RequestMapping("/movies")
+    @RequestMapping("/m/movies")
     public ModelAndView allMovies(Principal principal,
                                   @RequestParam("pageSize") Optional<Integer> pageSize,
                                   @RequestParam("page") Optional<Integer> page){

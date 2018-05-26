@@ -6,7 +6,7 @@
 <main id="main" role="main" class="container">
     <div class="row">
         <div class="col-md-6" th:each="movie, index : ${movies}">
-            <a class="movie-container" th:classappend="@{'movie-id-' + ${movie.id}}" th:href="@{'/movies/' + ${movie.id}}">
+            <a class="movie-container" th:classappend="@{'movie-id-' + ${movie.id}}" th:href="@{'/m/movies/' + ${movie.id}}">
                 <div class="movie-container__cover">
                     <img th:src="${movie.coverImage}"/>
                 </div>
@@ -46,28 +46,28 @@
             <ul class="pagination">
                 <li th:class="${movies.number == 0} ? disabled"><a
                         class="pageLink"
-                        th:href="@{/movies/(pageSize=${selectedPageSize}, page=1)}">«</a>
+                        th:href="@{/m/movies/(pageSize=${selectedPageSize}, page=1)}">«</a>
                 </li>
                 <li th:class="${movies.number == 0} ? disabled"><a
                         class="pageLink"
-                        th:href="@{/movies/(pageSize=${selectedPageSize}, page=${movies.number})}">←</a>
+                        th:href="@{/m/movies/(pageSize=${selectedPageSize}, page=${movies.number})}">←</a>
                 </li>
                 <li
                         th:class="${movies.number == (page - 1)} ? 'active pointer-disabled'"
                         th:each="page : ${#numbers.sequence(pager.startPage, pager.endPage)}">
                     <a class="pageLink"
-                       th:href="@{/movies/(pageSize=${selectedPageSize}, page=${page})}"
+                       th:href="@{/m/movies/(pageSize=${selectedPageSize}, page=${page})}"
                        th:text="${page}"></a>
                 </li>
                 <li
                         th:class="${movies.number + 1 == movies.totalPages} ? disabled">
                     <a class="pageLink"
-                       th:href="@{/movies/(pageSize=${selectedPageSize}, page=${movies.number + 2})}">→</a>
+                       th:href="@{/m/movies/(pageSize=${selectedPageSize}, page=${movies.number + 2})}">→</a>
                 </li>
                 <li
                         th:class="${movies.number + 1 == movies.totalPages} ? disabled">
                     <a class="pageLink"
-                       th:href="@{/movies/(pageSize=${selectedPageSize}, page=${movies.totalPages})}">»</a>
+                       th:href="@{/m/movies/(pageSize=${selectedPageSize}, page=${movies.totalPages})}">»</a>
                 </li>
             </ul>
         </div>

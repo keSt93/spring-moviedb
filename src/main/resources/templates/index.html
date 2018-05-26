@@ -10,7 +10,7 @@
                 <div class="col-md-12">
                     <h3> Zuletzt gesehen </h3>
                     <div class="tile-container">
-                        <a class="tile-instance tile-box" th:each="recentMovie : ${recentMovies}" th:href="@{'/movies/' + ${recentMovie.id}}">
+                        <a class="tile-instance tile-box" th:each="recentMovie : ${recentMovies}" th:href="@{'/m/movies/' + ${recentMovie.id}}">
                             <div class="tile-image">
                                 <img th:src="${recentMovie.coverImage}"/>
                             </div>
@@ -19,7 +19,7 @@
                                 <span th:text="${recentMovie.title}"></span>
                             </div>
                         </a>
-                        <a class="tile-instance tile-box" th:href="@{'/movies/'}">
+                        <a class="tile-instance tile-box" th:href="@{'/m/movies/'}">
                             <div class="tile-image">
                             </div>
                             <div class="tile-overlay always-visible tile-blue">
@@ -33,7 +33,7 @@
                 <div class="col-md-12">
                     <h3> Filmreihen </h3>
                     <div class="tile-container">
-                        <a class="tile-instance tile-bigger" th:each="series : ${seriesList}" th:href="@{'/series/' + ${series.id}}">
+                        <a class="tile-instance tile-bigger" th:each="series : ${seriesList}" th:href="@{'/m/series/' + ${series.id}}">
                             <div class="tile-image">
                                 <img th:src="${series.coverImage}"/>
                             </div>
@@ -51,7 +51,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <h3> Am besten bewertet </h3>
-                    <a class="movie-container" th:each="movie, index : ${bestRatedMovies}" th:classappend="@{'movie-id-' + ${movie.id}}" th:href="@{'/movies/' + ${movie.id}}">
+                    <a class="movie-container" th:each="movie, index : ${bestRatedMovies}" th:classappend="@{'movie-id-' + ${movie.id}}" th:href="@{'/m/movies/' + ${movie.id}}">
                         <div class="movie-container__cover compact">
                             <img th:src="${movie.coverImage}"/>
                         </div>

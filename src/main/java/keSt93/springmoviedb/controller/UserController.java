@@ -44,7 +44,7 @@ public class UserController {
     @Autowired
     MovieCommentsRepository movieCommentsRepository;
 
-    @GetMapping("/user/current")
+    @GetMapping("/m/user/current")
     public ModelAndView index(Principal principal) {
         ModelAndView m = new ModelAndView("userPage");
         User currentUser = userRepository.findByUsernameEquals(principal.getName());

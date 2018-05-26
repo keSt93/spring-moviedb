@@ -98,7 +98,13 @@ footer {
   background-color: #18599c; }
 
 nav {
-  background-color: #4e4e4e; }
+  background-color: #18599c; }
+
+.navbar {
+  height: 80px; }
+
+a.nav-link {
+  color: white; }
 
 .nav__profileDetails__Container {
   padding: 0 1rem; }
@@ -209,6 +215,29 @@ nav {
 
 .notification-mobile-box .notification_instance {
   border: none; }
+
+.login-col {
+  min-height: 102vh;
+  display: flex;
+  flex: 1 1 100%;
+  align-items: center;
+  background: white;
+  padding: 2rem;
+  border: 1px solid #b4b2b0;
+  margin-top: -1rem;
+  flex-flow: column;
+  overflow: hidden;
+  box-shadow: 0px 0px 15px 10px rgba(0, 0, 0, 0.75); }
+
+.login-form {
+  width: 100%; }
+
+.login-head {
+  background: #18599c;
+  color: white;
+  width: 120%;
+  height: 200px;
+  margin: -2rem 0rem 2rem 0rem; }
 
 .movie-container {
   margin: .2rem -.7rem;

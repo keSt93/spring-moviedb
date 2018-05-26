@@ -44,7 +44,7 @@ public class MovieAddController {
     private UserRepository userRepository;
 
     // Add movie page
-    @GetMapping(value = "/addmovie")
+    @GetMapping(value = "/m/addmovie")
     public ModelAndView showView(Principal principal) {
         ModelAndView modelAndView = new ModelAndView("movieAdd");
 
@@ -73,7 +73,7 @@ public class MovieAddController {
     }
 
     // Add Movie Action
-    @PostMapping(value = "/addMovieAction")
+    @PostMapping(value = "/actions/addMovieAction")
     private String saveView(Movie movie, Principal currentUser)  {
         ImdbApi imdbApi = new ImdbApi(movie.getTitle());
         DataUriHelper dataUriHelper = new DataUriHelper();
@@ -107,7 +107,7 @@ public class MovieAddController {
 
         movieRepository.save(movie);
 
-        String notificationUrl = "/movies/" + movie.getId();
+        String notificationUrl = "/m/movies/" + movie.getId();
         String notificationImage = movie.getCoverImage();
         StringBuilder notificationText = new StringBuilder();
         notificationText
@@ -123,6 +123,6 @@ public class MovieAddController {
                 notificationText.toString(),
                 notificationUrl,
                 notificationImage);
-        return "redirect:/";
+        return "redirect:/m/";
     }
 }

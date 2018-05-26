@@ -32,7 +32,7 @@ public class NotificationController {
     @Autowired
     MovieRepository movieRepository;
 
-    @GetMapping("/notifications/markasread/{id}")
+    @GetMapping("/m/notifications/markasread/{id}")
     public String index(@PathVariable int id) {
         NotificationUserRelation notification = notificationUserRelationRepository.findOne(id);
 
@@ -43,7 +43,7 @@ public class NotificationController {
         return "notification_markAsRead";
     }
 
-    @GetMapping("/notifications/new")
+    @GetMapping("/m/notifications/new")
     public ModelAndView notificationList(Principal principal) {
         ModelAndView notificationList = new ModelAndView("notificationList");
         NotificationHelper notificationHelper = new NotificationHelper(userRepository, notificationUserRelationRepository, notificationTypeRepository);

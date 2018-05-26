@@ -1,7 +1,14 @@
 nav {
-  background-color: $db-dark-grey;
+  background-color: $navbar-bg-color;
 }
 
+.navbar {
+  height: $navbar-height;
+}
+
+a.nav-link {
+  color: white;
+}
 .nav__profileDetails__Container {
   padding: 0 1rem;
 }

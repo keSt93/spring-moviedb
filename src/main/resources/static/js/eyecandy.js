@@ -64,7 +64,7 @@ function adjustRatingProgressBarWithCustomText(elemClass, percent, customText) {
 
 // End Progress Bar Stuff --------------------------------------------------------------------------------
 
-// Number Stuff --------------------------------------------------------------------------------
+// Number Stuff ------------------------------------------------------------------------------------------
 function countNumberUp(elemClass, maxvalue) {
     $(elemClass).each(function(i) {
         var interval = setInterval(progress, 10);
@@ -95,3 +95,20 @@ function countNumberUpStartPageText(elemClass, maxvalue) {
         }
     })
 }
+// End Number Stuff ------------------------------------------------------------------------------------------
+
+// Background Stuff ------------------------------------------------------------------------------------------
+function getRandomBackground() {
+    var $body = $("body");
+    var images = [
+        "/img/background-images/popcorn-1085072_1920.jpg",
+        "/img/background-images/movie-918655_1920.jpg",
+        "/img/background-images/cinema-2093264_1920.jpg",
+    ]
+    var imagesCount = images.length;
+    var rnd = Math.floor((Math.random() * imagesCount) + 1);
+    var imageCSS = "background-image: url('"+ images[rnd-1]+"')"
+
+    $body.attr("style", imageCSS);
+}
+// End Background Stuff --------------------------------------------------------------------------------------

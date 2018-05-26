@@ -1,0 +1,29 @@
+.login-col {
+  min-height: 102vh;
+  display: flex;
+  flex: 1 1 100%;
+  align-items: center;
+  background: white;
+  padding: 2rem;
+  border: 1px solid $db-grey;
+  margin-top: -1rem;
+  flex-flow: column;
+  overflow: hidden;
+  box-shadow: 0px 0px 15px 10px rgba(0,0,0,0.75);
+}
+
+.login-form {
+  width: 100%;
+}
+
+.login-body {
+
+}
+
+.login-head {
+  background: $db-dark-blue;
+  color: white;
+  width: 120%;
+  height: 200px;
+  margin: -2rem 0rem 2rem 0rem;
+}

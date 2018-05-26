@@ -17,6 +17,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import javax.annotation.Resource;
 import javax.sql.DataSource;
@@ -39,30 +40,38 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.csrf().disable()
                 .authorizeRequests()
-                // Resources
-                .antMatchers("/css/**").permitAll()
-                .antMatchers("/js/**").permitAll()
-                .antMatchers("/img/**").permitAll()
-                .antMatchers("/target/**").permitAll()
-                // Public Sites
-                .antMatchers("/*").permitAll()
-                .antMatchers("/movies/**").permitAll()
-                .antMatchers("/series/**").permitAll()
-                // Registered only
-                .antMatchers("/addmovie/**").hasAnyRole("ROLE_USER")
-                .antMatchers("/addMovieAction/**").hasAnyRole("ROLE_USER")
-                .anyRequest().authenticated()
-                .and()
-                .formLogin().defaultSuccessUrl("/user/current")
-                .loginPage("/login")
-                .permitAll()
-                .and()
+                    // Resources
+                    .antMatchers("/css/**").permitAll()
+                    .antMatchers("/js/**").permitAll()
+                    .antMatchers("/img/**").permitAll()
+                    .antMatchers("/target/**").permitAll()
+                    // Public Sites
+                    .antMatchers("/*").permitAll()
+                    .antMatchers("/login/*").permitAll()
+                    .antMatchers("/logout/*").permitAll()
+                    .antMatchers("/m/***").hasAnyRole("USER", "OBSERVER")
+                    .antMatchers("/m/movies/**").hasAnyRole("USER", "OBSERVER")
+                    // .antMatchers("/m/series/**").hasAnyRole("ROLE_USER", "ROLE_OBSERVER")
+                    // .antMatchers("/m/addmovie/**").hasAnyRole("ROLE_USER", "ROLE_OBSERVER")
+                    // .antMatchers("/actions/**").hasAnyRole("ROLE_USER")
+                    .anyRequest().authenticated()
+                    .and()
+                .formLogin()
+                    .defaultSuccessUrl("/m/user/current")
+                    .loginPage("/")
+                    .permitAll()
+                    .and()
                 .logout()
-                .permitAll()
-                .and()
-                .rememberMe().rememberMeParameter("remember-me").tokenRepository(jdbcTokenRepositoryImpl)
-                .and()
-                .exceptionHandling().accessDeniedHandler(accessDeniedHandler);
+                    .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                    .logoutSuccessUrl("/")
+                    .permitAll()
+                    .and()
+                .rememberMe()
+                    .rememberMeParameter("remember-me")
+                    .tokenRepository(jdbcTokenRepositoryImpl)
+                    .and()
+                .exceptionHandling()
+                    .accessDeniedHandler(accessDeniedHandler);
     }
 
     @Autowired
