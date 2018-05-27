@@ -100,6 +100,14 @@ footer {
     display: block;
   }
 }
+.for-normal-inline-block {
+  @media (max-width: 767px) {
+    display: none;
+  }
+  @media (min-width: 768px) {
+    display: inline-block;
+  }
+}
 .for-small {
   @media (max-width: 767px) {
     display: block;

@@ -6,6 +6,13 @@ function boxCloser(e){
         $('.notification_list').hide();
     }
 }
+function boxCloserUserDropdown(e) {
+    if(e.target.id != 'nav__user-dropdown-list' &&
+        e.target.id != 'nav__userName') {
+        document.body.removeEventListener('click', boxCloserUserDropdown, false);
+        $('#nav__user-dropdown-list').hide();
+    }
+}
 
 function toggleNotificationWindow() {
     $('.notification_list').show();
@@ -23,4 +30,9 @@ function markNotificationAsRead(notification) {
             notificationElement.css("opacity", .5);
         }
     });
+}
+
+function displayUserDropdown() {
+    $("#nav__user-dropdown-list").show();
+    document.body.addEventListener('click', boxCloserUserDropdown, false);
 }

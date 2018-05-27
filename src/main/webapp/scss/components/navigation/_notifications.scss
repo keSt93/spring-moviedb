@@ -34,18 +34,18 @@
   display: none;
   animation: swing-in-top-fwd 1s cubic-bezier(0.175, 0.885, 0.320, 1.275) both;
   position: absolute;
-  background: $db-dark-grey;
-  color: white;
-  top: 3.6rem;
-  z-index: 51956161;
+  background: white;
+  top: 4.3rem;
+  z-index: 2;
   padding: .5rem;
-  border: 1px solid $db-light-grey;
-  transition: all .5s;
+  border: 1px solid $db-grey;
+  transition: all .3s;
   width: 320px;
+  box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
 
   &:before {
     content: " ";
-    background: $db-dark-grey;
+    background: white;
     width: 15px;
     height: 15px;
     position: absolute;
@@ -53,8 +53,8 @@
     left: 8px;
     transform: rotate(45deg);
     z-index: -58;
-    border-left: 1px solid $db-dark-grey-variation-1;
-    border-top: 1px solid $db-dark-grey-variation-1;
+    border-left: 1px solid $db-grey;
+    border-top: 1px solid $db-grey;
   }
 }
 
@@ -68,7 +68,7 @@
   height: 100px;
   margin: .4rem 0;
   padding: .2rem;
-  color: white;
+  color: black;
   position: relative;
 
   &:hover, &:active, &:focus {
@@ -88,7 +88,7 @@
 }
 .date {
   font-size: .8rem;
-  color: lightgray;
+  color: gray;
   display: block;
   position: absolute;
   bottom: 5px;
@@ -101,5 +101,8 @@
   }
   .notification_instance {
     border: none;
+  }
+  .notification_link {
+    color: white;
   }
 }

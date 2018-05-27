@@ -13,17 +13,28 @@
 
                         <div class="collapse navbar-collapse" id="navbar">
                             <ul class="navbar-nav mr-auto">
-                                <li class="nav-item">
-                                    <a class="nav-link" th:href="@{/m/}">MovieDB</a>
+                                <li class="nav-item nav-item-moviedb">
+                                    <a class="nav-link" th:href="@{/m/}">
+                                        MovieDB
+                                    </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" th:href="@{/m/movies}">Filme</a>
+                                    <a class="nav-link" th:href="@{/m/movies}">
+                                        <i class="fa fa-film"></i>
+                                        Filme
+                                    </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" th:href="@{/m/series}">Reihen</a>
+                                    <a class="nav-link" th:href="@{/m/series}">
+                                        <i class="fa fa-archive"></i>
+                                        Reihen
+                                    </a>
                                 </li>
                                 <li sec:authorize="isAuthenticated()" class="nav-item nav-green-af">
-                                    <a class="nav-link" th:href="@{/m/addmovie}">Film hinzufügen</a>
+                                    <a class="nav-link" th:href="@{/m/addmovie}">
+                                        <i class="fa fa-plus-square"></i>
+                                        Film hinzufügen
+                                    </a>
                                 </li>
                             </ul>
                         </div>
@@ -35,14 +46,17 @@
 
                             <!-- logged in -->
                             <form id="loggedin_form" sec:authorize="isAuthenticated()" class="form-inline my-2 my-lg-0" style="color: white;margin: 0 1rem; ">
-                                <div class="notification_container for-normal" id="notification_container" th:classappend="${#lists.size(notifications)} > 0 ? 'notifications' : 'no-notifications'" onclick="toggleNotificationWindow()">
+                                <div class="notification_container for-normal notifications"
+                                     id="notification_container"
+                                     th:if="${!#lists.isEmpty(notifications)}"
+                                     onclick="toggleNotificationWindow()">
                                     <span id ="notification_container-number" th:text="${#lists.size(notifications)}"></span>
                                 </div>
-                                <a class="notification_container notification_container_small for-small"
+                                <a class="notification_container notification_container_small for-small notifications"
                                    id="notification_container-small"
-                                   th:classappend="${#lists.size(notifications)} > 0 ? 'notifications' : 'no-notifications'"
-                                   th:href="${#lists.size(notifications)} > 0 ? @{/m/notifications/new} : '#'">
-                                    <span id ="notification_container-number-small" th:text="${#lists.size(notifications)}"></span>
+                                   th:if="${!#lists.isEmpty(notifications)}"
+                                   th:href="@{/m/notifications/new}">
+                                    <span id="notification_container-number-small" th:text="${#lists.size(notifications)}"></span>
                                 </a>
                                 <div id="notification_list" class="notification_list">
                                     <div id="notification_instance"
@@ -61,13 +75,21 @@
                                 </div>
                                 <div class="nav__profileDetails__Container">
                                     <span class="nav__loggedinAs"> Eingeloggt als: </span>
-                                    <a class="nav__userName" th:href="@{/m/user/current}" sec:authentication="name"></a>
+                                    <a class="nav__userName"  id="nav__userName" onclick="displayUserDropdown()" sec:authentication="name"></a>
+                                    <div class="nav__user-dropdown">
+                                        <ul id="nav__user-dropdown-list">
+                                            <li class="nav__user-dropdown-item">
+                                                <a th:href="@{/m/user/current}">Mein Profil</a>
+                                            </li>
+                                            <li class="nav__user-dropdown-item" sec:authorize="hasRole('ROLE_ADMIN')">
+                                                <a th:href="@{/admin/dashboard}">Adminbereich</a>
+                                            </li>
+                                        </ul>
+                                    </div>
                                 </div>
-                                <a class="btn btn-outline-success my-2 my-sm-0" style="color: white;" th:href="@{/logout}" >
-                                    <span class="for-normal">Ausloggen</span>
-                                    <i class="for-small fa fa-power-off"></i>
+                                <a class="btn nav__logout-button my-2 my-sm-0" style="color: white;" th:href="@{/logout}" >
+                                    <i class="fas fa-sign-out-alt"></i>
                                 </a>
-
                             </form>
                     </div>
                 </div>

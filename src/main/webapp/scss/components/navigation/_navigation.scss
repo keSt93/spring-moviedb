@@ -1,14 +1,118 @@
 nav {
-  background-color: $navbar-bg-color;
+  background: linear-gradient(135deg, #18599c 0%,#2989d8 27%,#207cca 73%,#18599c 100%);
 }
 
 .navbar {
-  height: $navbar-height;
+  @media (min-width: 768px) {
+    height: $navbar-height;
+  }
 }
 
-a.nav-link {
+.navbar-collapse {
+  @media (min-width: 768px) {
+    height: $navbar-height;
+  }
+}
+
+.navbar-nav {
+  @media (min-width: 768px) {
+    height: $navbar-height;
+    display: flex;
+    align-items: center;
+  }
+}
+
+.nav-item {
+  @media (min-width: 768px) {
+    height: $navbar-height;
+    display: flex;
+    align-items: center;
+    &:hover {
+      .fa {
+        animation: bounce-top 0.9s both;
+      }
+    }
+  }
+  @media (min-width: 992px) {
+    margin: 0 1rem;
+  }
+}
+
+.nav-item-moviedb {
+  @media (min-width: 768px) {
+    border-right: 1px solid rgba(255, 255, 255, .5);
+  }
+}
+
+.nav__logout-button {
+  border: 1px solid $db-grey;
+  transition: background-color .3s;
+
+  &:hover, &:active, &:focus {
+    background-color: $db-grey;
+  }
+}
+
+.nav__user-dropdown{
+  position: relative;
+  display: inline-block;
+}
+
+#nav__user-dropdown-list {
+  display: none;
+  animation: swing-in-top-fwd 1s cubic-bezier(0.175, 0.885, 0.320, 1.275) both;
+  position: absolute;
+  background-color: white;
+  min-width: 160px;
+  left: -43px;
+  top: 10px;
+  padding: 1rem;
+  z-index: 2;
+  border: 1px solid $db-grey;
+  box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+
+  &:before {
+    width: 10px;
+    height: 10px;
+    background: white;
+    content: "";
+    position: absolute;
+    top: -5px;
+    left: 10px;
+    transform: rotate(45deg);
+    border-left: 1px solid $db-grey;
+    border-top: 1px solid $db-grey;
+  }
+}
+
+.nav__user-dropdown-item {
+  list-style-type: none;
+
+  a {
+    color: black;
+    &:hover, &:active, &:focus {
+      color: black;
+    }
+  }
+}
+
+.nav__userName {
+  color: white;
+  cursor: pointer;
+
+  &:hover, &:active, &:focus {
+    color: white;
+  }
+}
+
+
+// bootstrap overwrite
+.navbar-dark .navbar-nav .nav-link {
   color: white;
 }
+
+
+// old shit
 .nav__profileDetails__Container {
   padding: 0 1rem;
 }
@@ -16,14 +120,6 @@ a.nav-link {
 .nav__loggedinAs {
   display: block;
   font-size: 0.7rem;
-}
-
-.nav__userName {
-  color: white;
-
-  &:hover, &:active, &:focus {
-    color: white;
-  }
 }
 
 .navigation-container form {
