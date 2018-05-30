@@ -79,6 +79,10 @@ select,
   border-radius: 0 !important;
 }
 
+.alert {
+  margin-top: 1rem;
+}
+
 footer {
   background: linear-gradient(135deg, $db-grey 0%,$db-dark-grey 75%);
   padding: 1rem;

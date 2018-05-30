@@ -1,0 +1,20 @@
+.nav-tabs {
+  border: none;
+  .nav-item {
+    height: auto;
+    margin: 0;
+  }
+  .nav-link {
+    border-radius: 0;
+    border: none;
+
+    &:not(.active) {
+      background: $db-grey;
+      color: white;
+    }
+    &.active {
+      background: $db-dark-grey;
+      color: white;
+    }
+  }
+}

@@ -55,6 +55,9 @@ select,
 .alert {
   border-radius: 0 !important; }
 
+.alert {
+  margin-top: 1rem; }
+
 footer {
   background: linear-gradient(135deg, #b4b2b0 0%, #4e4e4e 75%);
   padding: 1rem;
@@ -104,6 +107,21 @@ footer {
 
 .btn-primary {
   background-color: #18599c; }
+
+.nav-tabs {
+  border: none; }
+  .nav-tabs .nav-item {
+    height: auto;
+    margin: 0; }
+  .nav-tabs .nav-link {
+    border-radius: 0;
+    border: none; }
+    .nav-tabs .nav-link:not(.active) {
+      background: #b4b2b0;
+      color: white; }
+    .nav-tabs .nav-link.active {
+      background: #4e4e4e;
+      color: white; }
 
 nav {
   background: linear-gradient(135deg, #18599c 0%, #2989d8 27%, #207cca 73%, #18599c 100%); }

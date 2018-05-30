@@ -2,105 +2,201 @@
 <html lang="de"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
-<head th:include="fragments/special_movieList_header :: header" />
+<head th:include="fragments/special_movieList_header :: header"/>
 <body>
 <nav th:include="fragments/navigation :: navigation (notifications=${notifications})" id="navigationbar"/>
 <main id="main" role="main" class="container">
+
+
+
     <div class="row">
         <div class="col-md-12 single-movie-container">
+
+            <!-- Tab-Links -->
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="movie-tab" href="#movie-see" aria-controls="movie" data-toggle="tab" role="tab" aria-selected="true">Film</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="edit-tab" href="#movie-edit" aria-controls="movie-edit" data-toggle="tab" role="tab">Film bearbeiten</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="replace-tab" href="#movie-replace" aria-controls="movie-replace" data-toggle="tab" role="tab">Film austauschen</a>
+                </li>
+            </ul>
+
+            <!-- Header -->
             <div class="single-movie-container__title-container">
                 <h3 class="single-movie-container__title" th:text="${movie.title}"></h3>
                 <div class="single-movie-container__watchedDate">
-                    <span>Eingetragen am </span><span th:text="${#dates.format(movie.registeredDate, 'dd. MMMM yyyy')}"></span>
+                    <span>Eingetragen am </span><span
+                        th:text="${#dates.format(movie.registeredDate, 'dd. MMMM yyyy')}"></span>
                 </div>
                 <div class="single-movie-container__genre">
-                    <span>Genre: </span><span th:style="'color:' + ${movie.getGenre().color}" th:text="${movie.getGenre().name}"></span>
+                    <span>Genre: </span><span th:style="'color:' + ${movie.getGenre().color}"
+                                              th:text="${movie.getGenre().name}"></span>
                 </div>
             </div>
             <div class="single-movie-container__allratings-container">
                 <div class="single-movie-container__rating-instance single-movie-container__rating-overall">
                     <div class="single-movie-container__rating">
                         <div class="single-movie-container__rating-progressbar">
-                            <div class="single-movie-container__rating-progress" >
-                                <span class="single-movie-container__rating-progress-span" th:text="${movie.rating}"> </span>
+                            <div class="single-movie-container__rating-progress">
+                                <span class="single-movie-container__rating-progress-span"
+                                      th:text="${movie.rating}"> </span>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="single-movie-container__details">
-                <div class="single-movie-container__cover">
-                    <img th:src="${movie.coverImage}" />
-                </div>
-                <div class="single-movie-container__content">
-                    <div th:if="${param.successfullyrated}">
-                        <div class="alert alert-success">
-                            Deine Abstimmung wurde registriert!
-                        </div>
-                    </div>
+            <div class="tab-content" id="myTabContent">
 
-                    <div th:if="${param.oldworld}">
-                        <div class="alert alert-danger">
-                            Dieser Film stammt aus der "alten Welt" und kann deshalb nicht mehr bewertet werden.
-                        </div>
-                    </div>
+                <!-- movie-tab -->
+                <div class="tab-pane fade show active" id="movie-see" role="tabpanel" aria-labelledby="movie-tab">
+                    <div class="single-movie-container__details">
 
-                    <div th:if="${param.commentfail}">
-                        <div class="alert alert-danger">
-                            Beim Erstellen oder Löschen deines Kommentars ist etwas schief gelaufen. :(
+                        <div class="single-movie-container__cover">
+                            <img th:src="${movie.coverImage}"/>
                         </div>
-                    </div>
 
-                    <div class="row">
-                        <div class="col-md-8">
-                            <div class="single-movie-container__plot" th:text="${movie.plot}">
-                                Für diesen Film liegt keine Handlung vor.
+                        <div class="single-movie-container__content">
+
+                            <div th:if="${param.successfullyrated}">
+                                <div class="alert alert-success">
+                                    Deine Abstimmung wurde registriert!
+                                </div>
                             </div>
-                            <div class="single-movie-container__rateNow" sec:authorize="isAuthenticated()">
-                                <form th:action="@{'/actions/addRatingAction/' + ${movie.id}}" th:object="${newRating}" method="POST">
-                                    <div class="form-group">
-                                        <select class="single-movie-container__rateNow-dropdown" th:field="*{rating}">
-                                            <option value="1">1 Stern</option>
-                                            <option value="2">2 Sterne</option>
-                                            <option value="3">3 Sterne</option>
-                                            <option value="4">4 Sterne</option>
-                                            <option value="5" selected="selected">5 Sterne</option>
-                                            <option value="6">6 Sterne</option>
-                                            <option value="7">7 Sterne</option>
-                                            <option value="8">8 Sterne</option>
-                                            <option value="9">9 Sterne</option>
-                                            <option value="10">10 Sterne</option>
-                                        </select>
-                                        <button type="submit" class="single-movie-container__rateNow-submitButton"> Bewerten </button>
-                                        <small id="ratenowdropdown" class="form-text text-muted">Nur deine letzte Abstimmung wird gezählt!</small>
+
+                            <div th:if="${param.oldworld}">
+                                <div class="alert alert-danger">
+                                    Dieser Film stammt aus der "alten Welt" und kann deshalb nicht mehr bewertet werden.
+                                </div>
+                            </div>
+
+                            <div th:if="${param.commentfail}">
+                                <div class="alert alert-danger">
+                                    Beim Erstellen oder Löschen deines Kommentars ist etwas schief gelaufen. :(
+                                </div>
+                            </div>
+
+                            <div class="row">
+
+                                <div class="col-md-8">
+                                    <div class="single-movie-container__plot" th:text="${movie.plot}">
+                                        Für diesen Film liegt keine Handlung vor.
                                     </div>
-                                </form>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <span class="single-movie-container__rating-explaination">Individuelle Bewertungen:</span>
-                            <div th:each="rating : ${ratings}" class="single-movie-container__rating-instance single-movie-container__rating__userrating" th:classappend="'single-movie-container__rating-user-'+${rating.getUser().id}">
-                                <div class="single-movie-container__rating">
-                                    <div class="single-movie-container__rating-progressbar">
-                                        <div class="single-movie-container__rating-progress" th:text="${rating.rating}"></div>
+
+                                    <div class="single-movie-container__rateNow" sec:authorize="isAuthenticated()">
+                                        <form th:action="@{'/actions/addRatingAction/' + ${movie.id}}" th:object="${newRating}"
+                                              method="POST">
+                                            <div class="form-group">
+                                                <select class="single-movie-container__rateNow-dropdown" th:field="*{rating}">
+                                                    <option value="1">1 Stern</option>
+                                                    <option value="2">2 Sterne</option>
+                                                    <option value="3">3 Sterne</option>
+                                                    <option value="4">4 Sterne</option>
+                                                    <option value="5" selected="selected">5 Sterne</option>
+                                                    <option value="6">6 Sterne</option>
+                                                    <option value="7">7 Sterne</option>
+                                                    <option value="8">8 Sterne</option>
+                                                    <option value="9">9 Sterne</option>
+                                                    <option value="10">10 Sterne</option>
+                                                </select>
+                                                <button type="submit" class="single-movie-container__rateNow-submitButton">
+                                                    Bewerten
+                                                </button>
+                                                <small id="ratenowdropdown" class="form-text text-muted">Nur deine letzte
+                                                    Abstimmung wird gezählt!
+                                                </small>
+                                            </div>
+                                        </form>
                                     </div>
                                 </div>
-                                <script th:inline="javascript">
-                                    /*[+
-                                        var elementclass  = '.single-movie-container__rating-user-' + [[${rating.getUser().id}]] +' .single-movie-container__rating-progress';
-                                        var percentage = [[${rating.rating}]]
-                                        var customText = [[${rating.getUser().username}]] + ': ';
-                                     +]*/
-                                    adjustRatingProgressBarWithCustomText(elementclass, percentage*10, customText);
-                                </script>
+
+                                <div class="col-md-4">
+                                    <span class="single-movie-container__rating-explaination">Individuelle Bewertungen:</span>
+                                    <div th:each="rating : ${ratings}"
+                                         class="single-movie-container__rating-instance single-movie-container__rating__userrating"
+                                         th:classappend="'single-movie-container__rating-user-'+${rating.getUser().id}">
+                                        <div class="single-movie-container__rating">
+                                            <div class="single-movie-container__rating-progressbar">
+                                                <div class="single-movie-container__rating-progress"
+                                                     th:text="${rating.rating}"></div>
+                                            </div>
+                                        </div>
+                                        <script th:inline="javascript">
+                                            /*[+
+                                                var elementclass  = '.single-movie-container__rating-user-' + [[${rating.getUser().id}]] +' .single-movie-container__rating-progress';
+                                                var percentage = [[${rating.rating}]]
+                                                var customText = [[${rating.getUser().username}]] + ': ';
+                                             +]*/
+                                            adjustRatingProgressBarWithCustomText(elementclass, percentage * 10, customText);
+                                        </script>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
+
+                <div class="tab-pane fade" id="movie-edit" role="tabpanel" aria-labelledby="edit-tab">
+                    <!-- edit-tab -->
+                    <form th:action="@{'/actions/editMovieAction/' + ${movie.id}}" th:object="${movie}"  method="POST">
+
+                        <div class="form-group">
+                            <label for="moviename">Filmname:</label>
+                            <input type="text" name="moviename" id="moviename" class="form-control input-lg" required="true" autofocus="true" th:field="*{title}"/>
+                        </div>
+
+                        <!-- div class="form-group">
+                            <label for="releasedate">Releasedatum:</label>
+                            <input type="text" name="releasedate" id="releasedate" class="form-control input-lg" required="true" autofocus="true" th:field="*{releaseDate}"/>
+                        </div -->
+
+                        <div class="form-group">
+                            <label for="cover">Cover:</label>
+                            <input type="text" name="cover" id="cover" class="form-control input-lg" required="true" autofocus="true" th:field="*{coverImage}"/>
+                            <button onclick="document.getElementById('cover').value = '';" class="btn btn-block btn-primary">Feld leeren</button>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="genre">Genre:</label>
+                            <select class="form-control" id="genre" th:field="*{genre}">
+                                <option th:each="genre : ${genres_}" th:value="${genre.id}" th:text="${genre.name}"></option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="series">Reihe:</label>
+                            <select class="form-control" id="series" th:field="*{series}">
+                                <option th:each="serie : ${series_}"  th:value="${serie.id}" th:text="${serie.name}"></option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="length">Länge (Minuten):</label>
+                            <input type="number" name="length" id="length" class="form-control input-lg" required="true" autofocus="true" th:field="*{length}"/>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="plot">Plot:</label>
+                            <textarea class="form-control" id="plot" th:field="*{plot}">
+                            </textarea>
+                        </div>
+                        <button type="submit" class="btn btn-block btn-primary">Post!</button>
+                    </form>
+                </div>
+                <div class="tab-pane fade" id="movie-replace" role="tabpanel" aria-labelledby="replace-tab">
+                    todo replace
+                </div>
             </div>
+
         </div>
     </div>
+
+    <hr />
+
     <div class="row" sec:authorize="isAuthenticated()">
         <div class="col-md-8 offset-md-2">
             <form th:action="@{'/actions/addCommentAction/' + ${movie.id}}" th:object="${newComment}" method="POST">
@@ -113,7 +209,7 @@
         </div>
     </div>
 
-    <div class="row comment-instance-container"  th:each="comment : ${comments}">
+    <div class="row comment-instance-container" th:each="comment : ${comments}">
         <div class="col-md-8 offset-md-2 ">
             <div class="comment-instance">
                 <div class="comment-instance__userside">
@@ -134,13 +230,13 @@
         </div>
     </div>
 </main>
-<footer th:include="fragments/footer :: footer(wastedHours=${wastedHours},wastedMinutes=${wastedMinutes})" />
+<footer th:include="fragments/footer :: footer(wastedHours=${wastedHours},wastedMinutes=${wastedMinutes})"/>
 <script th:inline="javascript">
     /*[+
         var elementclass  = '.single-movie-container__rating-overall .single-movie-container__rating-progress';
         var percentage = [[${movie.rating}]]
      +]*/
-    adjustRatingProgressBarWithCustomText(elementclass, percentage*10, "Berechnetes Rating: ");
+    adjustRatingProgressBarWithCustomText(elementclass, percentage * 10, "Berechnetes Rating: ");
 </script>
 </body>
 </html>

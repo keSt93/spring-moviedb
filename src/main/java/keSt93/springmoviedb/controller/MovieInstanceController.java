@@ -16,9 +16,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.swing.text.DateFormatter;
 import javax.transaction.Transactional;
 import java.net.URL;
 import java.security.Principal;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -36,6 +38,8 @@ public class MovieInstanceController {
     private NotificationUserRelationRepository notificationUserRelationRepository;
     private NotificationTypeRepository notificationTypeRepository;
     private MovieCommentsRepository movieCommentsRepository;
+    private GenreRepository genreRepository;
+    private SeriesRepository seriesRepository;
 
     public MovieInstanceController(
             MovieRepository movieRepository,
@@ -43,7 +47,9 @@ public class MovieInstanceController {
             UserRepository userRepository,
             NotificationUserRelationRepository notificationUserRelationRepository,
             NotificationTypeRepository notificationTypeRepository,
-            MovieCommentsRepository movieCommentsRepository
+            MovieCommentsRepository movieCommentsRepository,
+            GenreRepository genreRepository,
+            SeriesRepository seriesRepository
     ) {
         this.movieRepository = movieRepository;
         this.movieRatingRepository = movieRatingRepository;
@@ -51,6 +57,8 @@ public class MovieInstanceController {
         this.notificationUserRelationRepository = notificationUserRelationRepository;
         this.notificationTypeRepository = notificationTypeRepository;
         this.movieCommentsRepository = movieCommentsRepository;
+        this.genreRepository = genreRepository;
+        this.seriesRepository = seriesRepository;
     }
 
 
@@ -63,6 +71,9 @@ public class MovieInstanceController {
         Iterable<MovieRating> requestedMovieRating = movieRatingRepository.findAllByMovie(requestedMovie);
         MovieRating newRating = new MovieRating();
 
+        // Get all Genres and Series for Dropdown
+        Iterable<Genre> genres = genreRepository.findAll();
+        Iterable<Series> series = seriesRepository.findAll();
 
         // get Related Movies
         Iterable<Movie> relatedMovies;
@@ -89,88 +100,52 @@ public class MovieInstanceController {
         m.addObject("comments", comments);
         m.addObject("newComment", new MovieComments());
         m.addObject("relatedMovies", relatedMovies);
+        m.addObject("genres_", genres);
+        m.addObject("series_", series);
+        m.addObject("editedMovie", new Movie());
 
         return m;
     }
 
-
-    // Add Rating
-    @PostMapping(value = "/actions/addRatingAction/{id}")
-    private String addRating(MovieRating movieRating, Principal principal, @PathVariable int id) {
+    // EditMovie
+    @PostMapping(value = "/actions/editMovieAction/{id}")
+    public String editMovie(Movie editedMovie, Principal principal, @PathVariable int id) {
 
         Movie currentMovie = movieRepository.findById(id);
-        User currentUser = userRepository.findByUsernameEquals(principal.getName());
 
-        MovieRating ratingByUserAndMovie = movieRatingRepository.findByUserAndAndMovie(currentUser, currentMovie);
-
-        //if movie is from the old world, we wont rate it.
-        if (currentMovie.getId() <= 70) {
-            return "redirect:/m/movies/" + id + "?oldworld=true";
+        if(currentMovie.getTitle() != editedMovie.getTitle()) {
+            currentMovie.setTitle(editedMovie.getTitle());
         }
 
-        if (ratingByUserAndMovie == null) {
-            // Generate MovieRatingEntry
-            movieRating.setMovie(currentMovie);
-            movieRating.setUser(currentUser);
-            movieRating.setRating(movieRating.getRating());
-            movieRatingRepository.save(movieRating);
-        } else {
-            ratingByUserAndMovie.setRating(movieRating.getRating());
-            movieRatingRepository.save(ratingByUserAndMovie);
+        /*
+        if(currentMovie.getReleaseDate() != editedMovie.getReleaseDate()) {
+            currentMovie.setReleaseDate(editedMovie.getReleaseDate());
         }
-        recalculateMovieRating(currentMovie, id);
+        */
+
+        if(currentMovie.getCoverImage() != editedMovie.getCoverImage()) {
+            try {
+                URL url = new URL(editedMovie.getCoverImage());
+                currentMovie.setCoverImage(DataUriHelper.getDataURIForURL(url).toString());
+            } catch (Exception ex) {
+
+            }
+        }
+        if(currentMovie.getSeries() != editedMovie.getSeries()) {
+            currentMovie.setSeries(editedMovie.getSeries());
+        }
+        if(currentMovie.getGenre() != editedMovie.getGenre()) {
+            currentMovie.setGenre(editedMovie.getGenre());
+        }
+        if(currentMovie.getLength() != editedMovie.getLength()) {
+            currentMovie.setLength(editedMovie.getLength());
+        }
+        if(currentMovie.getPlot() != editedMovie.getPlot()) {
+            currentMovie.setPlot(editedMovie.getPlot());
+        }
+
+        movieRepository.save(currentMovie);
+
         return "redirect:/m/movies/" + id + "?successfullyrated=true";
-    }
-
-    // Calculate new Rating
-    private void recalculateMovieRating(Movie currentMovie, int id) {
-
-        double ratingSum = movieRatingRepository.getCalculatedMovieRatingForMovie(currentMovie);
-        double ratingCount = movieRatingRepository.getCountOfMovieRatingsForMovie(currentMovie);
-        double finalRating = 0;
-        if (ratingCount > 1) {
-            finalRating = ratingSum / ratingCount;
-        }
-        if (ratingCount == 1) {
-            finalRating = ratingSum;
-        }
-        movieRepository.updateMovieRating(finalRating, id);
-    }
-
-    // Add Comment
-    @PostMapping(value = "/actions/addCommentAction/{id}")
-    private String saveComment(MovieComments newComment, Principal principal, @PathVariable int id) {
-        Movie currentMovie = movieRepository.findById(id);
-        User currentUser = userRepository.findByUsernameEquals(principal.getName());
-
-
-        if (StringUtils.isNotEmpty(newComment.getComment()) && currentMovie != null) {
-            newComment.setUser(currentUser);
-            newComment.setComment(newComment.getComment());
-            newComment.setCreationDate(new Date());
-            newComment.setMovie(currentMovie);
-            movieCommentsRepository.save(newComment);
-            return "redirect:/m/movies/" + id;
-        } else {
-            return "redirect:/m/movies/" + id + "?commentfail=true";
-        }
-    }
-
-    @RequestMapping(value = "/actions/deleteCommentAction/{movieId}/{commentId}")
-    private String deleteComment(Principal principal, @PathVariable int movieId, @PathVariable int commentId) {
-        MovieComments currentComment = movieCommentsRepository.findOne(commentId);
-        User currentUser = userRepository.findByUsernameEquals(principal.getName());
-
-        String currentUsername = currentUser.getUsername();
-        String commentUsername = currentComment.getUser().getUsername();
-
-        if (commentUsername.equals(currentUsername)) {
-            currentComment.setMovie(null);
-            currentComment.setUser(null);
-            movieCommentsRepository.delete(currentComment);
-            return "redirect:/m/movies/" + movieId;
-        } else {
-            return "redirect:/m/movies/" + movieId + "?commentfail=true";
-        }
     }
 }
