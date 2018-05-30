@@ -1,11 +1,6 @@
 package keSt93.springmoviedb.entities;
 
-import org.apache.tomcat.util.codec.binary.Base64;
-import org.apache.tomcat.util.codec.binary.StringUtils;
-
 import javax.persistence.*;
-import java.sql.Blob;
-import java.util.Date;
 
 
 @Entity

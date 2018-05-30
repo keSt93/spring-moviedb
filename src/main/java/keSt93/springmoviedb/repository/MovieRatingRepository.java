@@ -6,12 +6,13 @@ import keSt93.springmoviedb.entities.MovieRating;
 import keSt93.springmoviedb.entities.User;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository
 public interface MovieRatingRepository extends PagingAndSortingRepository<MovieRating, Integer> {
+
     Iterable<MovieRating> findAllByMovie(Movie m);
+
     Iterable<MovieRating> findFirst5ByUserOrderByIdDesc(User user);
 
     @Query("select sum(rating) from MovieRating where movie = ?1")

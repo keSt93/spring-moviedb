@@ -3,37 +3,39 @@ package keSt93.springmoviedb.controller;
 
 import keSt93.springmoviedb.entities.*;
 import keSt93.springmoviedb.repository.*;
+import keSt93.springmoviedb.utils.MovieDbUtils;
 import keSt93.springmoviedb.utils.NotificationHelper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.security.Principal;
 
-/**
- * Created by stein on 14.02.2018.
- */
-
 @Controller
 @RequestMapping("/")
 public class SeriesInstanceController {
 
-    @Autowired
-    MovieRepository movieRepository;
-    @Autowired
-    MovieRatingRepository movieRatingRepository;
-    @Autowired
-    UserRepository userRepository;
-    @Autowired
-    NotificationUserRelationRepository notificationUserRelationRepository;
-    @Autowired
-    NotificationTypeRepository notificationTypeRepository;
-    @Autowired
-    SeriesRepository seriesRepository;
+    private MovieRepository movieRepository;
+    private UserRepository userRepository;
+    private NotificationUserRelationRepository notificationUserRelationRepository;
+    private NotificationTypeRepository notificationTypeRepository;
+    private SeriesRepository seriesRepository;
+
+    public SeriesInstanceController(
+            MovieRepository movieRepository,
+            UserRepository userRepository,
+            NotificationUserRelationRepository notificationUserRelationRepository,
+            NotificationTypeRepository notificationTypeRepository,
+            SeriesRepository seriesRepository
+    ) {
+        this.movieRepository = movieRepository;
+        this.userRepository = userRepository;
+        this.notificationUserRelationRepository = notificationUserRelationRepository;
+        this.notificationTypeRepository = notificationTypeRepository;
+        this.seriesRepository = seriesRepository;
+    }
 
     // Series Detail Page
     @GetMapping("/m/series/{id}")
@@ -53,13 +55,8 @@ public class SeriesInstanceController {
         int totalMoviesForSeries = movieRepository.countAllBySeriesEquals(currentSeries);
         double averageSeriesRating = movieRepository.getAverageSeriesRating(currentSeries);
 
-        // Calculate wasted Time for Footer
-        int wastedMinutes = movieRepository.getTotalWastedMinutes();
-        int wastedHours = wastedMinutes / 60;
-        wastedMinutes = wastedMinutes % 60;
-
-        m.addObject("wastedMinutes", wastedMinutes);
-        m.addObject("wastedHours", wastedHours);
+        m.addObject("wastedMinutes", MovieDbUtils.getCalculatedMovieTime(movieRepository)[1]);
+        m.addObject("wastedHours", MovieDbUtils.getCalculatedMovieTime(movieRepository)[0]);
         m.addObject("wastedSeriesTime", wastedSeriesTime);
         m.addObject("totalMoviesForSeries", totalMoviesForSeries);
         m.addObject("averageSeriesRating", averageSeriesRating);

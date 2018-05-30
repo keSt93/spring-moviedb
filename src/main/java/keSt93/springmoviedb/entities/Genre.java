@@ -1,7 +1,6 @@
 package keSt93.springmoviedb.entities;
 
 import javax.persistence.*;
-import java.util.Date;
 
 @Entity
 @Table(name = "movies_genre")
@@ -14,7 +13,8 @@ public class Genre {
     @Column
     private String name;
 
-    @Column String color;
+    @Column
+    private String color;
 
     public String getColor() {
         return color;

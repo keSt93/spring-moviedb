@@ -1,11 +1,7 @@
 package keSt93.springmoviedb.entities;
 
-import keSt93.springmoviedb.repository.MovieRatingRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-
 import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
 
 @Entity
 @Table(name = "movies")

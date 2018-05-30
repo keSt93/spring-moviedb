@@ -10,7 +10,7 @@ import java.net.URLConnection;
 import java.util.Base64;
 import java.util.logging.Level;
 
-public class DataUriHelper {
+public final class DataUriHelper {
 
     public static URI getDataURIForURL(URL url) {
         URI dataUri = null;

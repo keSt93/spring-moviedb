@@ -5,18 +5,11 @@ import keSt93.springmoviedb.entities.*;
 import keSt93.springmoviedb.repository.*;
 import keSt93.springmoviedb.utils.MovieDbUtils;
 import keSt93.springmoviedb.utils.NotificationHelper;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.security.Principal;
-import java.util.Collection;
-
-/**
- * Created by stein on 14.02.2018.
- */
 
 @Controller
 public class StartPageController {
@@ -61,13 +54,12 @@ public class StartPageController {
         NotificationHelper notificationHelper = new NotificationHelper(userRepository, notificationUserRelationRepository, notificationTypeRepository);
         notifications = notificationHelper.getNotificationsFromUser(principal);
 
-
         // Add Objects to Model
-        m.addObject("recentMovies",recentMovies);
-        m.addObject("bestRatedMovies",bestRatedMovies);
-        m.addObject("seriesList",seriesList);
         m.addObject("wastedHours", MovieDbUtils.getCalculatedMovieTime(movieRepository)[0]);
         m.addObject("wastedMinutes", MovieDbUtils.getCalculatedMovieTime(movieRepository)[1]);
+        m.addObject("recentMovies", recentMovies);
+        m.addObject("bestRatedMovies", bestRatedMovies);
+        m.addObject("seriesList", seriesList);
         m.addObject("totalMovies", totalMovies);
         m.addObject("notifications", notifications);
         return m;

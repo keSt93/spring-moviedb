@@ -20,9 +20,12 @@ public interface MovieRepository extends PagingAndSortingRepository<Movie, Integ
     Page<Movie> findAllByOrderByIdDesc(Pageable pageable);
 
     Iterable<Movie> findFirst6ByOrderByRatingDesc();
+
     Iterable<Movie> findFirst11ByOrderByRegisteredDateDesc();
+
     Iterable<Movie> findAllBySeries(Series series);
-    Iterable<Movie> findAllBySeriesAndIdIsNot (Series series, int id);
+
+    Iterable<Movie> findAllBySeriesAndIdIsNot(Series series, int id);
 
 
     @Query("select sum(length) from Movie")
@@ -35,6 +38,7 @@ public interface MovieRepository extends PagingAndSortingRepository<Movie, Integ
     double getAverageSeriesRating(Series series);
 
     int countAllBy();
+
     int countAllBySeriesEquals(Series Series);
 
 

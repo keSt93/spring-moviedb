@@ -1,8 +1,6 @@
 package keSt93.springmoviedb.entities;
 
 import javax.persistence.*;
-import java.util.Date;
-
 
 @Entity
 @Table(name = "notifications_user_relation")

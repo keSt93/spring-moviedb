@@ -2,7 +2,6 @@ package keSt93.springmoviedb.utils;
 
 import keSt93.springmoviedb.repository.MovieRepository;
 
-import javax.annotation.PostConstruct;
 
 public final class MovieDbUtils {
 

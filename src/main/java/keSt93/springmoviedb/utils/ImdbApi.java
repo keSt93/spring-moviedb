@@ -2,6 +2,7 @@ package keSt93.springmoviedb.utils;
 
 
 import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
@@ -13,8 +14,8 @@ import java.util.Scanner;
 public class ImdbApi {
 
     private String APIKEY = "92857ebb";
-    private String INITIAL_DATAURL = "http://www.omdbapi.com/?apikey="+APIKEY+"&";
-    private String INITIAL_POSTERURL = "http://img.omdbapi.com/?apikey="+APIKEY+"&";
+    private String INITIAL_DATAURL = "http://www.omdbapi.com/?apikey=" + APIKEY + "&";
+    private String INITIAL_POSTERURL = "http://img.omdbapi.com/?apikey=" + APIKEY + "&";
 
     private JSONObject jsonObject;
     private String title;
@@ -28,11 +29,11 @@ public class ImdbApi {
 
     public ImdbApi(String movieName) {
         try {
-            URL apiUrl = new URL(INITIAL_DATAURL + "t="+ URLEncoder.encode(movieName, "UTF-8"));
-            Scanner scan =  new Scanner(apiUrl.openStream());
+            URL apiUrl = new URL(INITIAL_DATAURL + "t=" + URLEncoder.encode(movieName, "UTF-8"));
+            Scanner scan = new Scanner(apiUrl.openStream());
 
             String str = "";
-            while(scan.hasNext()) {
+            while (scan.hasNext()) {
                 str += scan.nextLine();
             }
             scan.close();
@@ -46,7 +47,6 @@ public class ImdbApi {
             released = jsonObject.getString("Released");
             plot = jsonObject.getString("Plot");
             length = Integer.parseInt(jsonObject.getString("Runtime").split(" ")[0]);
-
 
 
         } catch (Exception x) {

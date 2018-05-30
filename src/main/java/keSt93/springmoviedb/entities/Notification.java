@@ -21,7 +21,8 @@ public class Notification {
     @Column
     private String notificationUrl;
 
-    @Column String notificationImage;
+    @Column
+    private String notificationImage;
 
     public int getId() {
         return id;
