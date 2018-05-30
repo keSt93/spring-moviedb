@@ -1,0 +1,30 @@
+.tile-instance.tile-box {
+  width:  $tile-small-width;
+  height: $tile-small-height;
+
+  .tile-image {
+    img {
+      width:  $tile-small-width;
+      height: $tile-small-height;
+    }
+  }
+
+  .tile-overlay {
+    &.always-visible {
+      bottom: 0;
+      top: 0;
+    }
+    &:not(.always-visible) {
+      bottom: -110px;
+    }
+
+    width:  $tile-small-width;
+    height: $tile-small-height;
+  }
+
+  &:hover {
+    .tile-overlay:not(.always-visible) {
+      bottom: -15px;
+    }
+  }
+}

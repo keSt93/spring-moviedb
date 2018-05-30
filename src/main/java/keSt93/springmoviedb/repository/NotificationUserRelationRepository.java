@@ -10,8 +10,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface NotificationUserRelationRepository extends PagingAndSortingRepository<NotificationUserRelation, Integer> {
 
-    public Iterable<NotificationUserRelation> findAllByUserAndIsSeenFalse(User user);
-
-    public Iterable<NotificationUserRelation> findTop5ByUserOrderByIdDesc(User user);
+    Iterable<NotificationUserRelation> findAllByUserAndIsSeenFalse(User user);
+    Iterable<NotificationUserRelation> findTop5ByUserOrderByIdDesc(User user);
 
 }

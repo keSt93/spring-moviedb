@@ -47,7 +47,7 @@ public class StartPageController {
         ModelAndView m = new ModelAndView("index");
 
         // Movie Lists
-        Iterable<Movie> recentMovies = movieRepository.findFirst14ByOrderByRegisteredDateDesc();
+        Iterable<Movie> recentMovies = movieRepository.findFirst11ByOrderByRegisteredDateDesc();
         Iterable<Movie> bestRatedMovies = movieRepository.findFirst6ByOrderByRatingDesc();
 
         // Get all Movies count
@@ -61,12 +61,6 @@ public class StartPageController {
         NotificationHelper notificationHelper = new NotificationHelper(userRepository, notificationUserRelationRepository, notificationTypeRepository);
         notifications = notificationHelper.getNotificationsFromUser(principal);
 
-        String uhhh = "";
-        Collection<SimpleGrantedAuthority> authorities = (Collection<SimpleGrantedAuthority>)    SecurityContextHolder.getContext().getAuthentication().getAuthorities();
-        for (SimpleGrantedAuthority authority : authorities) {
-            uhhh += authority.getAuthority() + " \n ";
-        }
-        m.addObject("uhhh", uhhh);
 
         // Add Objects to Model
         m.addObject("recentMovies",recentMovies);

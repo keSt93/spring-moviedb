@@ -1,0 +1,67 @@
+.tile-instance.tile-medium {
+  @media (max-width: 991px) {
+    width: $tile-medium-proportions-small;
+    height: $tile-medium-proportions-small;
+
+    .tile-image img {
+      width: $tile-medium-proportions-small;
+      height: $tile-medium-proportions-small;
+    }
+  }
+  @media (min-width:992px) and (max-width: 1199px) {
+    width: $tile-medium-proportions-medium;
+    height: $tile-medium-proportions-medium;
+
+    .tile-image img {
+      width: $tile-medium-proportions-medium;
+      height: $tile-medium-proportions-medium;
+    }
+  }
+  @media (min-width: 1200px) {
+    width: $tile-medium-proportions-large;
+    height: $tile-medium-proportions-large;
+
+    .tile-image img {
+      width: $tile-medium-proportions-large;
+      height: $tile-medium-proportions-large;
+    }
+  }
+
+  .tile-overlay {
+    @media (max-width: 991px) {
+      width:  $tile-medium-proportions-small;
+      height: $tile-medium-proportions-small;
+      bottom: -188px;
+    }
+    @media (min-width:992px) and (max-width: 1199px) {
+      width:  $tile-medium-proportions-medium;
+      height: $tile-medium-proportions-medium;
+      bottom: -188px;
+    }
+    @media (min-width: 1200px) {
+      width:  $tile-medium-proportions-large;
+      height: $tile-medium-proportions-large;
+      bottom: -147px;
+    }
+
+    display: flex;
+    flex-flow: column;
+    align-items: start;
+    justify-content: flex-start;
+    text-align: left;
+
+
+    &.always-visible {
+      bottom: 0;
+      top: 0;
+      justify-content: center;
+    }
+
+    .tile-overlay-movie_title {
+      font-size: 1.5rem;
+    }
+  }
+  &:hover .tile-overlay {
+    bottom: -25px;
+  }
+}

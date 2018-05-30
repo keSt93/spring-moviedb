@@ -228,8 +228,7 @@ nav {
   .notification_container_small a:focus,
   .notification_container_small a:visited,
   .notification_container_small span {
-    text-decoration: none;
-    color: white; }
+    text-decoration: none; }
 
 .notification_list {
   display: none;
@@ -296,6 +295,202 @@ nav {
 .notification-mobile-box .notification_link {
   color: white; }
 
+.tile-container {
+  display: flex;
+  flex-direction: row;
+  flex-flow: wrap;
+  justify-content: flex-start; }
+  @media (max-width: 767px) {
+    .tile-container {
+      justify-content: center; } }
+  .tile-container .tile-instance {
+    overflow: hidden;
+    margin: .2rem;
+    position: relative;
+    transition: all .3s;
+    display: inherit;
+    border: 1px solid #b4b2b0; }
+    .tile-container .tile-instance .tile-image img {
+      object-fit: cover; }
+    .tile-container .tile-instance .tile-overlay {
+      position: absolute;
+      transition: all .5s;
+      padding: .2rem;
+      text-shadow: 0px 0px 2px black;
+      color: white; }
+      .tile-container .tile-instance .tile-overlay.always-visible {
+        font-size: 1.5rem;
+        text-align: center;
+        display: flex;
+        align-items: center; }
+        .tile-container .tile-instance .tile-overlay.always-visible:hover {
+          transform: scale(1.05); }
+        .tile-container .tile-instance .tile-overlay.always-visible.tile-blue {
+          background: linear-gradient(135deg, #18599c 0%, #0a2744 100%); }
+        .tile-container .tile-instance .tile-overlay.always-visible.tile-orange {
+          background: linear-gradient(135deg, #bd461b 0%, #64250e 100%); }
+      .tile-container .tile-instance .tile-overlay:not(.always-visible) {
+        background: rgba(0, 0, 0, 0.4); }
+      .tile-container .tile-instance .tile-overlay span {
+        display: block; }
+
+.tile-instance.tile-box {
+  width: 139px;
+  height: 139px; }
+  .tile-instance.tile-box .tile-image img {
+    width: 139px;
+    height: 139px; }
+  .tile-instance.tile-box .tile-overlay {
+    width: 139px;
+    height: 139px; }
+    .tile-instance.tile-box .tile-overlay.always-visible {
+      bottom: 0;
+      top: 0; }
+    .tile-instance.tile-box .tile-overlay:not(.always-visible) {
+      bottom: -110px; }
+  .tile-instance.tile-box:hover .tile-overlay:not(.always-visible) {
+    bottom: -15px; }
+
+@media (max-width: 991px) {
+  .tile-instance.tile-medium {
+    width: 218px;
+    height: 218px; }
+    .tile-instance.tile-medium .tile-image img {
+      width: 218px;
+      height: 218px; } }
+
+@media (min-width: 992px) and (max-width: 1199px) {
+  .tile-instance.tile-medium {
+    width: 196px;
+    height: 196px; }
+    .tile-instance.tile-medium .tile-image img {
+      width: 196px;
+      height: 196px; } }
+
+@media (min-width: 1200px) {
+  .tile-instance.tile-medium {
+    width: 176px;
+    height: 176px; }
+    .tile-instance.tile-medium .tile-image img {
+      width: 176px;
+      height: 176px; } }
+
+.tile-instance.tile-medium .tile-overlay {
+  display: flex;
+  flex-flow: column;
+  align-items: start;
+  justify-content: flex-start;
+  text-align: left; }
+  @media (max-width: 991px) {
+    .tile-instance.tile-medium .tile-overlay {
+      width: 218px;
+      height: 218px;
+      bottom: -188px; } }
+  @media (min-width: 992px) and (max-width: 1199px) {
+    .tile-instance.tile-medium .tile-overlay {
+      width: 196px;
+      height: 196px;
+      bottom: -188px; } }
+  @media (min-width: 1200px) {
+    .tile-instance.tile-medium .tile-overlay {
+      width: 176px;
+      height: 176px;
+      bottom: -147px; } }
+  .tile-instance.tile-medium .tile-overlay.always-visible {
+    bottom: 0;
+    top: 0;
+    justify-content: center; }
+  .tile-instance.tile-medium .tile-overlay .tile-overlay-movie_title {
+    font-size: 1.5rem; }
+
+.tile-instance.tile-medium:hover .tile-overlay {
+  bottom: -25px; }
+
+@media (max-width: 991px) {
+  .tile-instance.tile-bigger {
+    width: 236px;
+    height: 236px; }
+    .tile-instance.tile-bigger .tile-image img {
+      width: 236px;
+      height: 236px; } }
+
+@media (min-width: 992px) and (max-width: 1199px) {
+  .tile-instance.tile-bigger {
+    width: 215px;
+    height: 215px; }
+    .tile-instance.tile-bigger .tile-image img {
+      width: 215px;
+      height: 215px; } }
+
+@media (min-width: 1200px) {
+  .tile-instance.tile-bigger {
+    width: 236px;
+    height: 236px; }
+    .tile-instance.tile-bigger .tile-image img {
+      width: 236px;
+      height: 236px; } }
+
+.tile-instance.tile-bigger .tile-overlay {
+  top: -195px;
+  width: 236px;
+  height: 236px;
+  display: flex;
+  flex-flow: column;
+  align-items: end;
+  justify-content: flex-end;
+  text-align: left; }
+  .tile-instance.tile-bigger .tile-overlay .series-name {
+    font-size: 1.5rem; }
+
+.tile-instance.tile-bigger:hover .tile-overlay {
+  top: -140px; }
+
+@media (max-width: 991px) {
+  .tile-instance.tile-thicc {
+    width: 271px;
+    height: 271px; }
+    .tile-instance.tile-thicc .tile-image img {
+      width: 271px;
+      height: 271px; } }
+
+@media (min-width: 992px) and (max-width: 1199px) {
+  .tile-instance.tile-thicc {
+    width: 303px;
+    height: 303px; }
+    .tile-instance.tile-thicc .tile-image img {
+      width: 303px;
+      height: 303px; } }
+
+@media (min-width: 1200px) {
+  .tile-instance.tile-thicc {
+    width: 271px;
+    height: 271px; }
+    .tile-instance.tile-thicc .tile-image img {
+      width: 271px;
+      height: 271px; } }
+
+.tile-instance.tile-thicc .tile-overlay {
+  width: 340px;
+  height: 340px;
+  display: flex;
+  flex-flow: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  text-align: left;
+  transform: rotate(20deg);
+  bottom: -245px;
+  left: -60px; }
+  .tile-instance.tile-thicc .tile-overlay span {
+    margin-left: 30px; }
+  .tile-instance.tile-thicc .tile-overlay .hidden-until-hover {
+    opacity: 0;
+    transition: opacity .3s; }
+  .tile-instance.tile-thicc .tile-overlay .series-name {
+    font-size: 1.5rem; }
+
+.tile-instance.tile-thicc:hover .tile-overlay .hidden-until-hover {
+  opacity: 1; }
+
 .login-col {
   min-height: 102vh;
   display: flex;
@@ -324,6 +519,7 @@ nav {
   background: #edebe9;
   padding: 1rem;
   transition: all .3s;
+  border: 1px solid #b4b2b0;
   display: flex;
   flex-direction: row;
   text-decoration: none;
@@ -565,135 +761,6 @@ nav {
     .series-container__cover-fullheight img {
       max-width: 250px;
       height: 266px; } }
-
-.tile-container {
-  display: flex;
-  flex-direction: row;
-  flex-flow: wrap;
-  justify-content: flex-start; }
-  @media (max-width: 767px) {
-    .tile-container {
-      justify-content: center; } }
-  .tile-container .tile-instance {
-    overflow: hidden;
-    margin: .2rem;
-    position: relative;
-    transition: all .3s;
-    display: inherit; }
-    .tile-container .tile-instance .tile-image img {
-      object-fit: cover; }
-    .tile-container .tile-instance .tile-overlay {
-      position: absolute;
-      transition: all .5s;
-      padding: .2rem;
-      text-shadow: 0px 0px 2px black;
-      color: white; }
-      .tile-container .tile-instance .tile-overlay.always-visible {
-        font-size: 1.5rem;
-        text-align: center;
-        display: flex;
-        align-items: center; }
-        .tile-container .tile-instance .tile-overlay.always-visible:hover {
-          transform: scale(1.05); }
-        .tile-container .tile-instance .tile-overlay.always-visible.tile-blue {
-          background: linear-gradient(135deg, #18599c 0%, #0a2744 100%); }
-        .tile-container .tile-instance .tile-overlay.always-visible.tile-orange {
-          background: linear-gradient(135deg, #bd461b 0%, #64250e 100%); }
-      .tile-container .tile-instance .tile-overlay:not(.always-visible) {
-        background: rgba(0, 0, 0, 0.4); }
-      .tile-container .tile-instance .tile-overlay span {
-        display: block; }
-  @media (max-width: 991px) {
-    .tile-container .tile-instance.tile-thicc {
-      width: 271px;
-      height: 271px; }
-      .tile-container .tile-instance.tile-thicc .tile-image img {
-        width: 271px;
-        height: 271px; } }
-  @media (min-width: 992px) and (max-width: 1199px) {
-    .tile-container .tile-instance.tile-thicc {
-      width: 303px;
-      height: 303px; }
-      .tile-container .tile-instance.tile-thicc .tile-image img {
-        width: 303px;
-        height: 303px; } }
-  @media (min-width: 1200px) {
-    .tile-container .tile-instance.tile-thicc {
-      width: 271px;
-      height: 271px; }
-      .tile-container .tile-instance.tile-thicc .tile-image img {
-        width: 271px;
-        height: 271px; } }
-  .tile-container .tile-instance.tile-thicc .tile-overlay {
-    width: 340px;
-    height: 340px;
-    display: flex;
-    flex-flow: column;
-    align-items: flex-start;
-    justify-content: flex-start;
-    text-align: left;
-    transform: rotate(20deg);
-    bottom: -245px;
-    left: -60px; }
-    .tile-container .tile-instance.tile-thicc .tile-overlay span {
-      margin-left: 30px; }
-    .tile-container .tile-instance.tile-thicc .tile-overlay .hidden-until-hover {
-      opacity: 0;
-      transition: opacity .3s; }
-    .tile-container .tile-instance.tile-thicc .tile-overlay .series-name {
-      font-size: 1.5rem; }
-  .tile-container .tile-instance.tile-thicc:hover .tile-overlay .hidden-until-hover {
-    opacity: 1; }
-  @media (max-width: 991px) {
-    .tile-container .tile-instance.tile-bigger {
-      width: 236px;
-      height: 236px; }
-      .tile-container .tile-instance.tile-bigger .tile-image img {
-        width: 236px;
-        height: 236px; } }
-  @media (min-width: 992px) and (max-width: 1199px) {
-    .tile-container .tile-instance.tile-bigger {
-      width: 215px;
-      height: 215px; }
-      .tile-container .tile-instance.tile-bigger .tile-image img {
-        width: 215px;
-        height: 215px; } }
-  @media (min-width: 1200px) {
-    .tile-container .tile-instance.tile-bigger {
-      width: 236px;
-      height: 236px; }
-      .tile-container .tile-instance.tile-bigger .tile-image img {
-        width: 236px;
-        height: 236px; } }
-  .tile-container .tile-instance.tile-bigger .tile-overlay {
-    top: -195px;
-    width: 236px;
-    height: 236px;
-    display: flex;
-    flex-flow: column;
-    align-items: end;
-    justify-content: flex-end;
-    text-align: left; }
-    .tile-container .tile-instance.tile-bigger .tile-overlay .series-name {
-      font-size: 1.5rem; }
-  .tile-container .tile-instance.tile-bigger:hover .tile-overlay {
-    top: -140px; }
-  .tile-container .tile-instance.tile-box {
-    width: 139px;
-    height: 139px; }
-    .tile-container .tile-instance.tile-box .tile-image img {
-      width: 139px;
-      height: 139px; }
-    .tile-container .tile-instance.tile-box .tile-overlay {
-      width: 139px;
-      height: 139px; }
-      .tile-container .tile-instance.tile-box .tile-overlay.always-visible {
-        bottom: 0;
-        top: 0; }
-      .tile-container .tile-instance.tile-box .tile-overlay:not(.always-visible) {
-        bottom: -110px; }
-    .tile-container .tile-instance.tile-box:hover .tile-overlay:not(.always-visible) {
-      bottom: -15px; }
 
 .notification-user-box {
   background: #4e4e4e;

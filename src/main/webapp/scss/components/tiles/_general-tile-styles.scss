@@ -1,0 +1,57 @@
+.tile-container {
+  display: flex;
+  flex-direction: row;
+  flex-flow: wrap;
+  justify-content: flex-start;
+
+  @media (max-width: 767px) {
+    justify-content: center;
+  }
+
+  .tile-instance {
+    overflow: hidden;
+    margin: .2rem;
+    position: relative;
+    transition: all .3s;
+    display: inherit;
+    border: 1px solid $db-grey;
+
+    .tile-image {
+      img {
+        object-fit: cover;
+      }
+    }
+    .tile-overlay {
+      position: absolute;
+      transition: all .5s;
+      padding: .2rem;
+      text-shadow: 0px 0px 2px rgba(0, 0, 0, 1);
+      color: white;
+
+      &.always-visible {
+        font-size: 1.5rem;
+        text-align: center;
+        display: flex;
+        align-items: center;
+
+        &:hover {
+          transform: scale(1.05);
+        }
+
+        &.tile-blue {
+          background: linear-gradient(135deg, $db-dark-blue 0%, darken($db-dark-blue, 20%) 100%);
+        }
+        &.tile-orange {
+          background: linear-gradient(135deg, $db-orange 0%, darken($db-orange, 20%) 100%);
+        }
+      }
+      &:not(.always-visible) {
+        background: rgba(0,0,0,.4);
+      }
+
+      span {
+        display: block;
+      }
+    }
+  }
+}

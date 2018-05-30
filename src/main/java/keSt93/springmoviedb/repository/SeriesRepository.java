@@ -13,12 +13,12 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface SeriesRepository extends PagingAndSortingRepository<Series, Integer> {
 
-    public Series findById(int id);
+    Series findById(int id);
 
-    public Iterable<Series> findByIdOrderByIdDesc(int id);
+    Iterable<Series> findByIdOrderByIdDesc(int id);
 
-    public Iterable<Series> findFirst3ByOrderByLastUsedDesc();
+    Iterable<Series> findFirst3ByOrderByLastUsedDesc();
 
-    public Page<Series> findAllByIdNotOrderByIdDesc(int id, Pageable pageable);
+    Page<Series> findAllByIdNotOrderByIdDesc(int id, Pageable pageable);
 
 }

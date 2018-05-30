@@ -9,5 +9,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface NotificationTypeRepository extends PagingAndSortingRepository<NotificationType, Integer> {
 
-    public NotificationType findById(int id);
+    NotificationType findById(int id);
 }

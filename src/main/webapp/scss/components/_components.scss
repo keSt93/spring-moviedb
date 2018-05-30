@@ -5,8 +5,12 @@
 @import "navigation/navigation";
 @import "navigation/notifications";
 
+// ___________________________________________ Tiles
+@import "tiles/tiles";
+
 // ___________________________________________ Loginpage Styles
 @import "loginPage/login";
+
 
 // ___________________________________________ Series Styles
 // Movie List Styles
@@ -20,8 +24,6 @@
 @import "seriesList/seriesInstance";
 @import "seriesList/seriesList";
 
-// ___________________________________________ Start Page Styles (although the tiles are used throughout the whole site..)
-@import "startPage/tiles";
 
 
 // ___________________________________________ Userpage Styles

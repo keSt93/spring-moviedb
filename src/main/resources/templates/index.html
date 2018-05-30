@@ -10,16 +10,16 @@
                 <div class="col-md-12">
                     <h3> Zuletzt gesehen </h3>
                     <div class="tile-container">
-                        <a class="tile-instance tile-box" th:each="recentMovie : ${recentMovies}" th:href="@{'/m/movies/' + ${recentMovie.id}}">
+                        <a class="tile-instance tile-medium" th:each="recentMovie : ${recentMovies}" th:href="@{'/m/movies/' + ${recentMovie.id}}">
                             <div class="tile-image">
                                 <img th:src="${recentMovie.coverImage}"/>
                             </div>
                             <div class="tile-overlay">
                                 <span th:text="${#dates.format(recentMovie.registeredDate, 'dd. MMMM')}"></span>
-                                <span th:text="${recentMovie.title}"></span>
+                                <span class="tile-overlay-movie_title" th:text="${recentMovie.title}"></span>
                             </div>
                         </a>
-                        <a class="tile-instance tile-box" th:href="@{'/m/movies/'}">
+                        <a class="tile-instance tile-medium" th:href="@{'/m/movies/'}">
                             <div class="tile-image">
                             </div>
                             <div class="tile-overlay always-visible tile-blue">

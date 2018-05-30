@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface MovieCommentsRepository extends PagingAndSortingRepository<MovieComments, Integer> {
 
-    public Iterable<MovieComments> findAllByMovieOrderByCreationDateDesc(Movie movie);
+    Iterable<MovieComments> findAllByMovieOrderByCreationDateDesc(Movie movie);
 
-    public Iterable<MovieComments> findFirst5ByUserOrderByCreationDateDesc(User user);
+    Iterable<MovieComments> findFirst5ByUserOrderByCreationDateDesc(User user);
 }
