@@ -12,9 +12,10 @@
 
                    <!-- Movie Title Input -->
                    <div class="form-group">
-                       <label for="movieTitle"> Filmtitel </label>
-                       <input th:field="*{title}" placeholder="Titel" id="movieTitle" class="form-control" aria-describedby="movieTitleHelp"/>
-                       <small id="movieTitleHelp" class="form-text text-muted">Filmtitel, bevorzugt auf Englisch.</small>
+                       <label for="movieTitle"> Filmtitel / IMDB-ID </label>
+                       <input list="movieTitleListStuff" th:field="*{title}" placeholder="Titel" id="movieTitle" class="form-control" aria-describedby="movieTitleHelp" oninput="findMovie($('#movieTitle').val())"/>
+                       <datalist id="movieTitleListStuff"></datalist>
+                       <small id="movieTitleHelp" class="form-text text-muted">IMDB-ID oder Filmtitel, bevorzugt auf Englisch.</small>
                    </div>
 
                    <!-- Movie Genre Select -->
@@ -40,6 +41,7 @@
        </div>
    </div>
 </main>
+<script th:src="@{/js/ImdbApi.js}"></script>
 <footer th:include="fragments/footer :: footer(wastedHours=${wastedHours},wastedMinutes=${wastedMinutes})" />
 </body>
 </html>

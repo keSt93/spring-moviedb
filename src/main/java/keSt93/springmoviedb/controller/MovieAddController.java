@@ -2,19 +2,15 @@ package keSt93.springmoviedb.controller;
 
 import keSt93.springmoviedb.entities.*;
 import keSt93.springmoviedb.repository.*;
-import keSt93.springmoviedb.utils.DataUriHelper;
-import keSt93.springmoviedb.utils.ImdbApi;
-import keSt93.springmoviedb.utils.MovieDbUtils;
-import keSt93.springmoviedb.utils.NotificationHelper;
+import keSt93.springmoviedb.utils.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.net.URL;
 import java.security.Principal;
-import java.text.SimpleDateFormat;
 import java.util.Date;
+
 
 @Controller
 public class MovieAddController {
@@ -64,51 +60,41 @@ public class MovieAddController {
         modelAndView.addObject("series_", series);
         modelAndView.addObject("notifications", notifications);
 
-
         return modelAndView;
     }
+
 
     // Add Movie Action
     @PostMapping(value = "/actions/addMovieAction")
     private String addMovie(Movie movie, Principal currentUser) {
-        ImdbApi imdbApi = new ImdbApi(movie.getTitle());
+
         NotificationHelper notificationHelper = new NotificationHelper(userRepository, notificationUserRelationRepository, notificationTypeRepository);
-
         User user = userRepository.findByUsernameEquals(currentUser.getName());
+        Movie newMovie;
 
-        movie.setTitle(imdbApi.getTitle());
-
-        movie.setRegisteredDate(new Date());
-        movie.setRating(0);
-        movie.setSeries(movie.getSeries());
-        movie.setGenre(movie.getGenre());
-        movie.setLength(imdbApi.getLength());
-        movie.setPlot(imdbApi.getPlot());
-        movie.setUser(user);
-
-        try {
-            SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy");
-            Date releasedate = formatter.parse(imdbApi.getReleased().replace(" ", "-"));
-            movie.setReleaseDate(releasedate);
-        } catch (Exception ex) {
-            ex.printStackTrace();
+        String movieName = movie.getTitle();
+        if (movieName.startsWith("imdbID: ")) {
+            movieName = movieName.replace("imdbID: ", "");
+            newMovie = ImdbApi.getMovieByImdbId(movieName);
+        } else {
+            newMovie = ImdbApi.getMovieByName(movieName);
         }
 
-        try {
-            movie.setCoverImage(DataUriHelper.getDataURIForURL(new URL(imdbApi.getCoverUrl())).toString());
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
+        newMovie.setRegisteredDate(new Date());
+        newMovie.setRating(0);
+        newMovie.setSeries(movie.getSeries());
+        newMovie.setGenre(movie.getGenre());
+        newMovie.setUser(user);
 
-        movieRepository.save(movie);
+        movieRepository.save(newMovie);
 
-        String notificationUrl = "/m/movies/" + movie.getId();
-        String notificationImage = movie.getCoverImage();
+        String notificationUrl = "/m/movies/" + newMovie.getId();
+        String notificationImage = newMovie.getCoverImage();
         StringBuilder notificationText = new StringBuilder();
         notificationText
                 .append(user.getUsername())
                 .append(" hat gerade ")
-                .append(movie.getTitle())
+                .append(newMovie.getTitle())
                 .append(" hinzugefügt.")
                 .append(" Schau doch mal rein!");
 
@@ -118,6 +104,7 @@ public class MovieAddController {
                 notificationText.toString(),
                 notificationUrl,
                 notificationImage);
+
         return "redirect:/m/";
     }
 }

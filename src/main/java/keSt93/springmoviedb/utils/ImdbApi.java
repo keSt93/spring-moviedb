@@ -1,33 +1,55 @@
 package keSt93.springmoviedb.utils;
 
 
+import keSt93.springmoviedb.entities.Movie;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.net.URL;
-import java.net.URLConnection;
 import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
 
-public class ImdbApi {
+public final class ImdbApi {
 
-    private String APIKEY = "92857ebb";
-    private String INITIAL_DATAURL = "http://www.omdbapi.com/?apikey=" + APIKEY + "&";
-    private String INITIAL_POSTERURL = "http://img.omdbapi.com/?apikey=" + APIKEY + "&";
-
-    private JSONObject jsonObject;
-    private String title;
-    private String coverUrl;
-    private String imdbRating;
-    private String imdbID;
-    private String released;
-    private String plot;
-    private int length;
+    private static String APIKEY = "92857ebb";
+    private static String INITIAL_DATAURL = "http://www.omdbapi.com/?apikey=" + APIKEY + "&";
 
 
-    public ImdbApi(String movieName) {
+    public static Movie getMovieByImdbId(String id) {
+        Movie movie = new Movie();
+        JSONObject json;
+
+        try {
+            URL apiSearchUrl = new URL(INITIAL_DATAURL + "i=" + URLEncoder.encode(id, "UTF-8"));
+            Scanner scan = new Scanner(apiSearchUrl.openStream());
+
+            String str = "";
+            while (scan.hasNext()) {
+                str += scan.nextLine();
+            }
+            scan.close();
+            json = new JSONObject(str);
+
+            movie.setTitle(json.getString("Title"));
+            movie.setPlot(json.getString("Plot"));
+            movie.setLength(Integer.parseInt(json.getString("Runtime").split(" ")[0]));
+            movie.setCoverImage(DataUriHelper.getDataURIForURL(new URL(json.getString("Poster"))).toString());
+
+            SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy");
+            Date releasedate = formatter.parse(json.getString("Released").replace(" ", "-"));
+            movie.setReleaseDate(releasedate);
+
+        } catch (Exception x) {
+            x.printStackTrace();
+        }
+        return movie;
+    }
+
+    // use this only as fallback, its not really accurate since i'm not asking for a releasedate
+    public static Movie getMovieByName(String movieName) {
+        Movie movie = new Movie();
+
         try {
             URL apiUrl = new URL(INITIAL_DATAURL + "t=" + URLEncoder.encode(movieName, "UTF-8"));
             Scanner scan = new Scanner(apiUrl.openStream());
@@ -37,48 +59,22 @@ public class ImdbApi {
                 str += scan.nextLine();
             }
             scan.close();
-            jsonObject = new JSONObject(str);
+            JSONObject json = new JSONObject(str);
 
-            // JSONObject title = json.getJSONArray("title").getJSONObject(0);
-            title = jsonObject.getString("Title");
-            coverUrl = jsonObject.getString("Poster");
-            imdbRating = jsonObject.getString("imdbRating");
-            imdbID = jsonObject.getString("imdbID");
-            released = jsonObject.getString("Released");
-            plot = jsonObject.getString("Plot");
-            length = Integer.parseInt(jsonObject.getString("Runtime").split(" ")[0]);
+            movie.setTitle(json.getString("Title"));
+            movie.setPlot(json.getString("Plot"));
+            movie.setLength(Integer.parseInt(json.getString("Runtime").split(" ")[0]));
+            movie.setCoverImage(DataUriHelper.getDataURIForURL(new URL(json.getString("Poster"))).toString());
+
+            SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy");
+            Date releasedate = formatter.parse(json.getString("Released").replace(" ", "-"));
+            movie.setReleaseDate(releasedate);
 
 
         } catch (Exception x) {
             System.out.print(x.toString());
         }
+        return movie;
     }
 
-    public String getTitle() {
-        return title;
-    }
-
-    public String getCoverUrl() {
-        return coverUrl;
-    }
-
-    public String getImdbRating() {
-        return imdbRating;
-    }
-
-    public String getReleased() {
-        return released;
-    }
-
-    public String getPlot() {
-        return plot;
-    }
-
-    public String getImdbID() {
-        return imdbID;
-    }
-
-    public int getLength() {
-        return length;
-    }
 }
