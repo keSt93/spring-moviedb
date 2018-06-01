@@ -103,49 +103,8 @@ public class MovieInstanceController {
         m.addObject("genres_", genres);
         m.addObject("series_", series);
         m.addObject("editedMovie", new Movie());
+        m.addObject("replaceMovie", new Movie());
 
         return m;
-    }
-
-    // EditMovie
-    @PostMapping(value = "/actions/editMovieAction/{id}")
-    public String editMovie(Movie editedMovie, Principal principal, @PathVariable int id) {
-
-        Movie currentMovie = movieRepository.findById(id);
-
-        if(currentMovie.getTitle() != editedMovie.getTitle()) {
-            currentMovie.setTitle(editedMovie.getTitle());
-        }
-
-        /*
-        if(currentMovie.getReleaseDate() != editedMovie.getReleaseDate()) {
-            currentMovie.setReleaseDate(editedMovie.getReleaseDate());
-        }
-        */
-
-        if(currentMovie.getCoverImage() != editedMovie.getCoverImage()) {
-            try {
-                URL url = new URL(editedMovie.getCoverImage());
-                currentMovie.setCoverImage(DataUriHelper.getDataURIForURL(url).toString());
-            } catch (Exception ex) {
-
-            }
-        }
-        if(currentMovie.getSeries() != editedMovie.getSeries()) {
-            currentMovie.setSeries(editedMovie.getSeries());
-        }
-        if(currentMovie.getGenre() != editedMovie.getGenre()) {
-            currentMovie.setGenre(editedMovie.getGenre());
-        }
-        if(currentMovie.getLength() != editedMovie.getLength()) {
-            currentMovie.setLength(editedMovie.getLength());
-        }
-        if(currentMovie.getPlot() != editedMovie.getPlot()) {
-            currentMovie.setPlot(editedMovie.getPlot());
-        }
-
-        movieRepository.save(currentMovie);
-
-        return "redirect:/m/movies/" + id + "?successfullyrated=true";
     }
 }

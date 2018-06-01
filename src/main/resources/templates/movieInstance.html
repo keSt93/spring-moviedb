@@ -20,8 +20,11 @@
                 <li class="nav-item">
                     <a class="nav-link" id="edit-tab" href="#movie-edit" aria-controls="movie-edit" data-toggle="tab" role="tab">Film bearbeiten</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" sec:authorize="hasRole('ROLE_EXTENDED_MOVIE_EDIT')">
                     <a class="nav-link" id="replace-tab" href="#movie-replace" aria-controls="movie-replace" data-toggle="tab" role="tab">Film austauschen</a>
+                </li>
+                <li class="nav-item" sec:authorize="hasRole('ROLE_EXTENDED_MOVIE_EDIT')">
+                    <a class="nav-link" id="delete-tab" href="#movie-delete" aria-controls="movie-delete" data-toggle="tab" role="tab">Film löschen</a>
                 </li>
             </ul>
 
@@ -187,8 +190,22 @@
                         <button type="submit" class="btn btn-block btn-primary">Post!</button>
                     </form>
                 </div>
-                <div class="tab-pane fade" id="movie-replace" role="tabpanel" aria-labelledby="replace-tab">
-                    todo replace
+                <div class="tab-pane fade" id="movie-replace" role="tabpanel" aria-labelledby="replace-tab" sec:authorize="hasRole('ROLE_EXTENDED_MOVIE_EDIT')">
+                    <form th:action="@{'/actions/replaceMovieAction/' + ${movie.id}}" th:object="${replaceMovie}" method="POST">
+                        <!-- Movie Title Input -->
+                        <div class="form-group">
+                            <label for="movieTitleReplacement"> Ersetzen mit: </label>
+                            <input th:field="*{title}" placeholder="Titel" id="movieTitleReplacement" class="form-control" aria-describedby="movieTitleHelp"/>
+                            <small id="movieTitleHelp" class="form-text text-muted">IMDB-ID oder Filmtitel, bevorzugt auf Englisch.</small>
+                            <div id="foundMovies" class="tile-container"></div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Austauschen!</button>
+                    </form>
+                </div>
+                <div class="tab-pane fade" id="movie-delete" role="tabpanel" aria-labelledby="delete-tab" sec:authorize="hasRole('ROLE_EXTENDED_MOVIE_EDIT')">
+                    <form th:action="@{'/actions/deleteMovieAction/' + ${movie.id}}" method="POST">
+                        <button type="submit" class="btn btn-danger" style="margin-top: 1rem;">Film Löschen!</button>
+                    </form>
                 </div>
             </div>
 
@@ -237,6 +254,48 @@
         var percentage = [[${movie.rating}]]
      +]*/
     adjustRatingProgressBarWithCustomText(elementclass, percentage * 10, "Berechnetes Rating: ");
+</script>
+<script th:inline="javascript">
+    $( document ).ready(function() {
+        const APIKEY = "92857ebb";
+        const INITIAL_DATAURL = "http://www.omdbapi.com/?apikey=" + APIKEY + "&";
+
+        var timeout = null;
+        var $movieTitle = $("#movieTitleReplacement");
+
+        $movieTitle.keyup(function() {
+            clearTimeout(timeout);
+            timeout = setTimeout(function() {
+                $.get(INITIAL_DATAURL + "s=" + encodeURI($movieTitle.val()), function (data) {
+                    var obj = data["Search"];
+
+                    var htmloptions = "";
+                    $(obj).each(function (index, el) {
+                        var poster = el['Poster'];
+                        var posterPlaceholder  = /*[[ @{'/img/placeholder_poster.png'} ]]*/ "genericUrl";
+
+                        if(poster === "N/A") {
+                            poster = posterPlaceholder;
+                        }
+
+                        htmloptions += '' +
+                            '<a class="tile-instance tile-box" href="#" onclick="$(\'#movieTitleReplacement\').val(\'imdbID: '+el['imdbID']+'\')">' +
+                            '<div class="tile-image">' +
+                            '<img src="'+poster+'" />' +
+                            '</div>' +
+                            '<div class="tile-overlay always-visible small tile-gray-transparent">' +
+                            '<span class="tile-overlay-movie_title">'+el['Title']+' ('+el['Year']+')</span>' +
+                            '</div>' +
+                            '</a>';
+
+                        if (index == obj.length - 1) {
+                            $('#foundMovies').append(htmloptions);
+                        }
+                    });
+                });
+            },800);
+        });
+    });
 </script>
 </body>
 </html>
