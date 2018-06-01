@@ -29,10 +29,15 @@
       color: white;
 
       &.always-visible {
-        font-size: 1.5rem;
+
+        &:not(.small) {
+          font-size: 1.5rem;
+        }
+
         text-align: center;
         display: flex;
         align-items: center;
+        justify-content: center;
 
         &:hover {
           transform: scale(1.05);
@@ -43,6 +48,9 @@
         }
         &.tile-orange {
           background: linear-gradient(135deg, $db-orange 0%, darken($db-orange, 20%) 100%);
+        }
+        &.tile-gray-transparent {
+          background: rgba(0,0,0,.4);
         }
       }
       &:not(.always-visible) {

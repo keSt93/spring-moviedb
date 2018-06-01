@@ -337,16 +337,20 @@ nav {
       text-shadow: 0px 0px 2px black;
       color: white; }
       .tile-container .tile-instance .tile-overlay.always-visible {
-        font-size: 1.5rem;
         text-align: center;
         display: flex;
-        align-items: center; }
+        align-items: center;
+        justify-content: center; }
+        .tile-container .tile-instance .tile-overlay.always-visible:not(.small) {
+          font-size: 1.5rem; }
         .tile-container .tile-instance .tile-overlay.always-visible:hover {
           transform: scale(1.05); }
         .tile-container .tile-instance .tile-overlay.always-visible.tile-blue {
           background: linear-gradient(135deg, #18599c 0%, #0a2744 100%); }
         .tile-container .tile-instance .tile-overlay.always-visible.tile-orange {
           background: linear-gradient(135deg, #bd461b 0%, #64250e 100%); }
+        .tile-container .tile-instance .tile-overlay.always-visible.tile-gray-transparent {
+          background: rgba(0, 0, 0, 0.4); }
       .tile-container .tile-instance .tile-overlay:not(.always-visible) {
         background: rgba(0, 0, 0, 0.4); }
       .tile-container .tile-instance .tile-overlay span {
