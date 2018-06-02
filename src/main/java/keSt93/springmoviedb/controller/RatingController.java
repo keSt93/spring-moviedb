@@ -43,11 +43,15 @@ public class RatingController {
             return "redirect:/m/movies/" + id + "?oldworld=true";
         }
 
+        // #25 - check if rating is a valid number
+        if(movieRating.getRating() > 10 || movieRating.getRating() < 1) {
+            return "redirect:/m/movies/" + id + "?ratingerror=true";
+        }
+
         if (ratingByUserAndMovie == null) {
-            // Generate MovieRatingEntry
+            movieRating.setRating(movieRating.getRating());
             movieRating.setMovie(currentMovie);
             movieRating.setUser(currentUser);
-            movieRating.setRating(movieRating.getRating());
             movieRatingRepository.save(movieRating);
         } else {
             ratingByUserAndMovie.setRating(movieRating.getRating());

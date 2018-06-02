@@ -71,6 +71,24 @@
                                 </div>
                             </div>
 
+                            <div th:if="${param.ratingerror}">
+                                <div class="alert alert-danger">
+                                    Beim Bewerten lief wohl etwas schief, versuch es doch nochmal!
+                                </div>
+                            </div>
+
+                            <div th:if="${param.successfullyedited}">
+                                <div class="alert alert-success">
+                                    Erfolgreich bearbeitet!
+                                </div>
+                            </div>
+
+                            <div th:if="${param.editingerror}">
+                                <div class="alert alert-danger">
+                                    Beim Bearbeiten lief wohl etwas schief, versuch es doch nochmal!
+                                </div>
+                            </div>
+
                             <div th:if="${param.oldworld}">
                                 <div class="alert alert-danger">
                                     Dieser Film stammt aus der "alten Welt" und kann deshalb nicht mehr bewertet werden.

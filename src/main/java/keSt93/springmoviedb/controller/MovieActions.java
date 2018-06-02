@@ -58,7 +58,12 @@ public class MovieActions {
             currentMovie.setGenre(editedMovie.getGenre());
         }
         if (currentMovie.getLength() != editedMovie.getLength()) {
-            currentMovie.setLength(editedMovie.getLength());
+            // #26 - movie length cannot be negative anymore
+            if(editedMovie.getLength() < 1) {
+                return "redirect:/m/movies/" + id + "?editingerror=true";
+            } else {
+                currentMovie.setLength(editedMovie.getLength());
+            }
         }
         if (!currentMovie.getPlot().equals(editedMovie.getPlot())) {
             currentMovie.setPlot(editedMovie.getPlot());
@@ -66,7 +71,7 @@ public class MovieActions {
 
         movieRepository.save(currentMovie);
 
-        return "redirect:/m/movies/" + id + "?successfullyrated=true";
+        return "redirect:/m/movies/" + id + "?successfullyedited=true";
     }
 
     // Replace Movie
