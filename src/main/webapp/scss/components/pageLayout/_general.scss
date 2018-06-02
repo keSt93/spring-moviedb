@@ -84,7 +84,7 @@ select,
 }
 
 footer {
-  background: linear-gradient(135deg, $db-grey 0%,$db-dark-grey 75%);
+  background: $db-blue-gradient;
   padding: 1rem;
   color: white;
   min-height: 6rem;

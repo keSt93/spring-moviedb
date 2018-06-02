@@ -59,7 +59,7 @@ select,
   margin-top: 1rem; }
 
 footer {
-  background: linear-gradient(135deg, #b4b2b0 0%, #4e4e4e 75%);
+  background: linear-gradient(135deg, #18599c 0%, #2989d8 27%, #207cca 73%, #18599c 100%);
   padding: 1rem;
   color: white;
   min-height: 6rem;
@@ -375,11 +375,11 @@ nav {
 
 @media (max-width: 991px) {
   .tile-instance.tile-medium {
-    width: 218px;
-    height: 218px; }
+    width: 139px;
+    height: 139px; }
     .tile-instance.tile-medium .tile-image img {
-      width: 218px;
-      height: 218px; } }
+      width: 139px;
+      height: 139px; } }
 
 @media (min-width: 992px) and (max-width: 1199px) {
   .tile-instance.tile-medium {
@@ -405,8 +405,8 @@ nav {
   text-align: left; }
   @media (max-width: 991px) {
     .tile-instance.tile-medium .tile-overlay {
-      width: 218px;
-      height: 218px;
+      width: 139px;
+      height: 139px;
       bottom: -188px; } }
   @media (min-width: 992px) and (max-width: 1199px) {
     .tile-instance.tile-medium .tile-overlay {
